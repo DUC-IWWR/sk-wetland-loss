@@ -13,7 +13,7 @@ tar_option_set(
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
-tar_source()
+tar_source("src/model-drained-vb.R")
 
 list(
   # Targets for checking file existence/updates and loading in files
@@ -47,8 +47,16 @@ list(
   
   # Targets for data wrangling
   tar_target(
-    name = drains_cwi_impact,
-    command = merge(cwi_impact_vb_data, drains_vb_data[, c("BasinID", "Drains_km", "Drains_count")],
+    name = drained_vb,
+    command = merge(x = cwi_impact_vb_data[which(cwi_impact_vb_data$CWI_Impact %in% c(1,5)),], 
+                    y = drains_vb_data[, c("BasinID", "Drains_km", "Drains_count")],
                     by = "BasinID")
+  ),
+  
+  # Targets for modelling
+  tar_target(
+    name = drained_vb_model,
+    command = model_drained_vb()
   )
+  
 )
