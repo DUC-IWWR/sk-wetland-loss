@@ -108,6 +108,26 @@ list(
    command = ggarrange(class_1_drainage_plot, class_5_drainage_plot)
   ),
   
+  tar_target(
+    name = drains_per_sq_km_plot,
+    command = ggplot(data = drains_vb_data, 
+                      aes(x = Long, y = Lat, colour = as.numeric(Drains_count) / as.numeric(WS_AREA_KM2))) +
+                geom_point() +
+                xlab("Longitude") +
+                ylab("Latitude") +
+                theme(legend.position = "none") +
+                NULL
+  ),
+  tar_target(
+    name = drainage_per_sq_km_plot,
+    command = ggplot(data = cwi_impact_vb_data[which(cwi_impact_vb_data$CWI_Impact == 5), ],
+                      aes(x = Long, y = Lat, colour = Area_km2 / WS_AREA_KM2)) +
+                geom_point() +
+                xlab("Longitude") +
+                ylab("Latitude") +
+                theme(legend.position = "none") + 
+                NULL
+  ),
   
   
   

@@ -49,16 +49,33 @@ standardizes the drainage.
 
 Here are the percent drainage for CWI classes 1 and 5:
 ```{r}
+#| echo: false
 targets::tar_load(combined_class_drainage_plot)
 print(combined_class_drainage_plot)
 ```
 
+### Spatial Distribution of Drainage
 
-You can add options to executable code like this 
+Let's take a look at how the drainage varies in space. For now, we will just colour points by drainage amount 
+until I can get access to the virtual drainage shapefiles. Also note that I will standardize the 
+drainage amount (whether it be number of drains, length of drains, or drained area) by area of each
+virtual basin. That will allow us to see if there are any hotspots (or coldspots) of drainage that are not
+necessarily influenced by the size of the drainage ditch. We would expect larger virtual basins to have
+more drainage if this is strictly a process by amount of land.
+
+First, let us see the spatial distribution of the number of drains per square kilometer in each VB, recalling
+that the number of drains can be used as a proxy for length of drains.
 
 ```{r}
 #| echo: false
-2 * 2
+targets::tar_load(drains_per_sq_km_plot)
+print(drains_per_sq_km_plot)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+And now drainage at each VB:
+
+```{r}
+#| echo: false
+targets::tar_load(drainage_per_sq_km_plot)
+print(drainage_per_sq_km_plot)
+```
