@@ -1,0 +1,15 @@
+merge_vb_datasets <- function(drains_data = NULL,
+                              cwi_data = NULL,
+                              vb_shp = NULL)
+{
+  drains_data$HYBAS_ID <- vb_shp$HYBAS_ID
+  cwi_data$CWI_Impact <- paste0("CWI_", cwi_data$CWI_Impact)
+  cwi_data_red <- cwi_data[, c("BasinID", "CWI_Impact", "Area_km2")]
+  cwi_data_red_wide <- reshape2::dcast(cwi_data_red,
+                                       BasinID ~ CWI_Impact,
+                                       value.var = "Area_km2")
+  drains_data <- merge(drains_data, cwi_data_red_wide, by = "BasinID")
+  vb_final <- merge(vb_shp, drains_data[, c("HYBAS_ID", "BasinID", "CWI_1", "CWI_5")])
+  
+  return(vb_final)
+}

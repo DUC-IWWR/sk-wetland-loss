@@ -7,6 +7,7 @@
 # Load packages required to define the pipeline:
 library(targets)
 library(tarchetypes)
+library(geotargets)
 library(ggplot2)
 library(ggpubr)
 theme_set(theme_pubclean())
@@ -17,7 +18,7 @@ tar_option_set(
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
-tar_source("src/model-drained-vb.R")
+tar_source("src/merge-vb-datasets.R")
 
 list(
   # Targets for checking file existence/updates and loading in files
@@ -48,6 +49,25 @@ list(
     name = cwi_impact_wsa_data,
     command = read.csv(cwi_impact_wsa_data_file)
   ),
+  tar_target(
+    name = vb_shapefile,
+    command = "data/raw/Drains_VirtualBasin_summary/Drains_VirtualBasin_summary.shp",
+    format = "file"
+  ),
+  tar_terra_vect(
+    name = vb,
+    command = terra::vect(vb_shapefile)
+  ),
+  
+  #' Target for creating the overall dataset including geometry. I.e., let's merge the datasets
+  #' back together.
+  tar_terra_vect(
+    name = vb_db,
+    command = merge_vb_datasets(drains_vb_data,
+                                cwi_impact_vb_data,
+                                vb)
+  ),
+  
   
   # Targets for exploratory plots of data
   tar_target(
