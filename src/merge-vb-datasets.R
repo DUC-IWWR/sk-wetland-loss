@@ -12,5 +12,6 @@ merge_vb_datasets <- function(drains_data = NULL,
  # vb_final <- merge(vb_shp, drains_data[, c("HYBAS_ID", "BasinID", "CWI_1", "CWI_5")],
  #                   by = "HYBAS_ID")
   
-  return(drains_data[, c("HYBAS_ID", "BasinID", "CWI_1", "CWI_5")])
+  return(drains_data[, c("HYBAS_ID", "BasinID", 
+                         "CWI_0", "CWI_1", "CWI_2", "CWI_3", "CWI_4", "CWI_5")])
 }
