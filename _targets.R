@@ -65,7 +65,7 @@ list(
     name = vb_db,
     command = merge_vb_datasets(drains_vb_data,
                                 cwi_impact_vb_data,
-                                vb) |> terra::merge(x = vb, by = "HYBAS_ID")
+                                vb)
   ),
   
   
