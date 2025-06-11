@@ -52,6 +52,10 @@ targets::tar_load(combined_class_drainage_plot)
 print(combined_class_drainage_plot)
 ```
 
+Across the virtual basins for which we have data, we find a total drained area of 
+`r round(sum(vb_db$CWI_1, na.rm = TRUE) + sum(vb_db$CWI_5, na.rm = TRUE), 2)`km^2, which comprises a total of 
+`r round(((sum(vb_db$CWI_1, na.rm = TRUE) + sum(vb_db$CWI_5, na.rm = TRUE)) / sum(vb_db$CWI_Total, na.rm = TRUE)) * 100 ,2)`%.
+
 ### Spatial Distribution of Drainage
 
 Let's take a look at how the drainage varies in space. For now, we will just colour points by drainage amount 
@@ -70,7 +74,7 @@ targets::tar_load(drains_per_sq_km_plot)
 print(drains_per_sq_km_plot)
 ```
 
-And now drainage at each VB:
+And now the percent drained wetlands at each virtual basin (grey dots denote NA): 
 
 ```{r}
 #| echo: false
