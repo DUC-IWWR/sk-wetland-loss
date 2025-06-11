@@ -16,9 +16,7 @@ virtual basin. Let's take a look at some histograms and potential relationships 
 ### Distribution of Drain Lengths and Numbers of Drains
 ```{r}
 #| echo: false
-targets::tar_load(combined_drains_plot)
-targets::tar_load(drains_vb_data)
-targets::tar_load(cwi_impact_vb_data)
+targets::tar_load(vb_db)
 ```
 Let's first take a look at the distribution of drain lengths and the distribution of the number of drains. 
 Note here that I am only looking at virtual basins where the drain lengths are greater than 0, or the 
@@ -36,7 +34,7 @@ print(combined_drains_plot)
 ```
 
 We can see a fairly clear relationship between the number of drains and the length of drains per virtual basin. 
-In fact, we find a correlation of `r cor(drains_vb_data$Drains_km, drains_vb_data$Drains_count)`. With this in 
+In fact, we find a correlation of `r cor(vb_db$sum_Length, vb_db$Polyline_C)`. With this in 
 mind, we can probabl be confident that we can use either of these two variables in a model as they are effectively 
 telling the same story.
 

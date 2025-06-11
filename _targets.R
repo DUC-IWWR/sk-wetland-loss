@@ -72,8 +72,8 @@ list(
   # Targets for exploratory plots of data
   tar_target(
     name = drain_length_plot,
-    command = ggplot(data = drains_vb_data[which(drains_vb_data$Drains_km > 0), ], 
-                     aes(x = Drains_km)) + 
+    command = ggplot(data = data.frame(vb_db[which(vb_db$sum_Length > 0),]), 
+                     aes(x = sum_Length)) + 
                 geom_histogram() +
                 xlab("KM of Drains") +
                 ylab("Count") + 
@@ -81,8 +81,8 @@ list(
   ),
   tar_target(
     name = n_drains_plot,
-    command = ggplot(data = drains_vb_data[which(drains_vb_data$Drains_count > 0),], 
-                     aes(x = Drains_count)) +
+    command = ggplot(data = data.frame(vb_db[which(vb_db$Polyline_C > 0),]), 
+                     aes(x = Polyline_C)) +
                 geom_histogram() +
                 xlab("Number of Drains") +
                 ylab("Count") +
@@ -90,9 +90,9 @@ list(
   ),
   tar_target(
     name = length_vs_n_plot,
-    command = ggplot(data = drains_vb_data[which(drains_vb_data$Drains_count > 0 &
-                                                 drains_vb_data$Drains_km > 0), ],
-                    aes(x = Drains_count, y = Drains_km)) +
+    command = ggplot(data = data.frame(vb_db[which(vb_db$Polyline_C > 0 &
+                                                    vb_db$sum_Length > 0), ]),
+                    aes(x = Polyline_C, y = sum_Length)) +
                 geom_point() +
                 xlab("Number of Drains") +
                 ylab("Length of Drains") +
@@ -107,8 +107,8 @@ list(
   
   tar_target(
     name = class_1_drainage_plot,
-    command = ggplot(data = cwi_impact_vb_data[which(cwi_impact_vb_data$CWI_Impact == 1), ],
-                      aes(x = Area_km2 / WS_AREA_KM2)) +
+    command = ggplot(data = data.frame(vb_db),
+                      aes(x = CWI_1 / CWI_Total)) +
                 geom_histogram() +
                 xlab("Percent Drained Class 1") +
                 ylab("Count") +
@@ -116,8 +116,8 @@ list(
   ),
   tar_target(
     name = class_5_drainage_plot,
-    command = ggplot(data = cwi_impact_vb_data[which(cwi_impact_vb_data$CWI_Impact == 5), ],
-                      aes(x = Area_km2 / WS_AREA_KM2)) +
+    command = ggplot(data = data.frame(vb_db),
+                      aes(x = CWI_5 / CWI_Total)) +
                 geom_histogram() +
                 xlab("Percent Drained Class 5") +
                 ylab("Count") +
