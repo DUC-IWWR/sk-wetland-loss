@@ -72,7 +72,8 @@ list(
     name = wsa_data_wide,
     command = reshape2::dcast(cwi_impact_wsa_data,
                               Join_ID + Name ~ IMPACT,
-                              value.var = "Sum_area_km2")
+                              value.var = "Sum_area_km2") |>
+                dplyr::mutate(Total = `0` + `1` + `2` + `3` + `4` + `5`)
   ),
   
   
@@ -159,7 +160,11 @@ list(
   ),
   tar_target(
     name = wsa_class_1_drainage_plot,
-    command = NULL
+    command = ggplot(data = wsa_data_wide, aes(x = `1` / Total)) +
+                geom_histogram() +
+                xlab("Percent Drained Class 1") +
+                ylab("Count") +
+                NULL
   ),
   
   

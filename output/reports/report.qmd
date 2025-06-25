@@ -90,3 +90,8 @@ area by CWI class. In this case, we will also consider impact class 4 as WSA has
 
 Here is the percent drainage for CWI classes 1, 4, and 5:
 
+```{r}
+#| echo: false
+targets::tar_load(wsa_class_1_drainage_plot)
+print(wsa_class_1_drainage_plot)
+```
