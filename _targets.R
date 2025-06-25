@@ -68,6 +68,13 @@ list(
                                 vb)
   ),
   
+  tar_target(
+    name = wsa_data_wide,
+    command = reshape2::dcast(cwi_impact_wsa_data,
+                              Join_ID + Name ~ IMPACT,
+                              value.var = "Sum_area_km2")
+  ),
+  
   
   # Targets for exploratory plots of data
   tar_target(
@@ -149,6 +156,10 @@ list(
                 labs(colour="% Wetland Drained") +
                # theme(legend.position = "none") + 
                 NULL
+  ),
+  tar_target(
+    name = wsa_class_1_drainage_plot,
+    command = NULL
   ),
   
   

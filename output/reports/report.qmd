@@ -81,3 +81,12 @@ And now the percent drained wetlands at each virtual basin (grey dots denote NA)
 targets::tar_load(drainage_per_sq_km_plot)
 print(drainage_per_sq_km_plot)
 ```
+
+### Exploration of the WSA Data
+
+Let's now take a look at the data that has been used in the WSA analysis for wetland drainage amount. There are fewer units in this data set
+because we are now modelling at the WSA planning unit rather than at the virtual basin level. Still, we can have a look at the distribution of drained 
+area by CWI class. In this case, we will also consider impact class 4 as WSA has been considering this class in their analysis.
+
+Here is the percent drainage for CWI classes 1, 4, and 5:
+
