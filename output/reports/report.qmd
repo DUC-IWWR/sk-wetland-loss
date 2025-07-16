@@ -56,6 +56,32 @@ Across the virtual basins for which we have data, we find a total drained area o
 `r round(sum(vb_db$CWI_1, na.rm = TRUE) + sum(vb_db$CWI_5, na.rm = TRUE), 2)`km^2, which comprises a total of 
 `r round(((sum(vb_db$CWI_1, na.rm = TRUE) + sum(vb_db$CWI_5, na.rm = TRUE)) / sum(vb_db$CWI_Total, na.rm = TRUE)) * 100 ,2)`%.
 
+### Does number of drains correlate with drainage?
+
+One thing that we might be interested in is whether the number of drains in a virtual 
+basin correlates with the drainage in that basin. We would expect this to be the case,
+in that we should see a positive relationship. If so, we may be able to use this relationship
+in a larger model to estimate how much drainage we are missing in each virtual basin.
+
+Let us plot this relationship:
+
+
+```{r}
+#| echo: false
+targets::tar_load(drains_vs_drainage_plot)
+print(drains_vs_drainage_plot)
+```
+
+### Does landcover class explain variation in drainage?
+
+Let us now have a look at the variation in both number of drains and drained area as it pertains to landcover class. We will use boxplots for this:
+
+```{r}
+#| echo: false
+targets::tar_load(combined_boxplots)
+print(combined_boxplots)
+```
+
 ### Spatial Distribution of Drainage
 
 Let's take a look at how the drainage varies in space. For now, we will just colour points by drainage amount 
@@ -66,20 +92,13 @@ necessarily influenced by the size of the drainage ditch. We would expect larger
 more drainage if this is strictly a process by amount of land.
 
 First, let us see the spatial distribution of the number of drains per square kilometer in each VB, recalling
-that the number of drains can be used as a proxy for length of drains.
+that the number of drains can be used as a proxy for length of drains. We will plot this side by side
+with the percent drained wetlands at each virtual basin (grey dots denote NA):
 
 ```{r}
 #| echo: false
-targets::tar_load(drains_per_sq_km_plot)
-print(drains_per_sq_km_plot)
-```
-
-And now the percent drained wetlands at each virtual basin (grey dots denote NA): 
-
-```{r}
-#| echo: false
-targets::tar_load(drainage_per_sq_km_plot)
-print(drainage_per_sq_km_plot)
+targets::tar_load(combined_spatial_plot)
+print(combined_spatial_plot)
 ```
 
 ### Exploration of the WSA Data

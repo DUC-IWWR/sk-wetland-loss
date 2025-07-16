@@ -115,7 +115,7 @@ list(
   tar_target(
     name = class_1_drainage_plot,
     command = ggplot(data = data.frame(vb_db),
-                      aes(x = CWI_1 / CWI_Total)) +
+                      aes(x = (CWI_1 / CWI_Total) * 100)) +
                 geom_histogram() +
                 xlab("Percent Drained Class 1") +
                 ylab("Count") +
@@ -124,21 +124,58 @@ list(
   tar_target(
     name = class_5_drainage_plot,
     command = ggplot(data = data.frame(vb_db),
-                      aes(x = CWI_5 / CWI_Total)) +
+                      aes(x = (CWI_5 / CWI_Total) * 100)) +
                 geom_histogram() +
                 xlab("Percent Drained Class 5") +
                 ylab("Count") +
                 NULL
   ),
+   
   tar_target(
    name = combined_class_drainage_plot,
    command = ggarrange(class_1_drainage_plot, class_5_drainage_plot)
   ),
   
   tar_target(
+    name = drains_vs_drainage_plot,
+    command = ggplot(data = data.frame(vb_db),
+                     aes(x = Polyline_C, y = (CWI_1 + CWI_5))) +
+      geom_point() +
+      xlab("Number of Drains") +
+      ylab("Area Drained (CWI 1 + CWI 5") +
+      NULL
+  ),
+  
+  tar_target(
+    name = drains_vs_lcclass_plot,
+    command = ggplot(data = data.frame(vb_db),
+                     aes(x = LCClassNam, y = Polyline_C)) +
+      geom_boxplot() + 
+      xlab("Landcover Class") +
+      ylab("Number of Drains") +
+      NULL
+  ),
+  
+  tar_target(
+    name = drainage_vs_lcclass_plot,
+    command = ggplot(data = data.frame(vb_db),
+                     aes(x = LCClassNam, y = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
+      geom_boxplot() + 
+      xlab("Landcover Class") +
+      ylab("Percent Area Drained") +
+      NULL
+  ),
+  
+  tar_target(
+    name = combined_boxplots,
+    command = ggarrange(drains_vs_lcclass_plot, 
+                        drainage_vs_lcclass_plot)
+  ),
+  
+  tar_target(
     name = drains_per_sq_km_plot,
     command = ggplot(data = data.frame(vb_db), 
-                      aes(x = Long, y = Lat, colour = as.numeric(Polyline_C) / as.numeric(WS_AREA_KM))) +
+                      aes(x = Long, y = Lat, colour = (as.numeric(Polyline_C) / as.numeric(WS_AREA_KM)))) +
                 geom_point() +
                 xlab("Longitude") +
                 ylab("Latitude") +
@@ -149,13 +186,18 @@ list(
   tar_target(
     name = drainage_per_sq_km_plot,
     command = ggplot(data = data.frame(vb_db),
-                      aes(x = Long, y = Lat, colour = (CWI_1 + CWI_5) / CWI_Total)) +
+                      aes(x = Long, y = Lat, colour = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
                 geom_point() +
                 xlab("Longitude") +
                 ylab("Latitude") +
                 labs(colour="% Wetland Drained") +
                # theme(legend.position = "none") + 
                 NULL
+  ),
+  
+  tar_target(
+    name = combined_spatial_plot,
+    command = ggarrange(drains_per_sq_km_plot, drainage_per_sq_km_plot)
   ),
   
   
