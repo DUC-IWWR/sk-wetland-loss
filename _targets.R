@@ -10,6 +10,7 @@ library(tarchetypes)
 library(geotargets)
 library(ggplot2)
 library(ggpubr)
+library(tidyterra)
 theme_set(theme_pubclean())
 
 # Set target options:
@@ -139,10 +140,10 @@ list(
   tar_target(
     name = drains_vs_drainage_plot,
     command = ggplot(data = data.frame(vb_db),
-                     aes(x = Polyline_C, y = (CWI_1 + CWI_5))) +
+                     aes(x = sum_Length, y = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
       geom_point() +
       xlab("Number of Drains") +
-      ylab("Area Drained (CWI 1 + CWI 5") +
+      ylab("Percent Area Drained") +
       NULL
   ),
   
@@ -174,9 +175,8 @@ list(
   
   tar_target(
     name = drains_per_sq_km_plot,
-    command = ggplot(data = data.frame(vb_db), 
-                      aes(x = Long, y = Lat, colour = (as.numeric(Polyline_C) / as.numeric(WS_AREA_KM)))) +
-                geom_point() +
+    command = ggplot(data = vb_db, aes(fill = (Polyline_C / WS_AREA_KM))) +
+                geom_spatvector() +
                 xlab("Longitude") +
                 ylab("Latitude") +
                 labs(colour= "Drains / km^2") +
@@ -185,9 +185,8 @@ list(
   ),
   tar_target(
     name = drainage_per_sq_km_plot,
-    command = ggplot(data = data.frame(vb_db),
-                      aes(x = Long, y = Lat, colour = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
-                geom_point() +
+    command = ggplot(data = vb_db, aes(fill = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
+                geom_spatvector() +
                 xlab("Longitude") +
                 ylab("Latitude") +
                 labs(colour="% Wetland Drained") +
