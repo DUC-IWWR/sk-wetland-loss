@@ -154,6 +154,7 @@ list(
       geom_boxplot() + 
       xlab("Landcover Class") +
       ylab("Number of Drains") +
+      theme(axis.text.x = element_text(angle = 90)) +
       NULL
   ),
   
@@ -164,6 +165,7 @@ list(
       geom_boxplot() + 
       xlab("Landcover Class") +
       ylab("Percent Area Drained") +
+      theme(axis.text.x = element_text(angle = 90)) +
       NULL
   ),
   
@@ -179,17 +181,17 @@ list(
                 geom_spatvector() +
                 xlab("Longitude") +
                 ylab("Latitude") +
-                labs(colour= "Drains / km^2") +
+                labs(fill = "Drains / km^2") +
                # theme(legend.position = "none") +
                 NULL
   ),
   tar_target(
     name = drainage_per_sq_km_plot,
-    command = ggplot(data = vb_db, aes(fill = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
+    command = ggplot(data = vb_db, aes(fill = ((CWI_1 + CWI_5) / WS_AREA_KM) * 100)) +
                 geom_spatvector() +
                 xlab("Longitude") +
                 ylab("Latitude") +
-                labs(colour="% Wetland Drained") +
+                labs(fill = "% Wetland Drained / km^2") +
                # theme(legend.position = "none") + 
                 NULL
   ),

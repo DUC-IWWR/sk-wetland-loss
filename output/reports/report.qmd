@@ -84,16 +84,12 @@ print(combined_boxplots)
 
 ### Spatial Distribution of Drainage
 
-Let's take a look at how the drainage varies in space. For now, we will just colour points by drainage amount 
-until I can get access to the virtual drainage shapefiles. Also note that I will standardize the 
-drainage amount (whether it be number of drains, length of drains, or drained area) by area of each
-virtual basin. That will allow us to see if there are any hotspots (or coldspots) of drainage that are not
-necessarily influenced by the size of the drainage ditch. We would expect larger virtual basins to have
-more drainage if this is strictly a process by amount of land.
+Let's take a look at how the drainage varies in space. This will allow us to see if there are any hotspots (or coldspots) of drainage that are not
+necessarily influenced by the number of drainage ditches. 
 
 First, let us see the spatial distribution of the number of drains per square kilometer in each VB, recalling
 that the number of drains can be used as a proxy for length of drains. We will plot this side by side
-with the percent drained wetlands at each virtual basin (grey dots denote NA):
+with the percent drained wetlands at each virtual basin (grey areas denote NA):
 
 ```{r}
 #| echo: false
