@@ -11,6 +11,7 @@ library(geotargets)
 library(ggplot2)
 library(ggpubr)
 library(tidyterra)
+library(stantargets)
 theme_set(theme_pubclean())
 
 # Set target options:
@@ -20,6 +21,7 @@ tar_option_set(
 
 # Run the R scripts in the R/ folder with your custom functions:
 tar_source("src/merge-vb-datasets.R")
+tar_source("src/generate-stan-data.R")
 
 list(
   # Targets for checking file existence/updates and loading in files
@@ -208,6 +210,18 @@ list(
   tar_target(
     name = combined_spatial_plot,
     command = ggarrange(drains_per_sq_km_plot, drainage_per_sq_km_plot)
+  ),
+  
+  tar_target(
+    name = stan_data,
+    command = generate_stan_data(vb_db)
+  ),
+  
+  tar_stan_mcmc(
+    name = model,
+    stan_files = c("models/null.stan",
+                   "models/n_drains.stan"),
+    data = stan_data
   ),
   
   

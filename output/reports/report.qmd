@@ -113,3 +113,22 @@ wsa_data_wide$Percent_Intact <- round((rowSums(wsa_data_wide[, c(3,5,7)], na.rm 
 print(wsa_data_wide[, c("Name", "Percent_Intact")])
 ```
 
+## Modelling Drainage to Quantify Uncertainty
+
+Let us now attempt to create some models! TO DO INSERT ACTUAL MODEL HERE.
+
+Here is the Stan summary for the Null model:
+
+```{r}
+#| echo: false
+targets::tar_load(model_summary_null)
+print(model_summary_null) 
+```
+
+And now here is the Stan summary for the model that relates number of drains to drainage:
+
+```{r}
+#| echo: false
+targets::tar_load(model_summary_n_drains)
+print(model_summary_n_drains)
+```
