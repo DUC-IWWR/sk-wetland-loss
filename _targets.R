@@ -20,7 +20,7 @@ tar_option_set(
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
-tar_source("src/merge-vb-datasets.R")
+tar_source("src/build-vb-db.R")
 tar_source("src/generate-stan-data.R")
 
 list(
@@ -70,14 +70,33 @@ list(
     name = vb,
     command = terra::vect(vb_shapefile)
   ),
+  tar_target(
+    name = wsa_shapefile,
+    command = "data/raw/WSA_Watershed_Planning_Areas/WSA_Watershed_Planning_Areas.shp",
+    format = "file"
+  ),
+  tar_terra_vect(
+    name = wsa,
+    command = terra::vect(wsa_shapefile) |> terra::project(vb)
+  ),
   
-  #' Target for creating the overall dataset including geometry. I.e., let's merge the datasets
-  #' back together.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #' Target for creating the overall dataset including geometry.
   tar_terra_vect(
     name = vb_db,
-    command = merge_vb_datasets(drains_vb_data,
-                                cwi_impact_vb_data,
-                                vb)
+    command = build_vb_db(drains_data = drains_vb_data,
+                          cwi_data = cwi_impact_vb_data,
+                          vb_statistics = cwi_vb_statistics,
+                          vb_shp = vb,
+                          wsa_shp = wsa)
   ),
   
   tar_target(
@@ -151,7 +170,7 @@ list(
   tar_target(
     name = drains_vs_drainage_plot,
     command = ggplot(data = data.frame(vb_db),
-                     aes(x = sum_Length, y = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
+                     aes(x = sum_Length, y = Percent_Drained * 100)) +
       geom_point() +
       xlab("Number of Drains") +
       ylab("Percent Area Drained") +
@@ -172,7 +191,7 @@ list(
   tar_target(
     name = drainage_vs_lcclass_plot,
     command = ggplot(data = data.frame(vb_db),
-                     aes(x = LCClassNam, y = ((CWI_1 + CWI_5) / CWI_Total) * 100)) +
+                     aes(x = LCClassNam, y = Percent_Drained * 100)) +
       geom_boxplot() + 
       xlab("Landcover Class") +
       ylab("Percent Area Drained") +
@@ -198,7 +217,7 @@ list(
   ),
   tar_target(
     name = drainage_per_sq_km_plot,
-    command = ggplot(data = vb_db, aes(fill = ((CWI_1 + CWI_5) / WS_AREA_KM) * 100)) +
+    command = ggplot(data = vb_db, aes(fill = Percent_Drained * 100)) +
                 geom_spatvector() +
                 xlab("Longitude") +
                 ylab("Latitude") +
