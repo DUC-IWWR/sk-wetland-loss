@@ -14,6 +14,8 @@ model {
   vector[N] A;
   vector[N] B;
   
+  beta ~ std_normal();
+  
   mu = inv_logit(beta * n_drains);
   phi ~ cauchy(0, 5);
   
