@@ -239,7 +239,8 @@ list(
   tar_stan_mcmc(
     name = model,
     stan_files = c("models/null.stan",
-                   "models/n_drains.stan"),
+                   "models/n_drains.stan",
+                   "models/wsa.stan"),
     data = stan_data
   ),
   

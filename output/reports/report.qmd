@@ -132,3 +132,10 @@ And now here is the Stan summary for the model that relates number of drains to 
 targets::tar_load(model_summary_n_drains)
 print(model_summary_n_drains)
 ```
+
+Stan summary for the model that relates drainage to WSA, but shares a variance across WSAs:
+```{r}
+#| echo: false
+targets::tar_load(model_summary_wsa)
+print(model_summary_wsa)
+```

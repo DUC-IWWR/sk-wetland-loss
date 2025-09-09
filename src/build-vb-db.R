@@ -33,13 +33,16 @@ build_vb_db <- function(drains_data = NULL,
                                                 "MAX_Shape_Area",
                                                 "COUNT_Shape_Area")],
                         by = "HYBAS_ID", all.x = TRUE)
-  
 
-  
-
-  
   vb_db$WSA <- terra::extract(wsa_shp,
                               terra::centroids(vb_db))$Name
+  
+  # Drop all the NAs
+  vb_db <- vb_db[-which(is.na(vb_db$Percent_Drained)), ]
+  vb_db <- vb_db[-which(is.na(vb_db$WSA)), ]
+  
+  # Numerical factors for WSA
+  vb_db$WSA_Factor <- as.numeric(as.factor(vb_db$WSA))
   
   return(vb_db)
 }

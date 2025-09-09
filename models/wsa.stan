@@ -3,7 +3,7 @@ data {
   vector[N] y;
   
   int<lower = 0> n_wsa;
-  vector[N] wsa;
+  array[N] int wsa;
 }
 
 parameters {
@@ -12,19 +12,21 @@ parameters {
 }
 
 model {
-  vector[N] mu;
-  vector[N] A;
-  vector[N] B;
+  vector[n_wsa] mu;
+  vector[n_wsa] A;
+  vector[n_wsa] B;
   
   theta ~ std_normal();
   phi ~ cauchy(0, 5);
   
-  mu = inv_logit(beta * n_drains);
-  
+  mu = inv_logit(theta);
   
   A = mu * phi;
   B = (1.0 - mu) * phi;
   
-  y ~ beta(A, B);
+  for (i in 1:N)
+  {
+    y[i] ~ beta(A[wsa[i]], B[wsa[i]]);
+  }
 }
 
