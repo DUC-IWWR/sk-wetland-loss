@@ -137,5 +137,5 @@ Stan summary for the model that relates drainage to WSA, but shares a variance a
 ```{r}
 #| echo: false
 targets::tar_load(model_summary_wsa)
-print(model_summary_wsa)
+print(model_summary_wsa, n = nrow(model_summary_wsa))
 ```

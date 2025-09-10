@@ -207,11 +207,11 @@ list(
   
   tar_target(
     name = drains_per_sq_km_plot,
-    command = ggplot(data = vb_db, aes(fill = (Polyline_C / WS_AREA_KM))) +
+    command = ggplot(data = vb_db, aes(fill = Polyline_C)) +
                 geom_spatvector() +
                 xlab("Longitude") +
                 ylab("Latitude") +
-                labs(fill = "Drains / km^2") +
+                labs(fill = "Drains") +
                # theme(legend.position = "none") +
                 NULL
   ),
@@ -221,7 +221,7 @@ list(
                 geom_spatvector() +
                 xlab("Longitude") +
                 ylab("Latitude") +
-                labs(fill = "% Wetland Drained / km^2") +
+                labs(fill = "% Wetland Drained") +
                # theme(legend.position = "none") + 
                 NULL
   ),

@@ -30,3 +30,15 @@ model {
   }
 }
 
+generated quantities {
+  vector[n_wsa] percent_drained;
+  
+  for (i in 1:n_wsa)
+  {
+    percent_drained[i] = beta_rng(inv_logit(theta[i]) * phi,
+                                    (1.0-inv_logit(theta[i])) * phi);
+  }
+  
+
+}
+
