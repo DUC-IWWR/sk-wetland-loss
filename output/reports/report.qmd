@@ -115,9 +115,11 @@ print(wsa_data_wide[, c("Name", "Percent_Intact")])
 
 ## Modelling Drainage to Quantify Uncertainty
 
-Let us now attempt to create some models! TO DO INSERT ACTUAL MODEL HERE.
+Let us now attempt to create some models! Since I am modelling percent drainage as a response variable, I am going to use *beta regression*, which allows for a response variable to be in the range of 0 to 1. One downside of beta regression is that the response cannot be exactly 0 or exactly 1, and so I have added a very small number onto any 0s that exist in the data. 
 
-Here is the Stan summary for the Null model:
+I will test a few models here, but ultimately I am interested in a "full" model that we can use to predict values of drainage in each virtual basin.
+
+Let us start with a Null model, where we do not have any covariates. Here is the Stan summary for the Null model:
 
 ```{r}
 #| echo: false
@@ -163,7 +165,9 @@ targets::tar_load(drainage_plot_predicted)
 print(drainage_plot_predicted)
 ```
 
-This seems to match up reasonably okay with the observed drainage. Now, here is an uncertainty map, based on the variables in the model. With this, I will map out the *width of the 90% credible intervals* for each virtual basin, such that the larger the width, the LESS uncertain we are of the drainage in that area.
+This seems to match up reasonably okay with the observed drainage in some areas, but in other areas it seems to underestimate drainage. These seem to be the areas where we saw high drainage but low number of drains. I will proceed with the analysis for now, but keep in the back of our heads that we should consider adding in an explicit spatial effect that can "override" the effects of disproportionate number of drains. 
+
+Now, here is an uncertainty map, based on the variables in the model. With this, I will map out the *width of the 90% credible intervals* for each virtual basin, such that the larger the width, the LESS uncertain we are of the drainage in that area.
 ```{r}
 #| echo: false
 targets::tar_load(drainage_plot_uncertainty)
