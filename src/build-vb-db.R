@@ -41,8 +41,9 @@ build_vb_db <- function(drains_data = NULL,
   vb_db <- vb_db[-which(is.na(vb_db$Percent_Drained)), ]
   vb_db <- vb_db[-which(is.na(vb_db$WSA)), ]
   
-  # Numerical factors for WSA
+  # Numerical factors for WSA and LCClass
   vb_db$WSA_Factor <- as.numeric(as.factor(vb_db$WSA))
+  vb_db$LCClassNam_Factor <- as.numeric(as.factor(vb_db$LCClassNam))
   
   return(vb_db)
 }

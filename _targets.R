@@ -231,19 +231,50 @@ list(
     command = ggarrange(drains_per_sq_km_plot, drainage_per_sq_km_plot)
   ),
   
+  # Modelling-related targets
   tar_target(
     name = stan_data,
     command = generate_stan_data(vb_db)
   ),
-  
   tar_stan_mcmc(
     name = model,
     stan_files = c("models/null.stan",
                    "models/n_drains.stan",
-                   "models/wsa.stan"),
+                   "models/wsa.stan",
+                   "models/lcc.stan",
+                   "models/full.stan"),
     data = stan_data
   ),
   
+  # Post-hoc analysis targets
+  tar_target(
+    name = y_pred,
+    command = model_mcmc_full$summary(variables = "y_pred")
+  ),
+  
+  tar_target(
+    name = drainage_plot_predicted,
+    command = vb_db |> mutate(Predicted_Drainage = y_pred$mean) |>
+      ggplot(aes(fill = Predicted_Drainage * 100)) +
+      geom_spatvector() +
+      xlab("Longitude") +
+      ylab("Latitude") +
+      labs(fill = "% Wetland Drained (Predicted)") +
+      # theme(legend.position = "none") + 
+      NULL
+  ),
+  
+  tar_target(
+    name = drainage_plot_uncertainty,
+    command = vb_db |> mutate(Uncertainty = y_pred$q95 - y_pred$q5) |>
+      ggplot(aes(fill = Uncertainty)) +
+      geom_spatvector() +
+      xlab("Longitude") +
+      ylab("Latitude") +
+      labs(fill = "Credible Interval Width") +
+      # theme(legend.position = "none") + 
+      NULL
+  ),
   
   # Final report
   tar_quarto(

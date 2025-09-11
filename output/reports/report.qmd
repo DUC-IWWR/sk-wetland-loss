@@ -133,9 +133,66 @@ targets::tar_load(model_summary_n_drains)
 print(model_summary_n_drains)
 ```
 
-Stan summary for the model that relates drainage to WSA, but shares a variance across WSAs:
+Stan summary for the model that relates drainage to WSA:
 ```{r}
 #| echo: false
 targets::tar_load(model_summary_wsa)
 print(model_summary_wsa, n = nrow(model_summary_wsa))
 ```
+
+Stan summary for the model that relates drainage to landcover class
+```{r}
+#| echo: false
+targets::tar_load(model_summary_lcc)
+print(model_summary_lcc, n = nrow(model_summary_lcc))
+```
+
+Now let's start getting into richer models. This is a model that has the slope for the number of drains, plus effects for landcover class and WSA planning units:
+```{r}
+#| echo: false
+targets::tar_load(model_summary_full)
+print(model_summary_full)
+```
+
+Let's use this last model to come up with some estimated uncertainty for each of the virtual basins. By using the parameter estimates from above, we can come up with predicted values of drainage for each virtual basin based on its WSA planning unit, landcover type, and number of drains in the virtual basin.
+
+Here is the predicted drainage map:
+```{r}
+#| echo: false
+targets::tar_load(drainage_plot_predicted)
+print(drainage_plot_predicted)
+```
+
+This seems to match up reasonably okay with the observed drainage. Now, here is an uncertainty map, based on the variables in the model. With this, I will map out the *width of the 90% credible intervals* for each virtual basin, such that the larger the width, the LESS uncertain we are of the drainage in that area.
+```{r}
+#| echo: false
+targets::tar_load(drainage_plot_uncertainty)
+print(drainage_plot_uncertainty)
+```
+
+Unsurprisingly, we see areas where we are most certain of the drainage and areas we are less certain of the drainage.
+
+Finally, let us come up with a total estimated drainage on the landscape and add uncertainty on to that. I will use the predicted drainage rates from the model to generate total wetland area drained per virtual basin, then sum those wetland areas and divide by the entire wetland area to get an overall drainage on this landscape. I will then do the same for the 5% quantile and the 95% quantile, to get a range of overall drainage.
+
+```{r}
+#| echo: false
+targets::tar_load(y_pred)
+targets::tar_load(vb_db)
+
+estimated_total_drainage <- sum(vb_db$CWI_Total * y_pred$mean)
+percent_total_drainage <- estimated_total_drainage / sum(vb_db$CWI_Total) * 100
+
+lower_total_drainage <- sum(vb_db$CWI_Total * y_pred$q5)
+percent_lower_drainage <- lower_total_drainage / sum(vb_db$CWI_Total) * 100
+
+upper_total_drainage <- sum(vb_db$CWI_Total * y_pred$q95)
+percent_upper_drainage <- upper_total_drainage / sum(vb_db$CWI_Total) * 100
+
+print(paste0("Mean Estimated Drainage: ", round(estimated_total_drainage,2), " km^2, ", round(percent_total_drainage,2), "%"))
+
+print(paste0("Lower 5% Estimated Drainage: ", round(lower_total_drainage,2), " km^2, ", round(percent_lower_drainage,2), "%"))
+
+print(paste0("Upper 95% Estimated Drainage: ", round(upper_total_drainage,2), " km^2, ", round(percent_upper_drainage,2), "%"))
+```
+
+Effectively what the model is telling us is that overall wetland drainage on this landscape could range anywhere from 1.48% upward to 37.24%, with an estimated drainage of approximately 13.04%. It is useful to note that our model predicts an approximately similar amount of drainage that was estimated by previous analyses that used CWI data, but because we are bringing in other sources of data (e.g., drainage ditch mapping, virtual basins, etc.), we can generate an uncertainty around this number.

@@ -9,6 +9,14 @@ generate_stan_data <- function(data = NULL)
   N <- length(y)
   n_wsa <- length(unique(data_df$WSA))
   wsa <- data_df$WSA_Factor
+  n_lcc <- length(unique(data_df$LCClassNam))
+  lcc <- data_df$LCClassNam_Factor
   
-  return(list(N = N, y = y, n_drains = n_drains, n_wsa = n_wsa, wsa = wsa))
+  return(list(N = N,
+              y = y, 
+              n_drains = n_drains, 
+              n_wsa = n_wsa, 
+              wsa = wsa,
+              n_lcc = n_lcc,
+              lcc = lcc))
 }
