@@ -62,6 +62,15 @@ list(
     command = read.csv(cwi_vb_statistics_file)
   ),
   tar_target(
+    name = cwi_vs_cd_file,
+    command = "data/raw/cwi_vs_cd.csv",
+    format = "file"
+  ),
+  tar_target(
+    name = cwi_vs_cd,
+    command = read.csv(cwi_vs_cd_file)
+  ),
+  tar_target(
     name = vb_shapefile,
     command = "data/raw/Drains_VirtualBasin_summary/Drains_VirtualBasin_summary.shp",
     format = "file"
