@@ -68,7 +68,8 @@ list(
   ),
   tar_target(
     name = cwi_vs_cd,
-    command = read.csv(cwi_vs_cd_file)
+    command = read.csv(cwi_vs_cd_file) |> dplyr::mutate(Drained = ifelse((grepl("1", CWI.Impact.Concatentated) | 
+                                                                          grepl("5", CWI.Impact.Concatentated)), TRUE, FALSE))
   ),
   tar_target(
     name = vb_shapefile,

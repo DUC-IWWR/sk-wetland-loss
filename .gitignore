@@ -50,3 +50,8 @@ rsconnect/
 
 # executable files from Stan
 models/*.exe
+
+# Other
+_targets/meta/meta
+*.zip
+*.cpg *.dbf *prj *sbn *sbx *shp *shp.xml
