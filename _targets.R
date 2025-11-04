@@ -24,7 +24,7 @@ tar_source("src/build-vb-db.R")
 tar_source("src/generate-stan-data.R")
 
 list(
-  # Targets for checking file existence/updates and loading in files
+  ########### Targets for checking file existence/updates and loading in files #######################
   tar_target(
     name = drains_vb_data_file,
     command = "data/raw/drains_vb.csv",
@@ -68,8 +68,12 @@ list(
   ),
   tar_target(
     name = cwi_vs_cd,
-    command = read.csv(cwi_vs_cd_file) |> dplyr::mutate(Drained = ifelse((grepl("1", CWI.Impact.Concatentated) | 
-                                                                          grepl("5", CWI.Impact.Concatentated)), TRUE, FALSE))
+    command = read.csv(cwi_vs_cd_file) |> 
+      dplyr::mutate(Detected_CWI = ifelse((is.na(CWI.Basin.ID)), FALSE, TRUE)) |>
+      dplyr::mutate(Detected_CD = ifelse((is.na(CD.Basin.ID)), FALSE, TRUE)) |>
+      dplyr::mutate(Drained_CWI = ifelse((grepl("1", CWI.Impact.Concatentated) | grepl("5", CWI.Impact.Concatentated)), TRUE, FALSE)) |>
+      dplyr::mutate(Drained_CD = ifelse((CD.RevImpact %in% c("Completely Drained", "Cultivated")), TRUE, FALSE))
+      
   ),
   tar_target(
     name = vb_shapefile,
@@ -90,16 +94,7 @@ list(
     command = terra::vect(wsa_shapefile) |> terra::project(vb)
   ),
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  #' Target for creating the overall dataset including geometry.
+  ####### Target for creating the overall dataset including geometry #######################
   tar_terra_vect(
     name = vb_db,
     command = build_vb_db(drains_data = drains_vb_data,
@@ -117,7 +112,7 @@ list(
   ),
   
   
-  # Targets for exploratory plots of data
+  ############ Targets for exploratory plots of data #####################
   tar_target(
     name = drain_length_plot,
     command = ggplot(data = data.frame(vb_db[which(vb_db$sum_Length > 0),]), 
@@ -240,8 +235,18 @@ list(
     name = combined_spatial_plot,
     command = ggarrange(drains_per_sq_km_plot, drainage_per_sq_km_plot)
   ),
+
+  tar_target(
+    name = cwi_vs_cd_summary,
+    command = list(n_detected_cwi = nrow(cwi_vs_cd[which(cwi_vs_cd$Detected_CWI), ]),
+                   n_detected_cd = nrow(cwi_vs_cd[which(cwi_vs_cd$Detected_CD), ]),
+                   n_drained_cwi = nrow(cwi_vs_cd[which(cwi_vs_cd$Detected_CWI & cwi_vs_cd$Drained_CWI), ]),
+                   n_drained_cd = nrow(cwi_vs_cd[which(cwi_vs_cd$Detected_CD & cwi_vs_cd$Drained_CD),]),
+                   drained_ha_cwi = sum(cwi_vs_cd[which(cwi_vs_cd$Detected_CWI & cwi_vs_cd$Drained_CWI), "CWI.Hectares"]),
+                   drained_ha_cd = sum(cwi_vs_cd[which(cwi_vs_cd$Detected_CD & cwi_vs_cd$Drained_CD), "CD.Hectares"]))
+  ),
   
-  # Modelling-related targets
+  ########## Modelling-related targets ###############
   tar_target(
     name = stan_data,
     command = generate_stan_data(vb_db)
@@ -256,7 +261,7 @@ list(
     data = stan_data
   ),
   
-  # Post-hoc analysis targets
+  ############## Post-hoc analysis targets ##############
   tar_target(
     name = y_pred,
     command = model_mcmc_full$summary(variables = "y_pred")
@@ -286,7 +291,7 @@ list(
       NULL
   ),
   
-  # Final report
+  ############## Final report ####################
   tar_quarto(
     name = report,
     path = "output/reports/report.qmd"
