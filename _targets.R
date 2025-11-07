@@ -242,8 +242,8 @@ list(
                    n_detected_cd = nrow(cwi_vs_cd[which(cwi_vs_cd$Detected_CD), ]),
                    n_drained_cwi = nrow(cwi_vs_cd[which(cwi_vs_cd$Detected_CWI & cwi_vs_cd$Drained_CWI), ]),
                    n_drained_cd = nrow(cwi_vs_cd[which(cwi_vs_cd$Detected_CD & cwi_vs_cd$Drained_CD),]),
-                   drained_ha_cwi = sum(cwi_vs_cd[which(cwi_vs_cd$Detected_CWI & cwi_vs_cd$Drained_CWI), "CWI.Hectares"]),
-                   drained_ha_cd = sum(cwi_vs_cd[which(cwi_vs_cd$Detected_CD & cwi_vs_cd$Drained_CD), "CD.Hectares"]))
+                   drained_ha_cwi = sum(cwi_vs_cd[which(cwi_vs_cd$Detected_CWI & cwi_vs_cd$Drained_CWI), "CWI.Hectares.Sum"]),
+                   drained_ha_cd = sum(cwi_vs_cd[which(cwi_vs_cd$Detected_CD & cwi_vs_cd$Drained_CD), "CD.Hectares.Sum"]))
   ),
   
   ########## Modelling-related targets ###############
