@@ -25,6 +25,39 @@ tar_source("src/generate-stan-data.R")
 
 list(
   ########### Targets for checking file existence/updates and loading in files #######################
+  # The main ones we will probably
+  tar_target(
+    name = cwi_drainage_file,
+    command = "data/raw/CWI_Drained_UnDrained.txt",
+    format = "file"
+  ),
+  tar_target(
+    name = cwi_drainage,
+    command = read.csv(cwi_drainage_file)
+  ),
+  tar_target(
+    name = cd_drainage_file,
+    command = "data/raw/ImpactModels_Drained_UnDrained.txt",
+    format = "file"
+  ),
+  tar_target(
+    name = cd_drainage,
+    command = read.csv(cd_drainage_file)
+  ),
+  tar_target(
+    name = cwi_points_file,
+    command = "data/raw/Points_CWI_Drained_UnDrained.txt",
+    format = "file"
+  ),
+  tar_target(
+    name = cwi_points,
+    command = read.csv(cwi_points_file)
+  ),
+
+
+
+
+
   tar_target(
     name = drains_vb_data_file,
     command = "data/raw/drains_vb.csv",
@@ -110,6 +143,34 @@ list(
                               formula = Join_ID + Name ~ IMPACT,
                               value.var = "Sum_area_km2")
   ),
+
+  tar_target(
+    name = combined_point_data,
+    command = dplyr::bind_rows(
+      (
+        cd_drainage |>
+          dplyr::select(
+            c("Impact", "Impact_Lat", "Impact_Long", "HYBAS_ID", "ClassNum", "ClassName", "WS_AREA_KM", "WS_PERI_KM", "Shape_Length", "Shape_Area")
+          ) |>
+          dplyr::rename(
+            tidyselect::all_of(
+              c(
+                Latitude = "Impact_Lat",
+                Longitude = "Impact_Long",
+                Length = "Shape_Length",
+                Area = "Shape_Area"
+              )
+            )
+          )
+      ),
+      (
+        cwi_drainage |>
+          
+      )
+    )
+      
+      
+  )
   
   
   ############ Targets for exploratory plots of data #####################
