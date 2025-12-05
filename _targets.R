@@ -144,6 +144,7 @@ list(
                               value.var = "Sum_area_km2")
   ),
 
+  # combined_point_data
   tar_target(
     name = combined_point_data,
     command = dplyr::bind_rows(
@@ -161,16 +162,56 @@ list(
                 Area = "Shape_Area"
               )
             )
+          ) |>
+          dplyr::mutate(
+            Model = rep("CD", nrow(cd_drainage))
           )
       ),
       (
         cwi_drainage |>
-          
+          dplyr::select(
+            c("Impact", "CWI_Lat", "CWI_Long", "HYBAS_ID", "ClassNum", "ClassName", "WS_AREA_KM", "WS_PERI_KM", "CWI_Shape_Length", "CWI_Shape_Area")
+          ) |>
+          dplyr::rename(
+            tidyselect::all_of(
+              c(
+                Latitude = "CWI_Lat",
+                Longitude = "CWI_Long",
+                Length = "CWI_Shape_Length",
+                Area = "CWI_Shape_Area"
+              )
+            )
+          ) |>
+          dplyr::mutate(
+            Model = rep("CWI", nrow(cwi_drainage))
+          )
+      ),
+      (
+        cwi_points |>
+          dplyr::select(
+            c("Impact", "Point_Lat", "Point_Long", "HYBAS_ID", "ClassNum", "ClassName", "WS_AREA_KM", "WS_PERI_KM", "Point_m2")
+          ) |>
+          dplyr::rename(
+            tidyselect::all_of(
+              c(
+                Latitude = "Point_Lat",
+                Longitude = "Point_Long",
+                Area = "Point_m2"
+              )
+            )
+          ) |>
+          dplyr::mutate(
+            Length = rep(NA, nrow(cwi_points)),
+            .before = "Area"
+          ) |>
+          dplyr::mutate(
+            Model = rep("CWI_Point", nrow(cwi_points))
+          )
       )
     )
       
       
-  )
+  ),
   
   
   ############ Targets for exploratory plots of data #####################
