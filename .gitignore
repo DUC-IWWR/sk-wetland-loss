@@ -51,7 +51,14 @@ rsconnect/
 # executable files from Stan
 models/*.exe
 
+# do not track raw data files other than if I force them
+data/raw/*
+
 # Other
 _targets/meta/meta
 *.zip
 *.cpg *.dbf *prj *sbn *sbx *shp *shp.xml
+
+# Quarto
+output/reports/report_files
+output/reports/report.html
