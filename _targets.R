@@ -21,7 +21,7 @@ tar_option_set(
 
 # Run the R scripts in the R/ folder with your custom functions:
 tar_source("src/build-vb-db.R")
-tar_source("src/generate-stan-data.R")
+tar_source("src/prepare-stan-data.R")
 
 list(
   ########### Targets for checking file existence/updates and loading in files #######################
@@ -371,12 +371,7 @@ list(
   ########## Modelling-related targets ###############
   tar_target(
     name = stan_data,
-    command = combined_point_data |>
-      dplyr::filter(
-        Model == "CWI",
-        HYBAS_ID == 7120074671,
-        Impact == "Drained"
-      ) 
+    command = prepare_stan_data(combined_point_data)
   )
   
 )
