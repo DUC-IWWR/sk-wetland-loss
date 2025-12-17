@@ -234,7 +234,9 @@ list(
   tar_stan_mcmc(
     name = model,
     stan_files = c("models/drainage_model.stan"),
-    data = stan_data
+    data = stan_data,
+    chains = 4,
+    parallel_chains = 4
   )
   
 )

@@ -88,3 +88,6 @@ model_mcmc_drainage_model|stem|916c176d2feb1192|167a4df8ed3fdcb7|3c87c6dfe2d3e2a
 model_summary_drainage_model|stem|d91689d4fbecd375|2e087eb156489f90|69d1edfb03c56b83|-820284720||t20439.0083780556s|s1084b|1084|fst_tbl|local|vector|||0.187|package 'fstcore' was built under R version 4.4.3|
 model_draws_drainage_model|stem|ba16fa718ba6a1bb|e1774c9adef1d9c1|c005f321cc69c002|1996063196||t20439.0083786503s|s59613b|59613|fst_tbl|local|vector|||0||
 model_diagnostics_drainage_model|stem|4207c8e5f23736ae|c79a889b44bca483|c005f321cc69c002|2046162824||t20439.008378976s|s74231b|74231|fst_tbl|local|vector|||0||
+prepare_stan_data|function|2cb76c811e30a688
+.Random.seed|object|2fecf850c97c2884
+model_file_drainage_model|stem|66ecee26cc407cc9|c5a94502d276afdf|2c530c1562a7fbd1|-1861492448|models/drainage_model.stan|t20439.0100146701s|s804b|804|file|local|vector|||0||

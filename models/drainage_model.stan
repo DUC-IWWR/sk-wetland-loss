@@ -17,10 +17,18 @@ data {
 }
 
 parameters {
+    real alpha_cwi;
+    real alpha_cd;
     real alpha_cwi_p;
 }
 
 model {
+    target += normal_lpdf(alpha_cwi | 0, 1);
+    target += bernoulli_logit_lpmf(impact_cwi | alpha_cwi);
+
+    target += normal_lpdf(alpha_cd | 0, 1);
+    target += bernoulli_logit_lpmf(impact_cd | alpha_cd);
+    
     target += normal_lpdf(alpha_cwi_p | 0, 1);
     target += bernoulli_logit_lpmf(impact_cwi_p | alpha_cwi_p);
 
