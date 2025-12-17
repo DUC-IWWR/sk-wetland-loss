@@ -21,7 +21,7 @@ tar_option_set(
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
-tar_source("src/build-vb-db.R")
+#tar_source("src/build-vb-db.R")
 tar_source("src/prepare-stan-data.R")
 
 list(
@@ -84,7 +84,7 @@ list(
   ),
   tar_terra_vect(
     name = wsa,
-    command = terra::vect(wsa_shapefile) |> terra::project(vb)
+    command = terra::vect(wsa_shapefile) |> terra::project(drains_vb)
   ),
   
   ####### Target for creating the overall dataset including geometry #######################
@@ -228,7 +228,13 @@ list(
   ########## Modelling-related targets ###############
   tar_target(
     name = stan_data,
-    command = prepare_stan_data(combined_point_data, hydro_basins)
+    command = prepare_stan_data(combined_point_data)
+  ),
+
+  tar_stan_mcmc(
+    name = model,
+    stan_files = c("models/drainage_model.stan"),
+    data = stan_data
   )
   
 )
