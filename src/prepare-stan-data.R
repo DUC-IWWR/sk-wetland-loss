@@ -1,4 +1,4 @@
-prepare_stan_data <- function(data = NULL, shapefile = NULL)
+prepare_stan_data <- function(data = NULL, shapefile = NULL, icar_matrix = NULL)
 {
   data <- tidyterra::bind_spat_cols(
     data,
@@ -42,7 +42,13 @@ prepare_stan_data <- function(data = NULL, shapefile = NULL)
       impact_cwi_p = dplyr::filter(df, Model == "CWI_Point") |>
         dplyr::pull(Impact_Code),
       basin_cwi_p = dplyr::filter(df, Model == "CWI_Point") |> 
-        dplyr::pull(HYBAS_ID_Factor)
+        dplyr::pull(HYBAS_ID_Factor),
+
+      # ICAR related things
+      N_icar = icar_matrix$N,
+      N_icar_edges = icar_matrix$N_edges,
+      node1 = icar_matrix$node1,
+      node2 = icar_matrix$node2
 
     )
   )

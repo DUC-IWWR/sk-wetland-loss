@@ -23,6 +23,8 @@ tar_option_set(
 # Run the R scripts in the R/ folder with your custom functions:
 #tar_source("src/build-vb-db.R")
 tar_source("src/prepare-stan-data.R")
+tar_source("src/generate-icar-matrix.R")
+tar_source("src/mungeCARdata4stan.R")
 
 list(
   ########### Targets for checking file existence/updates and loading in files #######################
@@ -215,9 +217,14 @@ list(
  
   
   ########## Modelling-related targets ###############
+
+  tar_target(
+    name = icar_matrix,
+    command = generate_icar_matrix(hydro_basins)
+  ),
   tar_target(
     name = stan_data,
-    command = prepare_stan_data(combined_point_data, hydro_basins)
+    command = prepare_stan_data(combined_point_data, hydro_basins, icar_matrix)
   ),
 
   tar_stan_mcmc(
