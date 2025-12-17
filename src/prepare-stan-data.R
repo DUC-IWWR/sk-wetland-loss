@@ -1,12 +1,22 @@
-prepare_stan_data <- function(data = NULL)
+prepare_stan_data <- function(data = NULL, shapefile = NULL)
 {
+  data <- tidyterra::bind_spat_cols(
+    data,
+    terra::extract(
+      tidyterra::select(
+        shapefile, HYBAS_ID_Factor
+      ),
+      data
+    )
+  )
+
   df <- data.frame(data) |>
     dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 0))
 
   return(
     list(
       # Overall data
-      n_basins = length(unique(df$HYBAS_ID_Factor)),
+      n_basins = length(unique(shapefile$HYBAS_ID_Factor)),
       n_datasets = length(unique(df$Model)),
 
       # CWI-related Data

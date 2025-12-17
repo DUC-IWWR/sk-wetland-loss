@@ -165,20 +165,6 @@ list(
       geom = c("Longitude", "Latitude"),
       crs <- terra::crs(terra::vect(hydro_basins_shapefile))
      ) 
-      #%>%
-    # tidyterra::bind_spat_cols(
-    #   .,
-    #   terra::extract(
-    #     tidyterra::select(
-    #       hydro_basins, HYBAS_ID
-    #     ),
-    #     .
-    #   )
-    # ) |>
-    # dplyr::mutate(
-    #   HYBAS_ID_Factor = as.integer(as.factor(HYBAS_ID))
-    # )
-
   ),
   
   ############ Targets for exploratory analysis #####################
@@ -231,7 +217,7 @@ list(
   ########## Modelling-related targets ###############
   tar_target(
     name = stan_data,
-    command = prepare_stan_data(combined_point_data)
+    command = prepare_stan_data(combined_point_data, hydro_basins)
   ),
 
   tar_stan_mcmc(
