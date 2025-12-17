@@ -75,7 +75,11 @@ list(
   tar_terra_vect(
     name = hydro_basins,
     command = terra::vect(hydro_basins_shapefile) |>
-      tidyterra::mutate(dplyr::across(HYBAS_ID, as.character))
+      tidyterra::mutate(dplyr::across(HYBAS_ID, as.character)) |>
+      terra::mask(x = _, mask = terra::hull(combined_point_data)) |>
+      dplyr::mutate(
+        HYBAS_ID_Factor = as.integer(as.factor(HYBAS_ID))
+      )
   ),
   tar_target(
     name = wsa_shapefile,
@@ -159,20 +163,21 @@ list(
     ) |> #end dplyr::bind_rows call
     terra::vect(
       geom = c("Longitude", "Latitude"),
-      crs <- terra::crs(hydro_basins)
-    ) %>%
-    tidyterra::bind_spat_cols(
-      .,
-      terra::extract(
-        tidyterra::select(
-          hydro_basins, HYBAS_ID
-        ),
-        .
-      )
-    ) |>
-    dplyr::mutate(
-      HYBAS_ID_Factor = as.integer(as.factor(HYBAS_ID))
-    )
+      crs <- terra::crs(terra::vect(hydro_basins_shapefile))
+     ) 
+      #%>%
+    # tidyterra::bind_spat_cols(
+    #   .,
+    #   terra::extract(
+    #     tidyterra::select(
+    #       hydro_basins, HYBAS_ID
+    #     ),
+    #     .
+    #   )
+    # ) |>
+    # dplyr::mutate(
+    #   HYBAS_ID_Factor = as.integer(as.factor(HYBAS_ID))
+    # )
 
   ),
   
@@ -217,9 +222,7 @@ list(
         ),
         size = 0.2
       ) +  
-      geom_spatvector(data = hydro_basins, fill = NA) +
-      xlim(terra::ext(combined_point_data)[1], terra::ext(combined_point_data)[2]) +
-      ylim(terra::ext(combined_point_data)[3], terra::ext(combined_point_data)[4])
+      geom_spatvector(data = hydro_basins, fill = NA) 
   ),
 
 
