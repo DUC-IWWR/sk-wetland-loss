@@ -48,7 +48,9 @@ prepare_stan_data <- function(data = NULL, shapefile = NULL, icar_matrix = NULL)
       N_icar = icar_matrix$N,
       N_icar_edges = icar_matrix$N_edges,
       node1 = icar_matrix$node1,
-      node2 = icar_matrix$node2
+      node2 = icar_matrix$node2,
+
+      grainsize = 1
 
     )
   )
