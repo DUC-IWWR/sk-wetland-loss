@@ -72,7 +72,8 @@ list(
         geom = c("Long", "Lat"),
         crs = "GEOGCRS[\"NAD83\",DATUM[\"North American Datum 1983\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],CS[ellipsoidal,2],AXIS[\"geodetic latitude (Lat)\",north,ORDER[1],ANGLEUNIT[\"degree\",0.0174532925199433]],AXIS[\"geodetic longitude (Lon)\",east,ORDER[2],ANGLEUNIT[\"degree\",0.0174532925199433]],USAGE[SCOPE[\"Geodesy.\"],AREA[\"North America - onshore and offshore: Canada - Alberta; British Columbia; Manitoba; New Brunswick; Newfoundland and Labrador; Northwest Territories; Nova Scotia; Nunavut; Ontario; Prince Edward Island; Quebec; Saskatchewan; Yukon. Puerto Rico. United States (USA) - Alabama; Alaska; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Hawaii; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming. US Virgin Islands. British Virgin Islands.\"],BBOX[14.92,167.65,86.45,-40.73]],ID[\"EPSG\",4269]]"
       ) |>
-      terra::project(terra::vect(drains_vb_shapefile))
+      terra::project(terra::vect(drains_vb_shapefile)) |>
+      terra::mask(x = _, mask = terra::hull(combined_point_data))
   ),
   tar_target(
     name = hydro_basins_shapefile,
@@ -84,10 +85,7 @@ list(
     command = terra::vect(hydro_basins_shapefile) |>
       terra::project(drains_vb) |>
       tidyterra::mutate(dplyr::across(HYBAS_ID, as.character)) |>
-      terra::mask(x = _, mask = terra::hull(combined_point_data)) |>
-      dplyr::mutate(
-        HYBAS_ID_Factor = as.integer(as.factor(HYBAS_ID))
-      )
+      terra::mask(x = _, mask = terra::hull(combined_point_data))
   ),
   tar_target(
     name = wsa_shapefile,
@@ -169,11 +167,24 @@ list(
           )
       )
     ) |> #end dplyr::bind_rows call
+    dplyr::mutate(
+      Area_Scaled = scale(Area)[,1]
+    ) |>
     terra::vect(
       geom = c("Longitude", "Latitude"),
       crs = "GEOGCRS[\"NAD83\",DATUM[\"North American Datum 1983\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],CS[ellipsoidal,2],AXIS[\"geodetic latitude (Lat)\",north,ORDER[1],ANGLEUNIT[\"degree\",0.0174532925199433]],AXIS[\"geodetic longitude (Lon)\",east,ORDER[2],ANGLEUNIT[\"degree\",0.0174532925199433]],USAGE[SCOPE[\"Geodesy.\"],AREA[\"North America - onshore and offshore: Canada - Alberta; British Columbia; Manitoba; New Brunswick; Newfoundland and Labrador; Northwest Territories; Nova Scotia; Nunavut; Ontario; Prince Edward Island; Quebec; Saskatchewan; Yukon. Puerto Rico. United States (USA) - Alabama; Alaska; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Hawaii; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming. US Virgin Islands. British Virgin Islands.\"],BBOX[14.92,167.65,86.45,-40.73]],ID[\"EPSG\",4269]]"
     ) |>
     terra::project(terra::vect(drains_vb_shapefile))
+  ),
+
+  tar_target(
+    name = drains_per_basin,
+    command = terra::extract(hydro_basins, drains_vb) |>
+    dplyr::bind_cols(dplyr::select(data.frame(drains_vb), Polyline_C)) |>
+    dplyr::select(HYBAS_ID, Polyline_C) |>
+    dplyr::group_by(HYBAS_ID) |>
+    dplyr::summarise(n_drains = sum(Polyline_C)) |>
+    dplyr::filter(!is.na(HYBAS_ID))
   ),
   
   ############ Targets for exploratory analysis #####################
@@ -183,6 +194,7 @@ list(
     command = ggplot() +
       geom_spatvector(data = drains_vb, aes(fill = Polyline_C))
   ),
+  
 
   tar_target(
     name = drainage_distribution_plot,
@@ -231,7 +243,7 @@ list(
   ),
   tar_target(
     name = stan_data,
-    command = prepare_stan_data(combined_point_data, hydro_basins, icar_matrix)
+    command = prepare_stan_data(combined_point_data, drains_per_basin, hydro_basins)
   ),
 
   tar_stan_mcmc(
