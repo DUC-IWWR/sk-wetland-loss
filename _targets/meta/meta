@@ -92,3 +92,13 @@ mungeCARdata4stan|function|175bc7af67a484f8
 generate_icar_matrix|function|4588c763734aa584
 prepare_stan_data|function|dead0b144de23068
 stan_data|stem|540a4423ed034f8c|fda8766a10278857|e18dda1c1f69a0cb|2113801197||t20440.9160441706s|s19905223b|19905223|rds|local|vector|||22.625|some observations have no neighbours; if this seems unexpected, try increasing the snap argument.. neighbour object has 2 sub-graphs; if this sub-graph count seems unexpected, try increasing the snap argument.|
+mungeCARdata4stan|function|175bc7af67a484f8
+.Random.seed|object|eff804f52c7470a9
+generate_icar_matrix|function|4588c763734aa584
+prepare_stan_data|function|dead0b144de23068
+model_file_drainage_model|stem|c37c6e2b353cb031|c5a94502d276afdf|2c530c1562a7fbd1|-1861492448|models/drainage_model.stan|t20440.933650123s|s3545b|3545|file|local|vector|||0||
+drains_by_vb_plot|stem|6a535e3fcdeebe77|75e84a12657e477a|43dc4ead980db7ca|-791640538||t20440.9346757804s|s1500865b|1500865|rds|local|vector|||4.203||
+wsa|stem|09a59e1a409a0729|a082cb234acfe78d|e806a2dfff1036db|1375051156||t20440.934681931s|s4530176b|4530176|format_custom&read=ewogICAgaWYgKCJHUEtHIiA9PSAiRVNSSSBTaGFwZWZpbGUiKSB7CiAgICAgICAgdGVycmE6OnZlY3QocGFzdGUwKCIvdnNpemlwL3siLCBwYXRoLCAifSIpKQogICAgfQogICAgZWxzZSB7CiAgICAgICAgdGVycmE6OnZlY3QocGF0aCkKICAgIH0KfQ&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVWZWN0b3IsIGMobGlzdCh4ID0gb2JqZWN0LCBmaWxlbmFtZSA9IGlmZWxzZSgiR1BLRyIgPT0gCiAgICAgICAgIkVTUkkgU2hhcGVmaWxlIiwgeWVzID0gcGFzdGUwKHBhdGgsICIuc2h6IiksIG5vID0gcGF0aCksIAogICAgICAgIGZpbGV0eXBlID0gIkdQS0ciLCBvdmVyd3JpdGUgPSBUUlVFLCBvcHRpb25zID0gIkVOQ09ESU5HPVVURi04IiksIAogICAgICAgIGxpc3QoKSkpCiAgICBpZiAoIkdQS0ciID09ICJFU1JJIFNoYXBlZmlsZSIpIHsKICAgICAgICBmaWxlLnJlbmFtZShwYXN0ZTAocGF0aCwgIi5zaHoiKSwgcGF0aCkKICAgIH0KfQ&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||0.282||
+icar_matrix|stem|7f69a91a0281df7c|42f7d62acba0b410|836d14c81ae988ab|1955256420||t20440.9347264488s|s14311b|14311|rds|local|vector|||3.765||
+drainage_distribution_plot|stem|d48821ccb075ea91|ea2a71441fc95c7f|24236b846bfaa24b|-421558469||t20440.9350537143s|s38378207b|38378207|rds|local|vector|||11.547||
+model_data|stem|9720aa4310fe0298|77b402edb6b70a79|e8d1381bf17e360f|-1204036396||t20440.9350605364s|s18138139b|18138139|qs|local|vector|||0||
