@@ -66,8 +66,13 @@ list(
   tar_terra_vect(
     name = drains_vb,
     command = terra::vect(drains_vb_shapefile) |> 
-      tidyterra::mutate(dplyr::across(HYBAS_ID, as.character)) |>
-      tidyterra::filter(HYBAS_ID != "0")
+      tidyterra::mutate(dplyr::across(HYBAS_ID, as.character)) %>%
+      data.frame(.) |>
+      terra::vect(
+        geom = c("Long", "Lat"),
+        crs = "GEOGCRS[\"NAD83\",DATUM[\"North American Datum 1983\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],CS[ellipsoidal,2],AXIS[\"geodetic latitude (Lat)\",north,ORDER[1],ANGLEUNIT[\"degree\",0.0174532925199433]],AXIS[\"geodetic longitude (Lon)\",east,ORDER[2],ANGLEUNIT[\"degree\",0.0174532925199433]],USAGE[SCOPE[\"Geodesy.\"],AREA[\"North America - onshore and offshore: Canada - Alberta; British Columbia; Manitoba; New Brunswick; Newfoundland and Labrador; Northwest Territories; Nova Scotia; Nunavut; Ontario; Prince Edward Island; Quebec; Saskatchewan; Yukon. Puerto Rico. United States (USA) - Alabama; Alaska; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Hawaii; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming. US Virgin Islands. British Virgin Islands.\"],BBOX[14.92,167.65,86.45,-40.73]],ID[\"EPSG\",4269]]"
+      ) |>
+      terra::project(terra::vect(drains_vb_shapefile))
   ),
   tar_target(
     name = hydro_basins_shapefile,
@@ -77,6 +82,7 @@ list(
   tar_terra_vect(
     name = hydro_basins,
     command = terra::vect(hydro_basins_shapefile) |>
+      terra::project(drains_vb) |>
       tidyterra::mutate(dplyr::across(HYBAS_ID, as.character)) |>
       terra::mask(x = _, mask = terra::hull(combined_point_data)) |>
       dplyr::mutate(
@@ -165,8 +171,9 @@ list(
     ) |> #end dplyr::bind_rows call
     terra::vect(
       geom = c("Longitude", "Latitude"),
-      crs <- terra::crs(terra::vect(hydro_basins_shapefile))
-     ) 
+      crs = "GEOGCRS[\"NAD83\",DATUM[\"North American Datum 1983\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],CS[ellipsoidal,2],AXIS[\"geodetic latitude (Lat)\",north,ORDER[1],ANGLEUNIT[\"degree\",0.0174532925199433]],AXIS[\"geodetic longitude (Lon)\",east,ORDER[2],ANGLEUNIT[\"degree\",0.0174532925199433]],USAGE[SCOPE[\"Geodesy.\"],AREA[\"North America - onshore and offshore: Canada - Alberta; British Columbia; Manitoba; New Brunswick; Newfoundland and Labrador; Northwest Territories; Nova Scotia; Nunavut; Ontario; Prince Edward Island; Quebec; Saskatchewan; Yukon. Puerto Rico. United States (USA) - Alabama; Alaska; Arizona; Arkansas; California; Colorado; Connecticut; Delaware; Florida; Georgia; Hawaii; Idaho; Illinois; Indiana; Iowa; Kansas; Kentucky; Louisiana; Maine; Maryland; Massachusetts; Michigan; Minnesota; Mississippi; Missouri; Montana; Nebraska; Nevada; New Hampshire; New Jersey; New Mexico; New York; North Carolina; North Dakota; Ohio; Oklahoma; Oregon; Pennsylvania; Rhode Island; South Carolina; South Dakota; Tennessee; Texas; Utah; Vermont; Virginia; Washington; West Virginia; Wisconsin; Wyoming. US Virgin Islands. British Virgin Islands.\"],BBOX[14.92,167.65,86.45,-40.73]],ID[\"EPSG\",4269]]"
+    ) |>
+    terra::project(terra::vect(drains_vb_shapefile))
   ),
   
   ############ Targets for exploratory analysis #####################
