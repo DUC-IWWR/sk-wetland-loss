@@ -255,14 +255,11 @@ list(
 
   tar_stan_mcmc(
     name = model,
-    iter_warmup = 10,
-    iter_sampling = 10,
-    refresh = 10,
     stan_files = c("models/drainage_model.stan", "models/drainage_model_cwi.stan"),
     data = stan_data,
     chains = 4,
     parallel_chains = 4,
-    threads_per_chain = 3,
+    threads_per_chain = 4,
     cpp_options = list(stan_threads = TRUE)
   ),
 
