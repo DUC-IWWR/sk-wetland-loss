@@ -259,7 +259,7 @@ list(
     data = stan_data,
     chains = 4,
     parallel_chains = 4,
-    threads_per_chain = 4,
+    threads_per_chain = 3,
     cpp_options = list(stan_threads = TRUE)
   ),
 

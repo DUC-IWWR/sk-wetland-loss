@@ -36,13 +36,21 @@ data {
 parameters {
     real alpha_cwi;
 
-    real beta_drains;
+    real beta_drains_raw;
     real <lower = 0> sigma_drains;
 
-    real beta_area;
+    real beta_area_raw;
     real <lower = 0> sigma_area;
 
     vector[n_basins] Theta;
+}
+
+transformed parameters {
+   real beta_drains;
+   real beta_area;
+
+   beta_drains = beta_drains_raw * sigma_drains;
+   beta_area = beta_area_raw * sigma_area;
 }
 
 model {
@@ -50,10 +58,10 @@ model {
     target += -0.5 * dot_self(Theta[node1] - Theta[node2]) + normal_lupdf(sum(Theta) | 0, 0.01 * n_basins);
 
     // covariates sampling
-    target += normal_lupdf(beta_drains | 0, sigma_drains);
+    target += std_normal_lupdf(beta_drains_raw);
     target += exponential_lpdf(sigma_drains | 1);
 
-    target += normal_lupdf(beta_area | 0, sigma_area);
+    target += std_normal_lupdf(beta_area_raw);
     target += exponential_lpdf(sigma_area | 1);
 
     target += std_normal_lupdf(alpha_cwi);

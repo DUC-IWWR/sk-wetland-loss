@@ -49,13 +49,13 @@ parameters {
     real alpha_cd;
     real alpha_cwi_p;
 
-    real BETA_drains;
+    real BETA_drains_raw;
     real <lower = 0> sigma_drains;
-    row_vector[n_datasets] beta_drains;
+    row_vector[n_datasets] beta_drains_raw;
 
-    real BETA_area;
+    real BETA_area_raw;
     real <lower = 0> sigma_area;
-    row_vector[n_datasets] beta_area;
+    row_vector[n_datasets] beta_area_raw;
 
     vector <lower = 0>[n_datasets] alpha;
     matrix[n_basins, n_datasets] u;
@@ -64,6 +64,18 @@ parameters {
 
 transformed parameters {
    matrix[n_datasets, n_basins] Theta;
+
+   real BETA_drains;
+   row_vector[n_datasets] beta_drains;
+
+   real BETA_area;
+   row_vector[n_datasets] beta_area;
+
+   BETA_drains = BETA_drains_raw * sigma_drains;
+   beta_drains = BETA_drains + (beta_drains_raw * 10);
+
+   BETA_area = BETA_area_raw * sigma_area;
+   beta_area = BETA_area + (beta_area_raw * 10);
 
    Theta = diag_pre_multiply(alpha, L) * u';
 }
@@ -79,12 +91,12 @@ model {
     }
 
     // covariates sampling
-    target += normal_lupdf(BETA_drains | 0, sigma_drains);
-    target += normal_lupdf(beta_drains | BETA_drains, 10);
+    target += std_normal_lupdf(BETA_drains_raw);
+    target += std_normal_lupdf(beta_drains_raw);
     target += exponential_lpdf(sigma_drains | 1);
 
-    target += normal_lupdf(BETA_area | 0, sigma_area);
-    target += normal_lupdf(beta_area | BETA_area, 10);
+    target += std_normal_lupdf(BETA_area_raw);
+    target += std_normal_lupdf(beta_area_raw);
     target += exponential_lpdf(sigma_area | 1);
 
 
