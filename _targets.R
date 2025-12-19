@@ -25,6 +25,8 @@ tar_option_set(
 tar_source("src/prepare-stan-data.R")
 tar_source("src/generate-icar-matrix.R")
 tar_source("src/mungeCARdata4stan.R")
+tar_source("src/generate-prediction-list.R")
+tar_source("src/generate-spatial-effects-map.R")
 
 list(
   ########### Targets for checking file existence/updates and loading in files #######################
@@ -246,6 +248,11 @@ list(
     command = prepare_stan_data(combined_point_data, drains_per_basin, hydro_basins)
   ),
 
+  tar_target(
+    name = prediction_list,
+    command = generate_prediction_list(combined_point_data, drains_per_basin, hydro_basins)
+  ),
+
   tar_stan_mcmc(
     name = model,
     iter_warmup = 10,
@@ -257,6 +264,11 @@ list(
     parallel_chains = 4,
     threads_per_chain = 3,
     cpp_options = list(stan_threads = TRUE)
+  ),
+
+  tar_target(
+    name = spatial_effects_map,
+    command = generate_spatial_effects_map(hydro_basins, prediction_list, model_summary_drainage_model, model_summary_drainage_model_cwi)
   )
   
 )
