@@ -293,14 +293,13 @@ list(
   tar_stan_mcmc(
     name = test_model,
     stan_files = c(
-      "models/test_drainage_model_cwi_icar_only.stan"
+      "models/drainage_model_cwi_icar_only.stan",
+      "models/drainage_model_cwi_icar_area.stan"
     ),
     data = stan_data_reduced,
     chains = 4,
     parallel_chains = 4,
-    threads_per_chain = 2,
-    iter_warmup = 50,
-    iter_sampling = 50,
+    threads_per_chain = 3,
     cpp_options = list(stan_threads = TRUE)
   ),
 

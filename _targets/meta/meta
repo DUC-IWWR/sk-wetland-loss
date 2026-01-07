@@ -84,8 +84,6 @@ drainage_distribution_plot|stem|d48821ccb075ea91|ea2a71441fc95c7f|24236b846bfaa2
 stan_data|stem|540a4423ed034f8c|fda8766a10278857|e18dda1c1f69a0cb|2113801197||t20441.9417077327s|s19905223b|19905223|rds|local|vector|||35.609|some observations have no neighbours; if this seems unexpected, try increasing the snap argument.. neighbour object has 2 sub-graphs; if this sub-graph count seems unexpected, try increasing the snap argument.|
 prediction_list|stem|60de2d067b6029c1|59c36ece6076ceb8|6404a7840fe8e607|-1926439145||t20441.9420703944s|s20384960b|20384960|rds|local|vector|||23.656||
 model_data|stem|9720aa4310fe0298|77b402edb6b70a79|e8d1381bf17e360f|-1204036396||t20441.9420742825s|s18138139b|18138139|qs|local|vector|||0||
-model_file_drainage_model_cwi|stem|e2c6f541b6aad445|63574ca54df61a38|2c530c1562a7fbd1|-364732833|models/drainage_model_cwi.stan|t20441.9666195777s|s1892b|1892|file|local|vector|||0||
-model_file_drainage_model|stem|29feb1da1b624eff|c5a94502d276afdf|2c530c1562a7fbd1|-1861492448|models/drainage_model.stan|t20441.9668029415s|s3853b|3853|file|local|vector|||0||
 model_mcmc_drainage_model|stem|1a9a7439baf9c401|9191cc16a84a49cc|0b3465b7972beef6|1355469267||t20446.9808242s|s195851662b|195851662|qs|local|vector|||432461.75||
 model_mcmc_drainage_model_cwi|stem|8eca9f165a550091|e161f171c03c92e8|d06c65c413427b3e|-894524233||t20451.7482214739s|s31399834b|31399834|qs|local|vector|||411902.422||
 model_diagnostics_drainage_model|stem|7e4c923d38524f6a|c79a889b44bca483|1b33e071551042f7|2046162824||t20451.7482314903s|s59393b|59393|fst_tbl|local|vector|||0|package 'fstcore' was built under R version 4.4.3|
@@ -110,13 +108,18 @@ prediction_list_reduced|stem|64cde78e13f7f6e2|d853df67076bb341|0422e6b369e4ef2b|
 test_model_data|stem|b617dd66d7eceac8|3fcb3b3385e025ae|be49b62dcbe6e822|-297497848||t20460.8150435803s|s16936941b|16936941|qs|local|vector|||0||
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_spatial_effects_map|function|0cefd75f3d8d98a1
-.Random.seed|object|25f034c59f2d43cb
+.Random.seed|object|9f2015907c2f3073
 generate_prediction_list|function|829fd6f1bb08f09d
 generate_icar_matrix|function|4588c763734aa584
 prepare_stan_data|function|dead0b144de23068
+model_file_drainage_model|stem|29feb1da1b624eff|c5a94502d276afdf|2c530c1562a7fbd1|-1861492448|models/drainage_model.stan|t20460.8750568393s|s3853b|3853|file|local|vector|||0||
+test_model_file_drainage_model_cwi_icar_area|stem|d811b12dac108c07|69cab44aafc341a9|2c530c1562a7fbd1|391087816|models/drainage_model_cwi_icar_area.stan|t20460.8932460739s|s1326b|1326|file|local|vector|||0||
+model_file_drainage_model_cwi|stem|e2c6f541b6aad445|63574ca54df61a38|2c530c1562a7fbd1|-364732833|models/drainage_model_cwi.stan|t20460.8750572009s|s1892b|1892|file|local|vector|||0||
+test_model_mcmc_drainage_model_cwi_icar_area|stem||533de67db681337b|05701867e504730b|-802592921||t20460.8958772038s||0|qs|local|vector|||187.94||An error occured during compilation! See the message above for more information.
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_spatial_effects_map|function|0cefd75f3d8d98a1
-.Random.seed|object|55ecc24951107b3d
+.Random.seed|object|51c1366da519f852
 generate_prediction_list|function|829fd6f1bb08f09d
 generate_icar_matrix|function|4588c763734aa584
 prepare_stan_data|function|dead0b144de23068
+test_model_file_drainage_model_cwi_icar_area|stem|32e9643690d5e0e8|69cab44aafc341a9|2c530c1562a7fbd1|391087816|models/drainage_model_cwi_icar_area.stan|t20460.8965101605s|s1373b|1373|file|local|vector|||0||
