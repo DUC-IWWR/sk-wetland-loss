@@ -197,6 +197,15 @@ list(
     dplyr::summarise(n_drains = sum(Polyline_C)) |>
     dplyr::filter(!is.na(HYBAS_ID))
   ),
+  tar_target(
+    name = drains_per_basin_reduced,
+    command = terra::extract(hydro_basins_reduced, drains_vb) |>
+    dplyr::bind_cols(dplyr::select(data.frame(drains_vb), Polyline_C)) |>
+    dplyr::select(HYBAS_ID, Polyline_C) |>
+    dplyr::group_by(HYBAS_ID) |>
+    dplyr::summarise(n_drains = sum(Polyline_C)) |>
+    dplyr::filter(!is.na(HYBAS_ID))
+  ),
   
   ############ Targets for exploratory analysis #####################
 
@@ -256,10 +265,19 @@ list(
     name = stan_data,
     command = prepare_stan_data(combined_point_data, drains_per_basin, hydro_basins)
   ),
+  tar_target(
+    name = stan_data_reduced,
+    command = prepare_stan_data(combined_point_data, drains_per_basin_reduced, hydro_basins_reduced)
+  ),
 
   tar_target(
     name = prediction_list,
     command = generate_prediction_list(combined_point_data, drains_per_basin, hydro_basins)
+  ),
+
+  tar_target(
+    name = prediction_list_reduced,
+    command = generate_prediction_list(combined_point_data, drains_per_basin_reduced, hydro_basins_reduced)
   ),
 
   tar_stan_mcmc(
@@ -275,23 +293,24 @@ list(
   tar_stan_mcmc(
     name = test_model,
     stan_files = c(
-      "models/test_drainage_model_cwi_icar_only.stan",
-      "models/test_drainage_model_icar_only.stan"
+      "models/test_drainage_model_cwi_icar_only.stan"
     ),
-    data = stan_data,
+    data = stan_data_reduced,
     chains = 4,
     parallel_chains = 4,
     threads_per_chain = 2,
+    iter_warmup = 50,
+    iter_sampling = 50,
     cpp_options = list(stan_threads = TRUE)
   ),
 
   tar_target(
     name = spatial_effects_map,
     command = generate_spatial_effects_map(hydro_basins, prediction_list, model_summary_drainage_model, model_summary_drainage_model_cwi)
-  ),
-  tar_target(
-    name = spatial_effects_map_icar_only,
-    command = generate_spatial_effects_map(hydro_basins, prediction_list, model_summary_drainage_model, test_model_summary_test_drainage_model_cwi_icar_only)
   )
+  # tar_target(
+  #   name = spatial_effects_map_reduced,
+  #   command = generate_spatial_effects_map(hydro_basins_reduced, prediction_list_reduced, test_model_summary_test_drainage_model_icar_only, test_model_summary_test_drainage_model_cwi_icar_only)
+  # )
   
 )

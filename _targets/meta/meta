@@ -96,7 +96,6 @@ model_draws_drainage_model_cwi|stem|3f7f4508fdb1fc1a|aab9182eaf368211|8ba3ee6a16
 model_diagnostics_drainage_model_cwi|stem|0d4db257bcd9977b|aaffcbb1425033e5|8ba3ee6a16b72b01|2137946229||t20451.7492096695s|s61272b|61272|fst_tbl|local|vector|||0||
 spatial_effects_map|stem|18da2a1d89a6fa0c|ebc48de032a33bd1|d8defe9899ccbb75|-1358606647||t20451.7494044124s|s125133590b|125133590|rds|local|vector|||9.64||
 test_model_file_test_drainage_model_cwi_icar_only|stem|287017324e552142|c43510e75f4a06b4|2c530c1562a7fbd1|1487422392|models/test_drainage_model_cwi_icar_only.stan|t20459.9709489913s|s989b|989|file|local|vector|||0||
-test_model_data|stem|9720aa4310fe0298|77b402edb6b70a79|e8d1381bf17e360f|-297497848||t20459.9735700736s|s18138139b|18138139|qs|local|vector|||0||
 test_model_mcmc_test_drainage_model_cwi_icar_only|stem|cb7e439463116921|0b8f88f8ef1ebcfe|c8d5c0503ed7d116|-213474800||t20460.0631927023s|s25473414b|25473414|qs|local|vector|||7742.734||
 test_model_draws_test_drainage_model_cwi_icar_only|stem|3b19d5a690f4c5e0|c0166de99d741d02|df991eff261f7eb8|-332749235||t20460.0632005067s|s40736873b|40736873|fst_tbl|local|vector|||0.344|package 'fstcore' was built under R version 4.4.3|
 test_model_diagnostics_test_drainage_model_cwi_icar_only|stem|297b90e4c8ea7fe1|4e2cab0ab2be8125|df991eff261f7eb8|607643461||t20460.0632016084s|s54106b|54106|fst_tbl|local|vector|||0||
@@ -104,10 +103,20 @@ test_model_summary_test_drainage_model_cwi_icar_only|stem|1ec5f32fe4564ea2|20f87
 hydro_basins_reduced_shapefile|stem|7765d1d87a3d9d2d|c09e24dc2721f590|2c530c1562a7fbd1|-1327056631|data/raw/hydro_basins_reduced/hydro_basins_reduced.shp|t20460.0140684179s|s1422616b|1422616|file|local|vector|||0|package 'tibble' was built under R version 4.4.3|
 test_model_file_test_drainage_model_icar_only|stem|9cd687050e3c55f1|a2b41aa13b76fa2e|2c530c1562a7fbd1|-337394005|models/test_drainage_model_icar_only.stan|t20460.6488243153s|s2241b|2241|file|local|vector|||0||
 hydro_basins_reduced|stem|d28dc0f76edb207f|f157e65f2eab44aa|f39982073ba9491a|-1565330641||t20460.6510839163s|s2056192b|2056192|format_custom&read=ewogICAgaWYgKCJHUEtHIiA9PSAiRVNSSSBTaGFwZWZpbGUiKSB7CiAgICAgICAgdGVycmE6OnZlY3QocGFzdGUwKCIvdnNpemlwL3siLCBwYXRoLCAifSIpKQogICAgfQogICAgZWxzZSB7CiAgICAgICAgdGVycmE6OnZlY3QocGF0aCkKICAgIH0KfQ&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVWZWN0b3IsIGMobGlzdCh4ID0gb2JqZWN0LCBmaWxlbmFtZSA9IGlmZWxzZSgiR1BLRyIgPT0gCiAgICAgICAgIkVTUkkgU2hhcGVmaWxlIiwgeWVzID0gcGFzdGUwKHBhdGgsICIuc2h6IiksIG5vID0gcGF0aCksIAogICAgICAgIGZpbGV0eXBlID0gIkdQS0ciLCBvdmVyd3JpdGUgPSBUUlVFLCBvcHRpb25zID0gIkVOQ09ESU5HPVVURi04IiksIAogICAgICAgIGxpc3QoKSkpCiAgICBpZiAoIkdQS0ciID09ICJFU1JJIFNoYXBlZmlsZSIpIHsKICAgICAgICBmaWxlLnJlbmFtZShwYXN0ZTAocGF0aCwgIi5zaHoiKSwgcGF0aCkKICAgIH0KfQ&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||0.188||
+spatial_effects_map_icar_only|stem|f3995c94265bcffc|a284b36045c17cd1|35df24081640e8af|-1509026600||t20460.70031818s|s125132605b|125132605|rds|local|vector|||8.453||
+drains_per_basin_reduced|stem|fb11f251819af168|e42f6b6f5eee612f|f163ff4547f5cb94|-2141007116||t20460.8082847388s|s4949b|4949|rds|local|vector|||0.093||
+stan_data_reduced|stem|ed4450c906ac2a7d|5448fec6dbe9bdcc|d433f92937b19be5|678347984||t20460.8088236733s|s18591930b|18591930|rds|local|vector|||33.485|some observations have no neighbours; if this seems unexpected, try increasing the snap argument.. neighbour object has 2 sub-graphs; if this sub-graph count seems unexpected, try increasing the snap argument.|
+prediction_list_reduced|stem|64cde78e13f7f6e2|d853df67076bb341|0422e6b369e4ef2b|375651622||t20460.8150386349s|s19045451b|19045451|rds|local|vector|||38.422||
+test_model_data|stem|b617dd66d7eceac8|3fcb3b3385e025ae|be49b62dcbe6e822|-297497848||t20460.8150435803s|s16936941b|16936941|qs|local|vector|||0||
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_spatial_effects_map|function|0cefd75f3d8d98a1
-.Random.seed|object|89dd31a01592c022
+.Random.seed|object|25f034c59f2d43cb
 generate_prediction_list|function|829fd6f1bb08f09d
 generate_icar_matrix|function|4588c763734aa584
 prepare_stan_data|function|dead0b144de23068
-spatial_effects_map_icar_only|stem|f3995c94265bcffc|a284b36045c17cd1|35df24081640e8af|-1509026600||t20460.70031818s|s125132605b|125132605|rds|local|vector|||8.453||
+mungeCARdata4stan|function|175bc7af67a484f8
+generate_spatial_effects_map|function|0cefd75f3d8d98a1
+.Random.seed|object|55ecc24951107b3d
+generate_prediction_list|function|829fd6f1bb08f09d
+generate_icar_matrix|function|4588c763734aa584
+prepare_stan_data|function|dead0b144de23068
