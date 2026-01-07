@@ -90,6 +90,15 @@ list(
       terra::mask(x = _, mask = terra::hull(combined_point_data))
   ),
   tar_target(
+    name = hydro_basins_reduced_shapefile,
+    command = "data/raw/hydro_basins_reduced/hydro_basins_reduced.shp",
+    format = "file"
+  ),
+  tar_terra_vect(
+    name = hydro_basins_reduced,
+    command = terra::vect(hydro_basins_reduced_shapefile)
+  ),
+  tar_target(
     name = wsa_shapefile,
     command = "data/raw/WSA_Watershed_Planning_Areas/WSA_Watershed_Planning_Areas.shp",
     format = "file"
@@ -263,9 +272,26 @@ list(
     cpp_options = list(stan_threads = TRUE)
   ),
 
+  tar_stan_mcmc(
+    name = test_model,
+    stan_files = c(
+      "models/test_drainage_model_cwi_icar_only.stan",
+      "models/test_drainage_model_icar_only.stan"
+    ),
+    data = stan_data,
+    chains = 4,
+    parallel_chains = 4,
+    threads_per_chain = 2,
+    cpp_options = list(stan_threads = TRUE)
+  ),
+
   tar_target(
     name = spatial_effects_map,
     command = generate_spatial_effects_map(hydro_basins, prediction_list, model_summary_drainage_model, model_summary_drainage_model_cwi)
+  ),
+  tar_target(
+    name = spatial_effects_map_icar_only,
+    command = generate_spatial_effects_map(hydro_basins, prediction_list, model_summary_drainage_model, test_model_summary_test_drainage_model_cwi_icar_only)
   )
   
 )
