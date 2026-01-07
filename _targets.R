@@ -300,6 +300,8 @@ list(
     chains = 4,
     parallel_chains = 4,
     threads_per_chain = 3,
+    iter_warmup = 500,
+    iter_sampling = 500,
     cpp_options = list(stan_threads = TRUE)
   ),
 
