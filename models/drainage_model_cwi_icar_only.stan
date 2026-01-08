@@ -14,11 +14,8 @@ data {
     int <lower = 0> n_cwi;
     array[n_cwi] int impact_cwi;
     array[n_cwi] int basin_cwi;
-    vector[n_cwi] area_cwi;
 
     int <lower = 0> n_basins;
-    
-    row_vector[n_basins] n_drains;
 
     int <lower = 0> N_icar;
     int <lower = 0> N_icar_edges;

@@ -14,22 +14,17 @@ data {
     int <lower = 0> n_cwi;
     array[n_cwi] int impact_cwi;
     array[n_cwi] int basin_cwi;
-    vector[n_cwi] area_cwi;
 
     int <lower = 0> n_cd;
     array[n_cd] int impact_cd;
     array[n_cd] int basin_cd;
-    vector[n_cd] area_cd;
 
     int <lower = 0> n_cwi_p;
     array[n_cwi_p] int impact_cwi_p;
     array[n_cwi_p] int basin_cwi_p;
-    vector[n_cwi_p] area_cwi_p;
 
     int <lower = 0> n_basins;
     int <lower = 0> n_datasets;
-    
-    row_vector[n_basins] n_drains;
 
     int <lower = 0> N_icar;
     int <lower = 0> N_icar_edges;
