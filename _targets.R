@@ -27,6 +27,7 @@ tar_source("src/generate-icar-matrix.R")
 tar_source("src/mungeCARdata4stan.R")
 tar_source("src/generate-prediction-list.R")
 tar_source("src/generate-spatial-effects-map.R")
+tar_source("src/generate-fitted-shapefile.R")
 
 list(
   ########### Targets for checking file existence/updates and loading in files #######################
@@ -97,6 +98,15 @@ list(
   tar_terra_vect(
     name = hydro_basins_reduced,
     command = terra::vect(hydro_basins_reduced_shapefile)
+  ),
+  tar_target(
+    name = smith_creek_shapefile,
+    command = "data/raw/smith_creek/smith_creek.shp",
+    format = "file"
+  ),
+  tar_terra_vect(
+    name = smith_creek,
+    command = terra::vect(smith_creek_shapefile)
   ),
   tar_target(
     name = wsa_shapefile,
@@ -206,6 +216,15 @@ list(
     dplyr::summarise(n_drains = sum(Polyline_C)) |>
     dplyr::filter(!is.na(HYBAS_ID))
   ),
+    tar_target(
+    name = drains_per_basin_sc,
+    command = terra::extract(smith_creek, drains_vb) |>
+    dplyr::bind_cols(dplyr::select(data.frame(drains_vb), Polyline_C)) |>
+    dplyr::select(HYBAS_ID, Polyline_C) |>
+    dplyr::group_by(HYBAS_ID) |>
+    dplyr::summarise(n_drains = sum(Polyline_C)) |>
+    dplyr::filter(!is.na(HYBAS_ID))
+  ),
   
   ############ Targets for exploratory analysis #####################
 
@@ -271,6 +290,11 @@ list(
   ),
 
   tar_target(
+    name = stan_data_sc,
+    command = prepare_stan_data(combined_point_data, drains_per_basin_reduced, smith_creek)
+  ),
+
+  tar_target(
     name = prediction_list,
     command = generate_prediction_list(combined_point_data, drains_per_basin, hydro_basins)
   ),
@@ -278,6 +302,11 @@ list(
   tar_target(
     name = prediction_list_reduced,
     command = generate_prediction_list(combined_point_data, drains_per_basin_reduced, hydro_basins_reduced)
+  ),
+
+  tar_target(
+    name = prediction_list_sc,
+    command = generate_prediction_list(combined_point_data, drains_per_basin_sc, hydro_basins_sc)
   ),
 
   tar_stan_mcmc(
@@ -306,13 +335,84 @@ list(
     cpp_options = list(stan_threads = TRUE)
   ),
 
+  tar_stan_mcmc(
+    name = sc_model,
+    stan_files = c(
+      "models/drainage_model_cwi_icar_only.stan",
+      "models/drainage_model_icar_only.stan"
+    ),
+    data = stan_data_sc,
+    chains = 4,
+    parallel_chains = 4,
+    threads_per_chain = 3,
+    iter_warmup = 500,
+    iter_sampling = 500,
+    cpp_options = list(stan_threads = TRUE)
+  ),
+
+  tar_terra_vect(
+    name = fitted_drainage_shp_reduced_icar_only,
+    command = generate_fitted_shapefile(
+      hydro_basins = hydro_basins_reduced, 
+      prediction_list = prediction_list_reduced, 
+      model_summary = test_model_summary_drainage_model_icar_only, 
+      model_draws = test_model_draws_drainage_model_icar_only,
+      all_data = TRUE
+    )
+  ),
+    tar_terra_vect(
+    name = fitted_drainage_shp_reduced_cwi_icar_only,
+    command = generate_fitted_shapefile(
+      hydro_basins = hydro_basins_reduced, 
+      prediction_list = prediction_list_reduced, 
+      model_summary = test_model_summary_drainage_model_cwi_icar_only, 
+      model_draws = test_model_draws_drainage_model_cwi_icar_only,
+      all_data = FALSE)
+  ),
+
+  tar_target(
+    name = spatial_effects_fig_reduced_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_drainage_shp_reduced_icar_only, 
+        aes(fill = p_drainage_mean)
+      )
+  ),
+
+    tar_target(
+    name = spatial_effects_fig_reduced_cwi_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_drainage_shp_reduced_cwi_icar_only, 
+        aes(fill = p_drainage_mean)
+      )
+  ),
+
+  tar_target(
+    name = spatial_effects_sd_fig_reduced_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_drainage_shp_reduced_icar_only, 
+        aes(fill = p_drainage_sd)
+      )
+  ),
+
+    tar_target(
+    name = spatial_effects_sd_fig_reduced_cwi_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_drainage_shp_reduced_cwi_icar_only, 
+        aes(fill = p_drainage_sd)
+      )
+  ),
+
   tar_target(
     name = spatial_effects_map,
     command = generate_spatial_effects_map(hydro_basins, prediction_list, model_summary_drainage_model, model_summary_drainage_model_cwi)
+  ),
+  tar_target(
+    name = spatial_effects_map_reduced,
+    command = generate_spatial_effects_map(hydro_basins_reduced, prediction_list_reduced, test_model_summary_drainage_model_icar_only, test_model_summary_drainage_model_cwi_icar_only)
   )
-  # tar_target(
-  #   name = spatial_effects_map_reduced,
-  #   command = generate_spatial_effects_map(hydro_basins_reduced, prediction_list_reduced, test_model_summary_test_drainage_model_icar_only, test_model_summary_test_drainage_model_cwi_icar_only)
-  # )
   
 )
