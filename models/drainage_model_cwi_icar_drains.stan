@@ -5,10 +5,10 @@ functions {
         int end,
         array [] int basin,
         row_vector Theta,
-        real beta_area,
-        vector area
+        real beta_drains,
+        row_vector n_drains
     ) {
-        return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]] + (beta_area * area[start:end])');
+        return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]] + (beta_drains * n_drains[basin[start:end]]));
     }
 }
 
@@ -33,22 +33,22 @@ data {
 parameters {
     vector[n_basins] Theta;
     
-    real beta_area_raw;
-    real <lower = 0> sigma_area;
+    real beta_drains_raw;
+    real <lower = 0> sigma_drains;
 }
 
 transformed parameters {
-  real beta_area;
+  real beta_drains;
   
-  beta_area = beta_area_raw * sigma_area;
+  beta_drains = beta_drains_raw * sigma_drains;
 }
 
 model {
     // ICAR sampling
     target += -0.5 * dot_self(Theta[node1] - Theta[node2]) + normal_lupdf(sum(Theta) | 0, 0.01 * n_basins);
     
-    target += std_normal_lupdf(beta_area_raw);
-    target += exponential_lpdf(sigma_area | 1);
+    target += std_normal_lupdf(beta_drains_raw);
+    target += exponential_lpdf(sigma_drains | 1);
 
     target += reduce_sum(
         partial_sum_lupmf,
@@ -56,7 +56,7 @@ model {
         grainsize,
         basin_cwi,
         Theta',
-        beta_area,
-        area_cwi
+        beta_drains,
+        n_drains
     );
 }

@@ -293,8 +293,8 @@ list(
   tar_stan_mcmc(
     name = test_model,
     stan_files = c(
-      "models/drainage_model_cwi_icar_only.stan",
-      "models/drainage_model_cwi_icar_area.stan"
+      "models/drainage_model_cwi_icar_drains.stan",
+      "models/drainage_model_cwi_icar_only.stan"
     ),
     data = stan_data_reduced,
     chains = 4,

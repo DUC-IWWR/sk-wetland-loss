@@ -106,15 +106,23 @@ drains_per_basin_reduced|stem|fb11f251819af168|e42f6b6f5eee612f|f163ff4547f5cb94
 stan_data_reduced|stem|ed4450c906ac2a7d|5448fec6dbe9bdcc|d433f92937b19be5|678347984||t20460.8088236733s|s18591930b|18591930|rds|local|vector|||33.485|some observations have no neighbours; if this seems unexpected, try increasing the snap argument.. neighbour object has 2 sub-graphs; if this sub-graph count seems unexpected, try increasing the snap argument.|
 prediction_list_reduced|stem|64cde78e13f7f6e2|d853df67076bb341|0422e6b369e4ef2b|375651622||t20460.8150386349s|s19045451b|19045451|rds|local|vector|||38.422||
 test_model_data|stem|b617dd66d7eceac8|3fcb3b3385e025ae|be49b62dcbe6e822|-297497848||t20460.8150435803s|s16936941b|16936941|qs|local|vector|||0||
-model_file_drainage_model|stem|29feb1da1b624eff|c5a94502d276afdf|2c530c1562a7fbd1|-1861492448|models/drainage_model.stan|t20460.8750568393s|s3853b|3853|file|local|vector|||0||
-model_file_drainage_model_cwi|stem|e2c6f541b6aad445|63574ca54df61a38|2c530c1562a7fbd1|-364732833|models/drainage_model_cwi.stan|t20460.8750572009s|s1892b|1892|file|local|vector|||0||
 test_model_mcmc_drainage_model_cwi_icar_area|stem||533de67db681337b|05701867e504730b|-802592921||t20460.8958772038s||0|qs|local|vector|||187.94||An error occured during compilation! See the message above for more information.
-test_model_file_drainage_model_cwi_icar_area|stem|32e9643690d5e0e8|69cab44aafc341a9|2c530c1562a7fbd1|391087816|models/drainage_model_cwi_icar_area.stan|t20460.8965101605s|s1373b|1373|file|local|vector|||0||
-test_model_file_drainage_model_cwi_icar_only|stem|287017324e552142|f8d197f1b791091d|2c530c1562a7fbd1|914828969|models/drainage_model_cwi_icar_only.stan|t20460.8750573818s|s989b|989|file|local|vector|||0||
+test_model_mcmc_drainage_model_cwi_icar_only|stem|4111dcc02b78838c|4569e77d30fa41c7|b5fc9911338d5406|-1334410693||t20460.9323407471s|s11346341b|11346341|qs|local|vector|||1575.59||
+test_model_file_drainage_model_cwi_icar_area|stem|32e9643690d5e0e8|69cab44aafc341a9|2c530c1562a7fbd1|391087816|models/drainage_model_cwi_icar_area.stan|t20461.1200605388s|s1373b|1373|file|local|vector|||0||
+model_file_drainage_model_cwi|stem|e2c6f541b6aad445|63574ca54df61a38|2c530c1562a7fbd1|-364732833|models/drainage_model_cwi.stan|t20461.1200605388s|s1892b|1892|file|local|vector|||0||
+test_model_file_drainage_model_cwi_icar_only|stem|287017324e552142|f8d197f1b791091d|2c530c1562a7fbd1|914828969|models/drainage_model_cwi_icar_only.stan|t20461.1200605388s|s989b|989|file|local|vector|||0||
+model_file_drainage_model|stem|29feb1da1b624eff|c5a94502d276afdf|2c530c1562a7fbd1|-1861492448|models/drainage_model.stan|t20461.1200605388s|s3853b|3853|file|local|vector|||0||
+test_model_file_drainage_model_cwi_icar_drains|stem|329b1acf0e86d8c7|873c424c5e7b452f|2c530c1562a7fbd1|451587115|models/drainage_model_cwi_icar_drains.stan|t20461.1334521599s|s1413b|1413|file|local|vector|||0||
+test_model_mcmc_drainage_model_cwi_icar_drains|stem|d684b25cafdc47ce|8500a622f3fb7204|3edf4bc740e0d705|-206321299||t20461.6524265007s|s11362418b|11362418|qs|local|vector|||44819.99||
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_spatial_effects_map|function|0cefd75f3d8d98a1
-.Random.seed|object|be7f6110ca75272d
+.Random.seed|object|1111f3a530568724
 generate_prediction_list|function|829fd6f1bb08f09d
 generate_icar_matrix|function|4588c763734aa584
 prepare_stan_data|function|dead0b144de23068
-test_model_mcmc_drainage_model_cwi_icar_only|stem|4111dcc02b78838c|4569e77d30fa41c7|b5fc9911338d5406|-1334410693||t20460.9323407471s|s11346341b|11346341|qs|local|vector|||1575.59||
+test_model_summary_drainage_model_cwi_icar_drains|stem|cc3e2a3c3c73526b|6b9fecb9732b1641|3fee1b7b36973097|-599624044||t20461.6758128998s|s69776b|69776|fst_tbl|local|vector|||7.92|package 'fstcore' was built under R version 4.4.3|
+test_model_draws_drainage_model_cwi_icar_drains|stem|bb4f15576a560028|16db79331cfb471c|b37d180652661458|890468147||t20461.6758153934s|s13882901b|13882901|fst_tbl|local|vector|||0.06||
+test_model_diagnostics_drainage_model_cwi_icar_drains|stem|800c54e5d4fc998a|92c5a622b1efaafe|b37d180652661458|-400305133||t20461.6758176425s|s41062b|41062|fst_tbl|local|vector|||0||
+test_model_draws_drainage_model_cwi_icar_only|stem|33a8c3112edc07a8|a0615a4ce0163f67|ae6992ebb7bb0a92|-1314086062||t20461.6758200577s|s13834856b|13834856|fst_tbl|local|vector|||0.08||
+test_model_summary_drainage_model_cwi_icar_only|stem|e6f85b31143ebe84|8334b7a7208bf8b2|7a8210684cb730da|1771622252||t20461.675893946s|s69510b|69510|fst_tbl|local|vector|||5.94||
+test_model_diagnostics_drainage_model_cwi_icar_only|stem|4ecdd5222a30d1c6|9631282d93ce489c|ae6992ebb7bb0a92|1504694801||t20461.6758950929s|s35391b|35391|fst_tbl|local|vector|||0||
