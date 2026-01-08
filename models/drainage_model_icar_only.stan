@@ -58,7 +58,6 @@ model {
     for (i in 1:n_datasets) {
         target += -0.5 * dot_self(u[node1, i] - u[node2,i]);
         target += normal_lupdf(sum(u[, i]) | 0, 0.01 * n_basins);
-        //sum(u[, i]) ~ normal(0, 0.01 * n_basins);
     }
     target += reduce_sum(
         partial_sum_lupmf,
@@ -67,7 +66,6 @@ model {
         basin_cwi,
         Theta[1,]
     );
-    //target += bernoulli_logit_lpmf(impact_cwi | alpha_cwi + Theta[1, basin_cwi]);
 
     target += reduce_sum(
         partial_sum_lupmf,
@@ -76,7 +74,6 @@ model {
         basin_cd,
         Theta[2,]
     );
-    //target += bernoulli_logit_lpmf(impact_cd | alpha_cd + Theta[2, basin_cd]);
 
     target += reduce_sum(
         partial_sum_lupmf,
@@ -85,5 +82,4 @@ model {
         basin_cwi_p,
         Theta[3,]
     );
-    //target += bernoulli_logit_lpmf(impact_cwi_p | alpha_cwi_p + Theta[3, basin_cwi_p]);
 }
