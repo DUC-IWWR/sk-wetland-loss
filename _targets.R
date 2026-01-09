@@ -322,7 +322,6 @@ list(
   tar_stan_mcmc(
     name = test_model,
     stan_files = c(
-      "models/drainage_model_cwi_icar_drains.stan",
       "models/drainage_model_cwi_icar_only.stan",
       "models/drainage_model_icar_only.stan"
     ),
@@ -390,6 +389,8 @@ list(
       model_draws = sc_model_draws_drainage_model_cwi_icar_only,
       all_data = FALSE)
   ),
+  
+  ########## Plotting ###############
 
   tar_target(
     name = spatial_effects_fig_reduced_icar_only,
@@ -400,7 +401,7 @@ list(
       )
   ),
 
-    tar_target(
+  tar_target(
     name = spatial_effects_fig_reduced_cwi_icar_only,
     command = ggplot() + 
       geom_spatvector(
@@ -408,7 +409,17 @@ list(
         aes(fill = p_drainage_mean)
       )
   ),
-
+  
+  tar_target(
+    name = spatial_effects_fig_combined,
+    command = ggarrange(
+      spatial_effects_fig_reduced_cwi_icar_only,
+      spatial_effects_fig_reduced_icar_only,
+      labels = c("CWI Only", "Combined"),
+      nrow = 1,
+      common.legend = TRUE)
+  ),
+  
   tar_target(
     name = spatial_effects_sd_fig_reduced_icar_only,
     command = ggplot() + 
@@ -426,14 +437,84 @@ list(
         aes(fill = p_drainage_sd)
       )
   ),
-
+  
   tar_target(
-    name = spatial_effects_map,
-    command = generate_spatial_effects_map(hydro_basins, prediction_list, model_summary_drainage_model, model_summary_drainage_model_cwi)
+    name = spatial_effects_sd_fig_combined,
+    command = ggarrange(
+      spatial_effects_sd_fig_reduced_cwi_icar_only,
+      spatial_effects_sd_fig_reduced_icar_only,
+      labels = c("CWI Only", "Combined"),
+      nrow = 1,
+      common.legend = TRUE)
   ),
+  
+  
   tar_target(
-    name = spatial_effects_map_reduced,
-    command = generate_spatial_effects_map(hydro_basins_reduced, prediction_list_reduced, test_model_summary_drainage_model_icar_only, test_model_summary_drainage_model_cwi_icar_only)
+    name = spatial_effects_sc_fig_reduced_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_sc_drainage_shp_reduced_icar_only, 
+        aes(fill = p_drainage_mean)
+      )
+  ),
+  
+  tar_target(
+    name = spatial_effects_sc_fig_reduced_cwi_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_sc_drainage_shp_reduced_cwi_icar_only, 
+        aes(fill = p_drainage_mean)
+      )
+  ),
+  
+  tar_target(
+    name = spatial_effects_sc_fig_combined,
+    command = ggarrange(
+      spatial_effects_sc_fig_reduced_cwi_icar_only,
+      spatial_effects_sc_fig_reduced_icar_only,
+      labels = c("CWI Only", "Combined"),
+      nrow = 1,
+      common.legend = TRUE)
+  ),
+  
+  
+  tar_target(
+    name = spatial_effects_sc_sd_fig_reduced_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_sc_drainage_shp_reduced_icar_only, 
+        aes(fill = p_drainage_sd)
+      )
+  ),
+  
+  tar_target(
+    name = spatial_effects_sc_sd_fig_reduced_cwi_icar_only,
+    command = ggplot() + 
+      geom_spatvector(
+        data = fitted_sc_drainage_shp_reduced_cwi_icar_only, 
+        aes(fill = p_drainage_sd)
+      )
+  ),
+  
+  tar_target(
+    name = spatial_effects_sc_sd_fig_combined,
+    command = ggarrange(
+      spatial_effects_sc_sd_fig_reduced_cwi_icar_only,
+      spatial_effects_sc_sd_fig_reduced_icar_only,
+      labels = c("CWI Only", "Combined"),
+      nrow = 1,
+      common.legend = TRUE)
+  ),
+  
+  tar_target(
+    name = sc_spatial_coverage_map,
+    command = ggplot() + 
+      geom_spatvector(
+        data = tidyterra::filter(
+          .data = terra::mask(combined_point_data, smith_creek),
+          Impact == "Drained"), 
+        aes(color = Model), 
+        size = 0.5) + geom_spatvector(data = smith_creek, fill = NA)
   )
   
 )
