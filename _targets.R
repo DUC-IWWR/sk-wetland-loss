@@ -338,7 +338,8 @@ list(
     name = sc_model,
     stan_files = c(
       "models/drainage_model_cwi_icar_only.stan",
-      "models/drainage_model_icar_only.stan"
+      "models/drainage_model_icar_only.stan",
+      "models/drainage_model_cwi_icar_only_gamma.stan"
     ),
     data = stan_data_sc,
     chains = 4,
