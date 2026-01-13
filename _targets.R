@@ -369,7 +369,7 @@ list(
     iter_sampling = 500,
     cpp_options = list(stan_threads = TRUE)
   ),
-
+  
   tar_terra_vect(
     name = fitted_drainage_shp_reduced_icar_only,
     command = generate_fitted_shapefile(

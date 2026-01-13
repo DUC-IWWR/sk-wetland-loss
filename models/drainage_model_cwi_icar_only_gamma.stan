@@ -52,3 +52,9 @@ model {
         exp(Theta)'
     );
 }
+
+generated quantities {
+  vector[n_basins] average_area;
+  
+  average_area = exp(Theta);
+}
