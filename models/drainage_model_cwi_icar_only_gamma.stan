@@ -30,7 +30,7 @@ data {
 transformed data {
   array [n_cwi] real area_sqrt;
   
-  area_sqrt = to_array_1d(sqrt((area_cwi .* 81630.36) + 8980.243));
+  area_sqrt = to_array_1d(sqrt(area_cwi));
 }
 
 parameters {
@@ -50,6 +50,5 @@ model {
         basin_cwi,
         shape',
         exp(Theta)'
-
     );
 }

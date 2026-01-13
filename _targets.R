@@ -23,6 +23,7 @@ tar_option_set(
 # Run the R scripts in the R/ folder with your custom functions:
 #tar_source("src/build-vb-db.R")
 tar_source("src/prepare-stan-data.R")
+tar_source("src/prepare-stan-data-gamma.R")
 tar_source("src/generate-icar-matrix.R")
 tar_source("src/mungeCARdata4stan.R")
 tar_source("src/generate-prediction-list.R")
@@ -293,6 +294,11 @@ list(
     name = stan_data_sc,
     command = prepare_stan_data(combined_point_data, drains_per_basin_reduced, smith_creek)
   ),
+  
+  tar_target(
+    name = stan_data_gamma_sc,
+    command = prepare_stan_data_gamma(combined_point_data, drains_per_basin_sc, smith_creek)
+  ),
 
   tar_target(
     name = prediction_list,
@@ -338,10 +344,24 @@ list(
     name = sc_model,
     stan_files = c(
       "models/drainage_model_cwi_icar_only.stan",
-      "models/drainage_model_icar_only.stan",
-      "models/drainage_model_cwi_icar_only_gamma.stan"
+      "models/drainage_model_icar_only.stan"
     ),
     data = stan_data_sc,
+    chains = 4,
+    parallel_chains = 4,
+    threads_per_chain = 3,
+    iter_warmup = 500,
+    iter_sampling = 500,
+    cpp_options = list(stan_threads = TRUE)
+  ),
+  
+  tar_stan_mcmc(
+    name = sc_gamma_model,
+    stan_files = c(
+      "models/drainage_model_cwi_icar_only_gamma.stan",
+      "models/drainage_model_icar_only_gamma.stan"
+    ),
+    data = stan_data_gamma_sc,
     chains = 4,
     parallel_chains = 4,
     threads_per_chain = 3,
