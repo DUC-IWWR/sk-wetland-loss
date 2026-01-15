@@ -180,16 +180,21 @@ sc_normal_model_mcmc_drainage_model_cwi_icar_only_normal|stem|2e94d95ddf07790d|e
 sc_normal_model_draws_drainage_model_cwi_icar_only_normal|stem|54afadee2673dd45|67a61e48072f1e75|98e25a94aebf3d9a|432706179||t20466.9437378852s|s471928b|471928|fst_tbl|local|vector|||0.02|package 'fstcore' was built under R version 4.4.3|
 sc_normal_model_summary_drainage_model_cwi_icar_only_normal|stem|b720e19a78152dba|3565f840bcca8a34|b502b2cac13ddcb3|968853074||t20466.9437419426s|s3395b|3395|fst_tbl|local|vector|||0.3||
 sc_normal_model_diagnostics_drainage_model_cwi_icar_only_normal|stem|aea507dd4a6dec7e|91c4454dca103388|98e25a94aebf3d9a|-1912174782||t20466.943742671s|s40885b|40885|fst_tbl|local|vector|||0||
-mungeCARdata4stan|function|175bc7af67a484f8
-generate_spatial_effects_map|function|0cefd75f3d8d98a1
-generate_fitted_shapefile|function|97b7302a94fe149a
-.Random.seed|object|b17475692a9dc9fe
-generate_prediction_list|function|829fd6f1bb08f09d
-generate_icar_matrix|function|4588c763734aa584
-prepare_stan_data_gamma|function|b0dee0564aeef7e4
-prepare_stan_data|function|dead0b144de23068
 sc_gamma_model_file_drainage_model_cwi_icar_only_gamma|stem|6296af61e9236215|fbe3e4dc3558c5f1|2c530c1562a7fbd1|1231377635|models/drainage_model_cwi_icar_only_gamma.stan|t20466.9476816933s|s1324b|1324|file|local|vector|||0||
 sc_gamma_model_mcmc_drainage_model_cwi_icar_only_gamma|stem|40576825e1f497c3|6def2cae006fd458|0e53af412a1f14ba|2071503445||t20466.9506708076s|s1189020b|1189020|qs|local|vector|||248.92||
 sc_gamma_model_draws_drainage_model_cwi_icar_only_gamma|stem|664985973e369d2d|5d6ae0f0d0a3119d|1113c12f6c708770|1182704902||t20466.9506726352s|s1323628b|1323628|fst_tbl|local|vector|||0.03|package 'fstcore' was built under R version 4.4.3|
 sc_gamma_model_summary_drainage_model_cwi_icar_only_gamma|stem|c3cef09821c89a10|28d4a12c2ca92785|7a2935ddb3a3af56|-1536174439||t20466.9506820819s|s7970b|7970|fst_tbl|local|vector|||0.67|The ESS has been capped to avoid unstable estimates.. The ESS has been capped to avoid unstable estimates.. The ESS has been capped to avoid unstable estimates.. The ESS has been capped to avoid unstable estimates.|
 sc_gamma_model_diagnostics_drainage_model_cwi_icar_only_gamma|stem|7a3829268146be1a|663cfef11f6d701c|1113c12f6c708770|-825043772||t20466.9506834836s|s34820b|34820|fst_tbl|local|vector|||0||
+mungeCARdata4stan|function|175bc7af67a484f8
+generate_spatial_effects_map|function|0cefd75f3d8d98a1
+generate_fitted_shapefile|function|97b7302a94fe149a
+.Random.seed|object|1295ef970360b66d
+generate_prediction_list|function|829fd6f1bb08f09d
+generate_icar_matrix|function|4588c763734aa584
+prepare_stan_data_gamma|function|b0dee0564aeef7e4
+prepare_stan_data|function|dead0b144de23068
+sc_gamma_model_file_drainage_model_cwi_icar_drains_gamma|stem|438cf81db69a360f|beb5a7dd55aea1da|2c530c1562a7fbd1|572260659|models/drainage_model_cwi_icar_drains_gamma.stan|t20468.8724356806s|s1665b|1665|file|local|vector|||0||
+sc_gamma_model_mcmc_drainage_model_cwi_icar_drains_gamma|stem|6f4e7af193030753|f7ab7054d5204511|b8132360bc19aa02|812558091||t20468.9039269798s|s1236376b|1236376|qs|local|vector|||2712.23||
+sc_gamma_model_diagnostics_drainage_model_cwi_icar_drains_gamma|stem|af1448505d228ed1|2e4136de273bd0cd|a2d6718ae1d77747|2056172316||t20468.9039285728s|s36206b|36206|fst_tbl|local|vector|||0|package 'fstcore' was built under R version 4.4.3|
+sc_gamma_model_draws_drainage_model_cwi_icar_drains_gamma|stem|c741991244aa0808|73e3bed3a51850e5|a2d6718ae1d77747|-975174729||t20468.903929734s|s1371834b|1371834|fst_tbl|local|vector|||0.05||
+sc_gamma_model_summary_drainage_model_cwi_icar_drains_gamma|stem|8c24c9dd40af4a33|076b24723b4eacc5|7fc836ed5e91db45|1675244763||t20468.9039379997s|s8263b|8263|fst_tbl|local|vector|||0.65||

@@ -359,6 +359,7 @@ list(
     name = sc_gamma_model,
     stan_files = c(
       "models/drainage_model_cwi_icar_only_gamma.stan",
+      "models/drainage_model_cwi_icar_drains_gamma.stan",
       "models/drainage_model_icar_only_gamma.stan"
     ),
     data = stan_data_gamma_sc,
