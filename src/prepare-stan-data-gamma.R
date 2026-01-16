@@ -34,7 +34,7 @@ prepare_stan_data_gamma <- function(
   ) |>
     tidyterra::filter(!is.na(HYBAS_ID)) |>
     data.frame() |>
-    dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 0))
+    dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 2))
   
   # generate ICAR Matrix based on subsetted shapefile
   icar_matrix <- generate_icar_matrix(shapefile)

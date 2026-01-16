@@ -52,7 +52,7 @@ generate_prediction_list <- function(
       basin_cwi_string = dplyr::filter(df, Model == "CWI") |>
         dplyr::pull(HYBAS_ID),
       area_cwi = dplyr::filter(df, Model == "CWI") |>
-        dplyr::pull(Area_Scaled),
+        dplyr::pull(Area),
 
 
       # CD-related Data
@@ -65,7 +65,7 @@ generate_prediction_list <- function(
       basin_cd_string = dplyr::filter(df, Model == "CD") |>
         dplyr::pull(HYBAS_ID),
       area_cd = dplyr::filter(df, Model == "CD") |>
-        dplyr::pull(Area_Scaled),
+        dplyr::pull(Area),
 
       #CWI Point-only data
       n_cwi_p = dplyr::filter(df, Model == "CWI_Point") |>
@@ -77,7 +77,7 @@ generate_prediction_list <- function(
       basin_cwi_p_string = dplyr::filter(df, Model == "CWI_Point") |>
         dplyr::pull(HYBAS_ID),
       area_cwi_p = dplyr::filter(df, Model == "CWI_Point") |> 
-        dplyr::pull(Area_Scaled),
+        dplyr::pull(Area),
 
       # Basin-related covariates
       n_drains_unscaled = drains_per_basin_vector,

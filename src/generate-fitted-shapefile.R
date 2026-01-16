@@ -1,4 +1,8 @@
-generate_fitted_shapefile <- function(hydro_basins, prediction_list, model_summary, model_draws, all_data) {
+generate_fitted_shapefile <- function(response, hydro_basins, prediction_list, model_summary, model_draws, all_data) {
+  
+  if (response == "gamma") {
+    return(generate_fitted_shapefile_gamma(response, hydro_basins, prediction_list, model_summary, all_data))
+  }
 
   inv_logit <- function(x) exp(x)/(1+exp(x))
 
@@ -72,4 +76,118 @@ generate_fitted_shapefile <- function(hydro_basins, prediction_list, model_summa
     by = "HYBAS_ID")
   
   return(hydro_basins)
+}
+
+generate_fitted_shapefile_gamma <- function(response, hydro_basins, prediction_list, model_summary, all_data) {
+  
+  data <- data.frame(
+    "HYBAS_ID" = prediction_list$basin_cwi_string,
+    "HYBAS_ID_Factor" = prediction_list$basin_cwi
+  )
+  
+  data <- data[-which(duplicated(data$HYBAS_ID)), ]
+  drained_df_to_populate <- NULL
+  undrained_df_to_populate <- NULL
+  
+  if (all_data == FALSE)
+  {
+    for (i in 1:nrow(data)) {
+      if (is.null(drained_df_to_populate)) {
+        if (all_data) {
+          # TO DO (sorry Future Brandon)
+        } else {
+          drained_df_to_populate <- dplyr::filter(
+            model_summary,
+            variable == paste0("mean_drainage[", data$HYBAS_ID_Factor[i], ",1]")
+          )
+        }
+      } else {
+        if (all_data) {
+          # TO DO (sorry Future Brandon)
+        } else {
+          drained_df_to_populate <- rbind(
+            drained_df_to_populate,
+            dplyr::filter(
+              model_summary,
+              variable == paste0("mean_drainage[", data$HYBAS_ID_Factor[i], ",1]")
+            )
+          )
+        }
+      }
+      
+      if (is.null(undrained_df_to_populate)) {
+        if (all_data) {
+          # TO DO (sorry Future Brandon)
+        } else {
+          undrained_df_to_populate <- dplyr::filter(
+            model_summary,
+            variable == paste0("mean_drainage[", data$HYBAS_ID_Factor[i], ",2]")
+          )
+        }
+      } else {
+        if (all_data) {
+          # TO DO (sorry Future Brandon)
+        } else {
+          undrained_df_to_populate <- rbind(
+            undrained_df_to_populate,
+            dplyr::filter(
+              model_summary,
+              variable == paste0("mean_drainage[", data$HYBAS_ID_Factor[i], ",2]")
+            )
+          )
+        }
+      }
+    }
+  } else {
+    # for (i in 1:nrow(data)) {
+    #   
+    #   if (is.null(df_to_populate)) {
+    #     if (all_data) {
+    #       df_to_populate <- model_summary[which(model_summary$variable == paste0("Theta[1,", data$HYBAS_ID_Factor[i], "]")), ]
+    #     } else {
+    #       df_to_populate <- model_summary[which(model_summary$variable == paste0("Theta[", data$HYBAS_ID_Factor[i], "]")), ]
+    #     }
+    #   } else {
+    #     if (all_data) {
+    #       df_to_populate <- rbind(
+    #         df_to_populate,
+    #         model_summary[which(model_summary$variable == paste0("Theta[1,", data$HYBAS_ID_Factor[i], "]")), ]
+    #       )
+    #     } else {
+    #       df_to_populate <- rbind(
+    #         df_to_populate,
+    #         model_summary[which(model_summary$variable == paste0("Theta[", data$HYBAS_ID_Factor[i], "]")), ]
+    #       )        
+    #     }
+    #     
+    #   }
+    # }    
+  }
+
+  drained_df_to_populate <- cbind(
+    data[,"HYBAS_ID"],
+    drained_df_to_populate[, c(
+      "mean", "median", "sd", "q5", "q95", "rhat", "ess_bulk", "ess_tail"
+    )])
+  names(drained_df_to_populate)[1] <- "HYBAS_ID"
+  
+  undrained_df_to_populate <- cbind(
+    data[,"HYBAS_ID"],
+    undrained_df_to_populate[, c(
+      "mean", "median", "sd", "q5", "q95", "rhat", "ess_bulk", "ess_tail"
+    )])
+  names(undrained_df_to_populate)[1] <- "HYBAS_ID"
+  
+  area_drained <- tidyterra::left_join(
+    hydro_basins,
+    drained_df_to_populate,
+    by = "HYBAS_ID"
+  )
+  area_undrained <- tidyterra::left_join(
+    hydro_basins,
+    undrained_df_to_populate,
+    by = "HYBAS_ID"
+  )
+  
+  return(area_drained)
 }
