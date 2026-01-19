@@ -35,12 +35,12 @@ transformed data {
 
 parameters {
     vector<lower = 0> [n_basins] shape;
-    vector[n_basins] Theta;
+    sum_to_zero_vector[n_basins] Theta;
 }
 
 model {
     // ICAR sampling
-    target += -0.5 * dot_self(Theta[node1] - Theta[node2]) + normal_lupdf(sum(Theta) | 0, 0.01 * n_basins);
+    target += -0.5 * dot_self(Theta[node1] - Theta[node2]);
     target += exponential_lupdf(shape | 5);
 
     target += reduce_sum(
