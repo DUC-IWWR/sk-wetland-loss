@@ -206,14 +206,16 @@ mean_area_drained|stem|b93c7474b281073d|42933fe9dd5223dc|3eeba2d6e4c5ebaf|992332
 mean_area_drained_cwi|stem|54375ba04cb97bf6|d807f4a47175f909|e9b5d5b7bff22cb2|-102736205||t20473.9234823601s|s1200949b|1200949|rds|local|vector|||0.01||
 sd_area_drained_cwi|stem|97f680d9e205a8d4|3d5219fc8bc16447|e9b5d5b7bff22cb2|-893975210||t20473.9252941759s|s1200946b|1200946|rds|local|vector|||0.54||
 sd_area_drained|stem|48d0ccc8a19270f1|61fcf859f75407c4|3eeba2d6e4c5ebaf|1889969755||t20473.9253072806s|s1200965b|1200965|rds|local|vector|||0.03||
+mean_area_drained_combined|stem|a9445051332982f8|989f389ea376a37e|647b3ebdea66d355|609345420||t20473.9268400166s|s3275300b|3275300|rds|local|vector|||2.74||
+sd_area_drained_combined|stem|43498c39bb57f50a|bdbea2ef1cff897c|84c2246fb28b0618|1173514446||t20473.9268989467s|s3274932b|3274932|rds|local|vector|||1.53||
+dd_ua_2023_file|stem|876c8f25e9882152|a266550b20e1634c|2c530c1562a7fbd1|-328256643|data/raw/UA_DD_2023.tif|t20473.8361176922s|s112898881b|112898881|file|local|vector|||0|package 'tibble' was built under R version 4.4.3|
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_spatial_effects_map|function|0cefd75f3d8d98a1
 generate_fitted_shapefile_gamma|function|e23e89a6b758877f
-.Random.seed|object|b4d98436edcb8420
+.Random.seed|object|32f5437e2417c759
 generate_prediction_list|function|8a051d7052a7b8d2
 generate_icar_matrix|function|4588c763734aa584
 generate_fitted_shapefile|function|d78fc360b7652165
 prepare_stan_data_gamma|function|92460663ed725851
 prepare_stan_data|function|dead0b144de23068
-mean_area_drained_combined|stem|a9445051332982f8|989f389ea376a37e|647b3ebdea66d355|609345420||t20473.9268400166s|s3275300b|3275300|rds|local|vector|||2.74||
-sd_area_drained_combined|stem|43498c39bb57f50a|bdbea2ef1cff897c|84c2246fb28b0618|1173514446||t20473.9268989467s|s3274932b|3274932|rds|local|vector|||1.53||
+dd_ua_2023|stem|2dfc3287008e7dcd|3357473f61c24d6f|373deddf2d8f7a68|-1430761019||t20473.9405865964s|s68338976b|68338976|format_custom&read=dGVycmE6OnJhc3QocGF0aCk&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVSYXN0ZXIsIGMobGlzdChvYmplY3QsIGZpbGVuYW1lID0gcGF0aCwgCiAgICAgICAgZmlsZXR5cGUgPSAiR1RpZmYiLCBvdmVyd3JpdGUgPSBUUlVFLCBnZGFsID0gTlVMTCksIGxpc3QoKSkpCn0&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||0||

@@ -85,5 +85,15 @@ file_io_targets <- list(
   tar_terra_vect(
     name = wsa,
     command = terra::vect(wsa_shapefile) |> terra::project(drains_vb)
+  ),
+  
+  tar_target(
+    name = dd_ua_2023_file,
+    command = "data/raw/UA_DD_2023.tif",
+    format = "file"
+  ),
+  tar_terra_rast(
+    name = dd_ua_2023,
+    command = terra::rast(dd_ua_2023_file)
   )
 )
