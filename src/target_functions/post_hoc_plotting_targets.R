@@ -121,6 +121,52 @@ post_hoc_plotting_targets <- list(
         aes(fill = median)
       )
   ),
+  tar_target(
+    name = sd_area_drained,
+    command = ggplot() +
+      geom_spatvector(
+        data = fitted_sc_drainage_shp_icar_impact_gamma,
+        aes(fill = sd)
+      )
+  ),
+  tar_target(
+    name = mean_area_drained_cwi,
+    command = ggplot() +
+      geom_spatvector(
+        data = fitted_sc_drainage_shp_cwi_icar_impact_gamma,
+        aes(fill = median)
+      )
+  ),
+  tar_target(
+    name = sd_area_drained_cwi,
+    command = ggplot() +
+      geom_spatvector(
+        data = fitted_sc_drainage_shp_cwi_icar_impact_gamma,
+        aes(fill = sd)
+      )
+  ),
+  
+  tar_target(
+    name = mean_area_drained_combined,
+    command = ggarrange(
+      mean_area_drained_cwi,
+      mean_area_drained,
+      labels = c("CWI Only", "Combined"),
+      nrow = 1,
+      common.legend = TRUE
+    )
+  ),
+  
+  tar_target(
+    name = sd_area_drained_combined,
+    command = ggarrange(
+      sd_area_drained_cwi,
+      sd_area_drained,
+      labels = c("CWI Only", "Combined"),
+      nrow = 1,
+      common.legend = TRUE
+    )
+  ),
   
   tar_target(
     name = sc_spatial_coverage_map,

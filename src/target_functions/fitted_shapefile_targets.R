@@ -48,12 +48,23 @@ fitted_shapefile_targets <- list(
   
   ################## Gamma Response Variables ##########################
   tar_terra_vect(
-    name = fitted_sc_drainage_shp_icar_impact_gamma,
+    name = fitted_sc_drainage_shp_cwi_icar_impact_gamma,
     command = generate_fitted_shapefile(
       response = "gamma",
       hydro_basins = smith_creek,
       prediction_list = prediction_list_sc,
       model_summary = sc_gamma_model_summary_drainage_model_cwi_icar_impact_gamma,
+      all_data = FALSE
+    )
+  ),
+  
+  tar_terra_vect(
+    name = fitted_sc_drainage_shp_icar_impact_gamma,
+    command = generate_fitted_shapefile(
+      response = "gamma",
+      hydro_basins = smith_creek,
+      prediction_list = prediction_list_sc,
+      model_summary = sc_gamma_model_summary_drainage_model_icar_impact_gamma,
       all_data = FALSE
     )
   )
