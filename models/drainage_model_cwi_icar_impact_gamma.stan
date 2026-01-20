@@ -40,16 +40,18 @@ parameters {
     vector<lower = 0> [n_basins] shape;
     sum_to_zero_vector[n_basins] Theta;
     
-    vector[2] beta_impact;
+    sum_to_zero_vector[2] beta_impact;
+    real <lower = 0> sigma_impact;
 }
 
 model {
     // ICAR sampling
     target += -0.5 * dot_self(Theta[node1] - Theta[node2]);// + normal_lupdf(sum(Theta) | 0, 0.01 * n_basins);
-    
     target += exponential_lupdf(shape | 5);
     
-    target += std_normal_lupdf(beta_impact);
+    // Scale sigma_impact by sqrt(n_impact / (n_impact - 1)) = sqrt(2) 
+    target += normal_lupdf(beta_impact | 0, sigma_impact * sqrt(2));
+    target += std_normal_lupdf(sigma_impact);
 
     target += reduce_sum(
         partial_sum_lupdf,
