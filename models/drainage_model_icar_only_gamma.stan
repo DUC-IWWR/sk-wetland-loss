@@ -22,11 +22,6 @@ data {
     array[n_cd] int basin_cd;
     vector [n_cd] area_cd;
 
-    int <lower = 0> n_cwi_p;
-    array[n_cwi_p] int impact_cwi_p;
-    array[n_cwi_p] int basin_cwi_p;
-    vector [n_cwi_p] area_cwi_p;
-
     int <lower = 0> n_basins;
     int <lower = 0> n_datasets;
 
@@ -41,47 +36,43 @@ data {
 transformed data {
   array [n_cwi] real area_cwi_sqrt;
   array [n_cd] real area_cd_sqrt;
-  array [n_cwi_p] real area_cwi_p_sqrt;
   
   area_cwi_sqrt = to_array_1d(sqrt(area_cwi));
   area_cd_sqrt = to_array_1d(sqrt(area_cd));
-  area_cwi_p_sqrt = to_array_1d(sqrt(area_cwi_p));
 }
 
 parameters {
-    vector <lower = 0>[n_datasets] alpha;
-    matrix[n_basins, n_datasets] u;
-    cholesky_factor_corr[n_datasets] L;
+    vector <lower = 0>[n_datasets-1] alpha;
+    sum_to_zero_vector[n_basins] u_cwi;
+    sum_to_zero_vector[n_basins] u_cp;
+    cholesky_factor_corr[n_datasets-1] L;
     
-    
+    vector<lower = 0> [n_basins] shape_cwi;
+    vector<lower = 0> [n_basins] shape_cd;
 }
 
 transformed parameters {
-   matrix[n_datasets, n_basins] Theta;
+   matrix[n_datasets-1, n_basins] Theta;
 
-   Theta = diag_pre_multiply(alpha, L) * u';
+   Theta = diag_pre_multiply(alpha, L) * append_col(u_cwi, u_cp)';
 }
 
 model {
-    matrix [n_datasets, n_basins] shape;
     // ICAR sampling
     target += lkj_corr_cholesky_lupdf(L | 1);
     target += std_normal_lupdf(alpha);
-    for (i in 1:n_datasets) {
-        target += -0.5 * dot_self(u[node1, i] - u[node2,i]);
-        target += normal_lupdf(sum(u[, i]) | 0, 0.01 * n_basins);
-        
-        //target += exponential_lupdf(shape[i, ] | 5);
-    }
+    target += -0.5 * dot_self(u_cwi[node1] - u_cwi[node2]);
+    target += -0.5 * dot_self(u_cp[node1] - u_cp[node2]);
     
-    shape = rep_matrix(5, n_datasets, n_basins);
+    target += exponential_lupdf(shape_cwi | 5);
+    target += exponential_lupdf(shape_cd | 5);
     
     target += reduce_sum(
         partial_sum_lupdf,
         area_cwi_sqrt,
         grainsize,
         basin_cwi,
-        shape[1,],
+        shape_cwi',
         exp(Theta[1,])
     );
 
@@ -90,16 +81,8 @@ model {
         area_cd_sqrt,
         grainsize,
         basin_cd,
-        shape[2,],
+        shape_cd',
         exp(Theta[2,])
     );
 
-    target += reduce_sum(
-        partial_sum_lupdf,
-        area_cwi_p_sqrt,
-        grainsize,
-        basin_cwi_p,
-        shape[3,],
-        exp(Theta[3,])
-    );
 }
