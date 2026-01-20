@@ -80,7 +80,8 @@ modelling_targets <- list(
     stan_files = c(
       "models/drainage_model_cwi_icar_only_gamma.stan",
       "models/drainage_model_cwi_icar_impact_gamma.stan",
-      "models/drainage_model_icar_only_gamma.stan"
+      "models/drainage_model_icar_only_gamma.stan",
+      "models/drainage_model_icar_impact_gamma.stan"
     ),
     data = stan_data_gamma_sc,
     chains = 4,
