@@ -16,15 +16,17 @@ prepare_stan_data_dd <- function(
     )
   ) |>
     tidyterra::filter(!is.na(HYBAS_ID)) |>
-    dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 2))
+    dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 0))
 
   df <- tidyterra::bind_spat_cols(
     data_basins,
     terra::extract(
-      drainage, data_basins
+      drainage,
+      terra::buffer(data_basins, 500),
+      fun = sum
     )
   ) |> data.frame() |>
-    dplyr::mutate(UA_DD_2023 = ifelse(is.na(UA_DD_2023), 0, UA_DD_2023)) |>
+    dplyr::filter(!is.na(UA_DD_2023)) |>
     dplyr::mutate(
       DD_Scaled = scale(UA_DD_2023)[,1]
     )
@@ -45,6 +47,8 @@ prepare_stan_data_dd <- function(
       basin_cwi = dplyr::filter(df, Model == "CWI") |> 
         dplyr::pull(HYBAS_ID_Factor),
       area_cwi = dplyr::filter(df, Model == "CWI") |>
+        dplyr::pull(Area_Scaled),
+      area_unscaled_cwi = dplyr::filter(df, Model == "CWI") |>
         dplyr::pull(Area),
       dd_cwi = dplyr::filter(df, Model == "CWI") |>
         dplyr::pull(DD_Scaled),
@@ -60,6 +64,8 @@ prepare_stan_data_dd <- function(
       basin_cd = dplyr::filter(df, Model == "CD") |> 
         dplyr::pull(HYBAS_ID_Factor),
       area_cd = dplyr::filter(df, Model == "CD") |>
+        dplyr::pull(Area_Scaled),
+      area_unscaled_cd = dplyr::filter(df, Model == "CD") |>
         dplyr::pull(Area),
       dd_cd = dplyr::filter(df, Model == "CD") |>
         dplyr::pull(DD_Scaled),

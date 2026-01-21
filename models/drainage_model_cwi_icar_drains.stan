@@ -4,23 +4,22 @@ functions {
         int start,
         int end,
         array [] int basin,
+        vector drainage,
         row_vector Theta,
-        real beta_drains,
-        row_vector n_drains
+        vector beta_drainage
     ) {
-        return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]] + (beta_drains * n_drains[basin[start:end]]));
-    }
+        return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]]' + beta_drainage[basin[start:end]] .* drainage[start:end]);
+  }
 }
 
 data {
     int <lower = 0> n_cwi;
     array[n_cwi] int impact_cwi;
     array[n_cwi] int basin_cwi;
-    vector[n_cwi] area_cwi;
+    vector [n_cwi] area_cwi;
+    vector [n_cwi] dd_cwi;
 
     int <lower = 0> n_basins;
-    
-    row_vector[n_basins] n_drains;
 
     int <lower = 0> N_icar;
     int <lower = 0> N_icar_edges;
@@ -31,32 +30,33 @@ data {
 }
 
 parameters {
-    vector[n_basins] Theta;
+    sum_to_zero_vector[n_basins] Theta;
     
-    real beta_drains_raw;
-    real <lower = 0> sigma_drains;
+    vector[n_basins] beta_drainage_raw;
+    real <lower = 0> sigma_drainage;
 }
 
 transformed parameters {
-  real beta_drains;
+  vector[n_basins] beta_drainage;
   
-  beta_drains = beta_drains_raw * sigma_drains;
+  beta_drainage = beta_drainage_raw * sigma_drainage;
 }
 
 model {
     // ICAR sampling
-    target += -0.5 * dot_self(Theta[node1] - Theta[node2]) + normal_lupdf(sum(Theta) | 0, 0.01 * n_basins);
+    target += -0.5 * dot_self(Theta[node1] - Theta[node2]);
     
-    target += std_normal_lupdf(beta_drains_raw);
-    target += exponential_lpdf(sigma_drains | 1);
+    target += std_normal_lupdf(beta_drainage_raw);
+    target += std_normal_lupdf(sigma_drainage);
 
     target += reduce_sum(
         partial_sum_lupmf,
         impact_cwi,
         grainsize,
         basin_cwi,
+        dd_cwi,
         Theta',
-        beta_drains,
-        n_drains
+        beta_drainage
+        
     );
 }
