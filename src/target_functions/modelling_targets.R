@@ -58,14 +58,18 @@ modelling_targets <- list(
   tar_stan_mcmc(
     name = sc_model,
     stan_files = c(
-      "models/drainage_model_cwi_icar_only.stan",
-      "models/drainage_model_cwi_icar_drains.stan",
-      "models/drainage_model_cwi_icar_drains_area.stan"
+      # "models/drainage_model_cwi_icar_only.stan",
+      # "models/drainage_model_cwi_icar_drains.stan",
+      # "models/drainage_model_cwi_icar_drains_area.stan",
+      # 
+      # "models/drainage_model_icar_only.stan",
+      "models/drainage_model_icar_drains.stan"
     ),
     data = stan_data_dd,
     chains = 4,
     parallel_chains = 4,
     threads_per_chain = 3,
+    adapt_delta = 0.99,
     cpp_options = list(stan_threads = TRUE)
   )
 )

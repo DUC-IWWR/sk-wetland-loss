@@ -14,14 +14,12 @@ data {
     int <lower = 0> n_cwi;
     array[n_cwi] int impact_cwi;
     array[n_cwi] int basin_cwi;
+    vector [n_cwi] area_cwi;
 
     int <lower = 0> n_cd;
     array[n_cd] int impact_cd;
     array[n_cd] int basin_cd;
-
-    int <lower = 0> n_cwi_p;
-    array[n_cwi_p] int impact_cwi_p;
-    array[n_cwi_p] int basin_cwi_p;
+    vector [n_cd] area_cd;
 
     int <lower = 0> n_basins;
     int <lower = 0> n_datasets;
@@ -36,24 +34,25 @@ data {
 
 parameters {
     vector <lower = 0>[n_datasets] alpha;
-    matrix[n_basins, n_datasets] u;
+    sum_to_zero_vector[n_basins] u_cwi;
+    sum_to_zero_vector[n_basins] u_cp;
     cholesky_factor_corr[n_datasets] L;
+
 }
 
 transformed parameters {
    matrix[n_datasets, n_basins] Theta;
 
-   Theta = diag_pre_multiply(alpha, L) * u';
+   Theta = diag_pre_multiply(alpha, L) * append_col(u_cwi, u_cp)';
 }
 
 model {
     // ICAR sampling
     target += lkj_corr_cholesky_lupdf(L | 1);
     target += std_normal_lupdf(alpha);
-    for (i in 1:n_datasets) {
-        target += -0.5 * dot_self(u[node1, i] - u[node2,i]);
-        target += normal_lupdf(sum(u[, i]) | 0, 0.01 * n_basins);
-    }
+    target += -0.5 * dot_self(u_cwi[node1] - u_cwi[node2]);
+    target += -0.5 * dot_self(u_cp[node1] - u_cp[node2]);
+    
     target += reduce_sum(
         partial_sum_lupmf,
         impact_cwi,
@@ -70,11 +69,4 @@ model {
         Theta[2,]
     );
 
-    target += reduce_sum(
-        partial_sum_lupmf,
-        impact_cwi_p,
-        grainsize,
-        basin_cwi_p,
-        Theta[3,]
-    );
 }
