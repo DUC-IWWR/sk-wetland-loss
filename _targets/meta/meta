@@ -119,18 +119,23 @@ sc_model_mcmc_drainage_model_cwi_icar_only|stem|0c4144155b89ee83|c99ddd88b9f43f9
 sc_model_draws_drainage_model_cwi_icar_only|stem|5bea29f009bceb0d|48f43d23597f2d6e|00d21bd5dae05194|610997090||t20474.8303888819s|s908904b|908904|fst_tbl|local|vector|||0.01|package 'fstcore' was built under R version 4.4.3|
 sc_model_summary_drainage_model_cwi_icar_only|stem|340c59039f53e09d|a2c090be6ccc0d7c|c7828cf36edcacab|-260486139||t20474.8303939896s|s3314b|3314|fst_tbl|local|vector|||0.36||
 sc_model_diagnostics_drainage_model_cwi_icar_only|stem|5f9e79f534b67da7|efe23c4acea35433|00d21bd5dae05194|-1963230047||t20474.8303944589s|s76760b|76760|fst_tbl|local|vector|||0||
+sc_model_file_drainage_model_cwi_icar_drains|stem|d610fe8ad38662d5|873c424c5e7b452f|2c530c1562a7fbd1|-1064406907|models/drainage_model_cwi_icar_drains.stan|t20474.8702546508s|s1421b|1421|file|local|vector|||0||
+sc_model_mcmc_drainage_model_cwi_icar_drains|stem|c1ccacd081be5e2e|6e213e4f8f008f78|97bc207993056672|1412802600||t20474.8729717056s|s2405255b|2405255|qs|local|vector|||226.14||
+sc_model_draws_drainage_model_cwi_icar_drains|stem|48ac2c038bde26e5|c20b43db7597b84b|167d2086bc775f64|1186912708||t20474.8729735379s|s2680175b|2680175|fst_tbl|local|vector|||0.05|package 'fstcore' was built under R version 4.4.3|
+sc_model_diagnostics_drainage_model_cwi_icar_drains|stem|2a4af7dfa7052c4e|bb7a62074349a2f9|167d2086bc775f64|-1342536761||t20474.8729740934s|s83181b|83181|fst_tbl|local|vector|||0||
+sc_model_summary_drainage_model_cwi_icar_drains|stem|6602be84b0694281|d4cf22ffd86196af|d9a0f43275afd8c5|100843944||t20474.8729922624s|s8086b|8086|fst_tbl|local|vector|||1.51||
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_spatial_effects_map|function|0cefd75f3d8d98a1
 generate_fitted_shapefile_gamma|function|e23e89a6b758877f
-.Random.seed|object|8eba8b2f1679bf10
+.Random.seed|object|560e59826366d6d5
 generate_prediction_list|function|8a051d7052a7b8d2
 generate_icar_matrix|function|4588c763734aa584
 generate_fitted_shapefile|function|d78fc360b7652165
 prepare_stan_data_gamma|function|92460663ed725851
 prepare_stan_data|function|dead0b144de23068
 prepare_stan_data_dd|function|4be00b9aaecf111b
-sc_model_file_drainage_model_cwi_icar_drains|stem|d610fe8ad38662d5|873c424c5e7b452f|2c530c1562a7fbd1|-1064406907|models/drainage_model_cwi_icar_drains.stan|t20474.8702546508s|s1421b|1421|file|local|vector|||0||
-sc_model_mcmc_drainage_model_cwi_icar_drains|stem|c1ccacd081be5e2e|6e213e4f8f008f78|97bc207993056672|1412802600||t20474.8729717056s|s2405255b|2405255|qs|local|vector|||226.14||
-sc_model_draws_drainage_model_cwi_icar_drains|stem|48ac2c038bde26e5|c20b43db7597b84b|167d2086bc775f64|1186912708||t20474.8729735379s|s2680175b|2680175|fst_tbl|local|vector|||0.05|package 'fstcore' was built under R version 4.4.3|
-sc_model_diagnostics_drainage_model_cwi_icar_drains|stem|2a4af7dfa7052c4e|bb7a62074349a2f9|167d2086bc775f64|-1342536761||t20474.8729740934s|s83181b|83181|fst_tbl|local|vector|||0||
-sc_model_summary_drainage_model_cwi_icar_drains|stem|6602be84b0694281|d4cf22ffd86196af|d9a0f43275afd8c5|100843944||t20474.8729922624s|s8086b|8086|fst_tbl|local|vector|||1.51||
+sc_model_file_drainage_model_cwi_icar_drains_area|stem|596bcd0c7669b21d|0fb9c73de9d3f3f0|2c530c1562a7fbd1|1980974721|models/drainage_model_cwi_icar_drains_area.stan|t20474.8932219492s|s1808b|1808|file|local|vector|||0||
+sc_model_mcmc_drainage_model_cwi_icar_drains_area|stem|e63457cf9c9c156a|8155ebb7fa122ea6|72315c0a1cc594ff|855351824||t20474.8970975749s|s3916436b|3916436|qs|local|vector|||288.4||
+sc_model_summary_drainage_model_cwi_icar_drains_area|stem|b20dbc9bc59e3448|8e25258ad2661a22|96eaaea379acbe40|-1546747825||t20474.897123068s|s12691b|12691|fst_tbl|local|vector|||2.09|package 'fstcore' was built under R version 4.4.3|
+sc_model_diagnostics_drainage_model_cwi_icar_drains_area|stem|25a2d2b3c65dce4a|ed38c3fee315bad8|00e7e099625c30c6|-2033553188||t20474.8971238997s|s82811b|82811|fst_tbl|local|vector|||0||
+sc_model_draws_drainage_model_cwi_icar_drains_area|stem|f3d8b9e61d21f83c|3d42e5afef91bafb|00e7e099625c30c6|2028232126||t20474.897124904s|s4451155b|4451155|fst_tbl|local|vector|||0.01||
