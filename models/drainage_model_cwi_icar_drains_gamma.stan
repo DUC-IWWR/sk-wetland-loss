@@ -21,7 +21,6 @@ data {
     vector [n_cwi] dd_cwi;
 
     int <lower = 0> n_basins;
-    row_vector[n_basins] n_drains;
 
     int <lower = 0> N_icar;
     int <lower = 0> N_icar_edges;
@@ -71,14 +70,4 @@ model {
         beta_drainage
         
     );
-}
-
-generated quantities {
-  matrix [n_basins, 2] mean_drainage;
-  
-  for (i in 1:n_basins) {
-    for (j in 1:2) {
-      mean_drainage[i,j] = exp(Theta[i] + beta_impact[j]) ^ 2;
-    }
-  }
 }

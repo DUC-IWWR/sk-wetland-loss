@@ -48,6 +48,8 @@ prepare_stan_data_dd <- function(
         dplyr::pull(Area),
       dd_cwi = dplyr::filter(df, Model == "CWI") |>
         dplyr::pull(DD_Scaled),
+      dd_cwi_unscaled = dplyr::filter(df, Model == "CWI") |>
+        dplyr::pull(UA_DD_2023),
       
       
       # CD-related Data
@@ -61,6 +63,8 @@ prepare_stan_data_dd <- function(
         dplyr::pull(Area),
       dd_cd = dplyr::filter(df, Model == "CD") |>
         dplyr::pull(DD_Scaled),
+      dd_cd_unscaled = dplyr::filter(df, Model == "CD") |>
+        dplyr::pull(UA_DD_2023),
       
       # ICAR related things
       N_icar = icar_matrix$N,
