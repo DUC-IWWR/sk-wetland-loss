@@ -24,6 +24,7 @@ tar_option_set(
 #tar_source("src/build-vb-db.R")
 tar_source("src/prepare-stan-data.R")
 tar_source("src/prepare-stan-data-gamma.R")
+tar_source("src/prepare-stan-data-dd.R")
 tar_source("src/generate-icar-matrix.R")
 tar_source("src/mungeCARdata4stan.R")
 tar_source("src/generate-prediction-list.R")

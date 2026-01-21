@@ -17,6 +17,11 @@ modelling_targets <- list(
     name = stan_data_gamma_sc,
     command = prepare_stan_data_gamma(combined_point_data, drains_per_basin_sc, smith_creek)
   ),
+
+  tar_target(
+    name = stan_data_dd,
+    command = prepare_stan_data_dd(combined_point_data, dd_ua_2023, smith_creek_reduced)
+  ),
   
   
   

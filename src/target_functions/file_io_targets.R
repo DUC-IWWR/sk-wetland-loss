@@ -78,6 +78,15 @@ file_io_targets <- list(
     command = terra::vect(smith_creek_shapefile)
   ),
   tar_target(
+    name = smith_creek_reduced_shapefile,
+    command = "data/raw/smith_creek_reduced/smith_creek_reduced.shp",
+    format = "file"
+  ),
+  tar_terra_vect(
+    name = smith_creek_reduced,
+    command = terra::vect(smith_creek_reduced_shapefile)
+  ),
+  tar_target(
     name = wsa_shapefile,
     command = "data/raw/WSA_Watershed_Planning_Areas/WSA_Watershed_Planning_Areas.shp",
     format = "file"
@@ -94,6 +103,6 @@ file_io_targets <- list(
   ),
   tar_terra_rast(
     name = dd_ua_2023,
-    command = terra::rast(dd_ua_2023_file)
+    command = terra::rast(dd_ua_2023_file) |> terra::project(drains_vb)
   )
 )
