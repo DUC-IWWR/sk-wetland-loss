@@ -63,7 +63,8 @@ modelling_targets <- list(
       # "models/drainage_model_cwi_icar_drains_area.stan",
       # 
       # "models/drainage_model_icar_only.stan",
-      "models/drainage_model_icar_drains.stan"
+      "models/drainage_model_icar_drains.stan",
+      "models/drainage_model_icar_drains_area.stan"
     ),
     data = stan_data_dd,
     chains = 4,
