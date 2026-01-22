@@ -58,11 +58,11 @@ modelling_targets <- list(
   tar_stan_mcmc(
     name = sc_model,
     stan_files = c(
-      # "models/drainage_model_cwi_icar_only.stan",
-      # "models/drainage_model_cwi_icar_drains.stan",
-      # "models/drainage_model_cwi_icar_drains_area.stan",
-      # 
-      # "models/drainage_model_icar_only.stan",
+      "models/drainage_model_cwi_icar_only.stan",
+      "models/drainage_model_cwi_icar_drains.stan",
+      "models/drainage_model_cwi_icar_drains_area.stan",
+
+      "models/drainage_model_icar_only.stan",
       "models/drainage_model_icar_drains.stan",
       "models/drainage_model_icar_drains_area.stan"
     ),
