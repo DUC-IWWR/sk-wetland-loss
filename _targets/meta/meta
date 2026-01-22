@@ -110,52 +110,47 @@ sc_gamma_model_file_drainage_model_icar_impact_gamma|stem|38cfd2abce17616c|0cb58
 sc_gamma_model_file_drainage_model_cwi_icar_only_gamma|stem|d0d0e1f404c97ba1|fbe3e4dc3558c5f1|2c530c1562a7fbd1|1231377635|models/drainage_model_cwi_icar_only_gamma.stan|t20472.8265837159s|s1288b|1288|file|local|vector|||0.02||
 sc_model_file_drainage_model_cwi_icar_only|stem|19abf2136ca914c4|f8d197f1b791091d|2c530c1562a7fbd1|1219056758|models/drainage_model_cwi_icar_only.stan|t20474.8257210909s|s882b|882|file|local|vector|||0||
 sc_model_data|stem|a251a6245ed398ac|5f70d29a492a894a|31ff58e99bedf92f|-731438976||t20474.8289223827s|s1639115b|1639115|qs|local|vector|||0||
-sc_model_mcmc_drainage_model_cwi_icar_only|stem|0c4144155b89ee83|c99ddd88b9f43f99|4dd7c2684cbc5664|1483884692||t20474.8303875585s|s895593b|895593|qs|local|vector|||126.48||
-sc_model_draws_drainage_model_cwi_icar_only|stem|5bea29f009bceb0d|48f43d23597f2d6e|00d21bd5dae05194|610997090||t20474.8303888819s|s908904b|908904|fst_tbl|local|vector|||0.01|package 'fstcore' was built under R version 4.4.3|
-sc_model_summary_drainage_model_cwi_icar_only|stem|340c59039f53e09d|a2c090be6ccc0d7c|c7828cf36edcacab|-260486139||t20474.8303939896s|s3314b|3314|fst_tbl|local|vector|||0.36||
-sc_model_diagnostics_drainage_model_cwi_icar_only|stem|5f9e79f534b67da7|efe23c4acea35433|00d21bd5dae05194|-1963230047||t20474.8303944589s|s76760b|76760|fst_tbl|local|vector|||0||
 sc_model_file_drainage_model_cwi_icar_drains|stem|d610fe8ad38662d5|873c424c5e7b452f|2c530c1562a7fbd1|-1064406907|models/drainage_model_cwi_icar_drains.stan|t20474.8702546508s|s1421b|1421|file|local|vector|||0||
-sc_model_mcmc_drainage_model_cwi_icar_drains|stem|c1ccacd081be5e2e|6e213e4f8f008f78|97bc207993056672|1412802600||t20474.8729717056s|s2405255b|2405255|qs|local|vector|||226.14||
-sc_model_draws_drainage_model_cwi_icar_drains|stem|48ac2c038bde26e5|c20b43db7597b84b|167d2086bc775f64|1186912708||t20474.8729735379s|s2680175b|2680175|fst_tbl|local|vector|||0.05|package 'fstcore' was built under R version 4.4.3|
-sc_model_diagnostics_drainage_model_cwi_icar_drains|stem|2a4af7dfa7052c4e|bb7a62074349a2f9|167d2086bc775f64|-1342536761||t20474.8729740934s|s83181b|83181|fst_tbl|local|vector|||0||
-sc_model_summary_drainage_model_cwi_icar_drains|stem|6602be84b0694281|d4cf22ffd86196af|d9a0f43275afd8c5|100843944||t20474.8729922624s|s8086b|8086|fst_tbl|local|vector|||1.51||
 sc_model_file_drainage_model_cwi_icar_drains_area|stem|596bcd0c7669b21d|0fb9c73de9d3f3f0|2c530c1562a7fbd1|1980974721|models/drainage_model_cwi_icar_drains_area.stan|t20474.8932219492s|s1808b|1808|file|local|vector|||0||
-sc_model_mcmc_drainage_model_cwi_icar_drains_area|stem|e63457cf9c9c156a|8155ebb7fa122ea6|72315c0a1cc594ff|855351824||t20474.8970975749s|s3916436b|3916436|qs|local|vector|||288.4||
-sc_model_summary_drainage_model_cwi_icar_drains_area|stem|b20dbc9bc59e3448|8e25258ad2661a22|96eaaea379acbe40|-1546747825||t20474.897123068s|s12691b|12691|fst_tbl|local|vector|||2.09|package 'fstcore' was built under R version 4.4.3|
-sc_model_diagnostics_drainage_model_cwi_icar_drains_area|stem|25a2d2b3c65dce4a|ed38c3fee315bad8|00e7e099625c30c6|-2033553188||t20474.8971238997s|s82811b|82811|fst_tbl|local|vector|||0||
-sc_model_draws_drainage_model_cwi_icar_drains_area|stem|f3d8b9e61d21f83c|3d42e5afef91bafb|00e7e099625c30c6|2028232126||t20474.897124904s|s4451155b|4451155|fst_tbl|local|vector|||0.01||
 sc_model_file_drainage_model_icar_only|stem|e34e3ce0c085303f|d7834c01d6df03ea|2c530c1562a7fbd1|499615739|models/drainage_model_icar_only.stan|t20474.9061014522s|s1630b|1630|file|local|vector|||0||
-sc_model_mcmc_drainage_model_icar_only|stem|be6d19fe94944b75|e89b6f556f15326c|cc50c5b03f84dd8a|-92960951||t20474.9142475605s|s3337493b|3337493|qs|local|vector|||694.78||
-sc_model_draws_drainage_model_icar_only|stem|e34949089b3c18cf|445bd9d4c7affb38|3184b7d445a7f6ff|587113201||t20474.9142495303s|s3645947b|3645947|fst_tbl|local|vector|||0.05|package 'fstcore' was built under R version 4.4.3|
-sc_model_diagnostics_drainage_model_icar_only|stem|e033c0e2db9ef793|a529fadb0dfb279e|3184b7d445a7f6ff|-2003637165||t20474.9142502854s|s81384b|81384|fst_tbl|local|vector|||0||
-sc_model_summary_drainage_model_icar_only|stem|b2fd25817308bc1c|209fcad74e0bc628|16ab6b8ba07d4fbe|1179603362||t20474.9142661853s|s10525b|10525|fst_tbl|local|vector|||1.33||
 sc_model_file_drainage_model_icar_drains|stem|4f205ea5c595b0ba|fe9a5ea9b1228786|2c530c1562a7fbd1|-1808643746|models/drainage_model_icar_drains.stan|t20474.9195003943s|s2124b|2124|file|local|vector|||0||
 sc_model_mcmc_drainage_model_icar_drains|stem|4d058277411c96c5|1dc446b963818007|a0b72bdf0887c0f4|330221683||t20474.9894910218s|s4758428b|4758428|qs|local|vector|||1794.71||
 sc_model_diagnostics_drainage_model_icar_drains|stem|ab333642f14455c4|fcfd5133b70798ef|2c02f4c9a6588df4|1118496665||t20474.9894923036s|s80630b|80630|fst_tbl|local|vector|||0|package 'fstcore' was built under R version 4.4.3|
 sc_model_draws_drainage_model_icar_drains|stem|b6079a112c339bcb|62a86b86ca03f6bd|2c02f4c9a6588df4|2032344022||t20474.9894936973s|s5417152b|5417152|fst_tbl|local|vector|||0.04||
 sc_model_summary_drainage_model_icar_drains|stem|016352192b992306|11fc6277863714e5|b9e109ee4bea6c72|1256640222||t20474.9895254245s|s15638b|15638|fst_tbl|local|vector|||2.64||
-mungeCARdata4stan|function|175bc7af67a484f8
-generate_spatial_effects_map|function|0cefd75f3d8d98a1
-generate_fitted_shapefile_gamma|function|e23e89a6b758877f
-.Random.seed|object|821c7079028e1258
-generate_prediction_list|function|8a051d7052a7b8d2
-generate_icar_matrix|function|4588c763734aa584
-generate_fitted_shapefile|function|d78fc360b7652165
-prepare_stan_data_gamma|function|92460663ed725851
-prepare_stan_data|function|dead0b144de23068
-prepare_stan_data_dd|function|4be00b9aaecf111b
 sc_model_file_drainage_model_icar_drains_area|stem|15a5d8149fd31d5b|f76970e1f9af9b05|2c530c1562a7fbd1|-433535003|models/drainage_model_icar_drains_area.stan|t20474.9936371834s|s2543b|2543|file|local|vector|||0||
 sc_model_mcmc_drainage_model_icar_drains_area|stem|a3c6106839aa1366|9e8e41cfddfeea41|76faf5190a9fa73b|-1825464237||t20475.0196764196s|s6348256b|6348256|qs|local|vector|||2219.23||
 sc_model_diagnostics_drainage_model_icar_drains_area|stem|afc0a6fef48e94fc|6ddc24915b69f657|4b4c013a67282465|-1044195069||t20475.0196776451s|s79175b|79175|fst_tbl|local|vector|||0|package 'fstcore' was built under R version 4.4.3|
 sc_model_summary_drainage_model_icar_drains_area|stem|a177e7fa3ba05906|6662ae4d8d25d080|caa8c7401a279ee8|191799341||t20475.0197106387s|s20535b|20535|fst_tbl|local|vector|||2.8||
 sc_model_draws_drainage_model_icar_drains_area|stem|6b52e8c730aac3da|21b70326684dd25d|4b4c013a67282465|-1274376794||t20475.0197121576s|s7188139b|7188139|fst_tbl|local|vector|||0.03||
+sc_model_mcmc_drainage_model_icar_only|stem|c405d90e046df653|d8812c0f87d11633|cc50c5b03f84dd8a|-92960951||t20475.0415622135s|s3251206b|3251206|qs|local|vector|||1678.78||
+sc_model_mcmc_drainage_model_cwi_icar_only|stem|8cee3b90f7f8f20f|dab1badf766893fd|4dd7c2684cbc5664|1483884692||t20475.0431685252s|s891782b|891782|qs|local|vector|||138.71||
+sc_model_mcmc_drainage_model_cwi_icar_drains_area|stem|d12e95771b78dff2|e286613238bcd618|72315c0a1cc594ff|855351824||t20475.0515809811s|s3912665b|3912665|qs|local|vector|||726.68||
+sc_model_mcmc_drainage_model_cwi_icar_drains|stem|1d8f79ae9863badb|d6f7a081250715f7|97bc207993056672|1412802600||t20475.0580736321s|s2399446b|2399446|qs|local|vector|||560.89||
+sc_model_diagnostics_drainage_model_icar_only|stem|4af595cf66841933|a529fadb0dfb279e|9a1b28ebf94aa99c|-2003637165||t20475.0580783309s|s85874b|85874|fst_tbl|local|vector|||0|package 'fstcore' was built under R version 4.4.3|
+sc_model_draws_drainage_model_icar_only|stem|f13228b419ebea6f|445bd9d4c7affb38|9a1b28ebf94aa99c|587113201||t20475.0580793264s|s3645872b|3645872|fst_tbl|local|vector|||0.03||
+sc_model_summary_drainage_model_icar_only|stem|9c71f6c3aeeec7f8|209fcad74e0bc628|01d5601e139c025d|1179603362||t20475.058102804s|s10525b|10525|fst_tbl|local|vector|||1.95||
+sc_model_summary_drainage_model_cwi_icar_only|stem|8b9f6e9c39126c6c|a2c090be6ccc0d7c|21f81a7b2337546d|-260486139||t20475.0581097097s|s3314b|3314|fst_tbl|local|vector|||0.54||
+sc_model_draws_drainage_model_cwi_icar_only|stem|a529fb3c7ba67bc6|48f43d23597f2d6e|219660075bda6af2|610997090||t20475.0581102305s|s908867b|908867|fst_tbl|local|vector|||0||
+sc_model_diagnostics_drainage_model_cwi_icar_only|stem|bf044544333ee94f|efe23c4acea35433|219660075bda6af2|-1963230047||t20475.058110705s|s80429b|80429|fst_tbl|local|vector|||0||
+sc_model_summary_drainage_model_cwi_icar_drains_area|stem|ad8ad0731217212e|8e25258ad2661a22|fa1cd38e8675ba34|-1546747825||t20475.0581310715s|s12691b|12691|fst_tbl|local|vector|||1.69||
+sc_model_diagnostics_drainage_model_cwi_icar_drains_area|stem|425ffce009d2ccbc|ed38c3fee315bad8|7b4fd5551bb2dfff|-2033553188||t20475.0581317951s|s78731b|78731|fst_tbl|local|vector|||0||
+sc_model_draws_drainage_model_cwi_icar_drains_area|stem|d49bd326e1c9dd30|3d42e5afef91bafb|7b4fd5551bb2dfff|2028232126||t20475.0581326993s|s4451139b|4451139|fst_tbl|local|vector|||0.01||
+sc_model_draws_drainage_model_cwi_icar_drains|stem|bfa0815941c26324|c20b43db7597b84b|b66d9d200f3eade0|1186912708||t20475.0581336034s|s2680196b|2680196|fst_tbl|local|vector|||0.02||
+sc_model_summary_drainage_model_cwi_icar_drains|stem|c4c0d4948b004714|d4cf22ffd86196af|8372c89f665327d3|100843944||t20475.05814752s|s8086b|8086|fst_tbl|local|vector|||1.16||
+sc_model_diagnostics_drainage_model_cwi_icar_drains|stem|c4c25be117501eb4|bb7a62074349a2f9|b66d9d200f3eade0|-1342536761||t20475.0581481216s|s82112b|82112|fst_tbl|local|vector|||0.02||
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_spatial_effects_map|function|0cefd75f3d8d98a1
 generate_fitted_shapefile_gamma|function|e23e89a6b758877f
-.Random.seed|object|c3ec62e3797191af
+.Random.seed|object|84967dc0dc23ec19
 generate_prediction_list|function|8a051d7052a7b8d2
 generate_icar_matrix|function|4588c763734aa584
 generate_fitted_shapefile|function|d78fc360b7652165
 prepare_stan_data_gamma|function|92460663ed725851
 prepare_stan_data|function|dead0b144de23068
 prepare_stan_data_dd|function|4be00b9aaecf111b
+sc_model_file_drainage_model_icar_drains_area_soft_stz|stem|89f8d23250519d7d|d2aa2035b28304ce|2c530c1562a7fbd1|675111446|models/drainage_model_icar_drains_area_soft_stz.stan|t20475.609556529s|s2474b|2474|file|local|vector|||0||
+sc_model_mcmc_drainage_model_icar_drains_area_soft_stz|stem|f15a796e6c6a84e5|e4ab66b02f6cdc0a|702ad0ba108a9241|1704569591||t20475.6364566885s|s6355256b|6355256|qs|local|vector|||2200.2||
+sc_model_summary_drainage_model_icar_drains_area_soft_stz|stem|561d440e491229e6|1965918b2e5057ad|65783b5850f68385|151794776||t20475.636490956s|s20535b|20535|fst_tbl|local|vector|||2.83|package 'fstcore' was built under R version 4.4.3|
+sc_model_diagnostics_drainage_model_icar_drains_area_soft_stz|stem|657fccebacb02733|9f474edb35b8f8ee|3b5122cb4f7a9ffb|805832715||t20475.6364916914s|s77647b|77647|fst_tbl|local|vector|||0||
+sc_model_draws_drainage_model_icar_drains_area_soft_stz|stem|557ce491a427a2f5|0eb9c1b86c79b209|3b5122cb4f7a9ffb|1946132140||t20475.6364927396s|s7188086b|7188086|fst_tbl|local|vector|||0.03||
