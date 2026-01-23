@@ -13,11 +13,16 @@ functions {
 }
 
 data {
-    int <lower = 0> n_cwi;
-    array[n_cwi] int impact_cwi;
-    array[n_cwi] int basin_cwi;
-    vector [n_cwi] area_cwi;
-    vector [n_cwi] dd_cwi;
+    int <lower = 0> n_cwi_tr;
+    array[n_cwi_tr] int impact_cwi_tr;
+    array[n_cwi_tr] int basin_cwi_tr;
+    vector [n_cwi_tr] dd_cwi_tr;
+    vector [n_cwi_tr] area_cwi_tr;
+    
+    int <lower = 0> n_cwi_te;
+    array[n_cwi_te] int basin_cwi_te;
+    vector [n_cwi_te] dd_cwi_te;
+    vector [n_cwi_te] area_cwi_te;
 
     int <lower = 0> n_basins;
 
@@ -51,12 +56,17 @@ model {
 
     target += reduce_sum(
         partial_sum_lupmf,
-        impact_cwi,
+        impact_cwi_tr,
         grainsize,
-        basin_cwi,
-        area_cwi,
+        basin_cwi_tr,
+        area_cwi_tr,
         Theta',
         beta_area
         
     );
+}
+
+generated quantities {
+  vector[n_cwi_te] score;
+  score = Theta[basin_cwi_te] + beta_area[basin_cwi_te] .* area_cwi_te;
 }

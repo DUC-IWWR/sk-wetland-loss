@@ -13,6 +13,7 @@ library(ggpubr)
 library(tidyterra)
 library(stantargets)
 library(magrittr)
+library(tibble)
 theme_set(theme_pubclean())
 
 # Set target options:
@@ -55,5 +56,21 @@ list(
   
   fitted_shapefile_targets,
   
-  post_hoc_plotting_targets
+  post_hoc_plotting_targets,
+  tar_target(
+    name = percent_correct_summary,
+    command = tibble(
+      Model = c("CWI_ICAR", "CWI_ICAR_Area", "CWI_ICAR_Drains", "CWI_ICAR_Drains_Area", "ICAR", "ICAR_Area", "ICAR_Drains", "ICAR_Drains_Area"),
+      Percent_Correct = c(
+        pc_cwi_icar_only,
+        pc_cwi_icar_drains,
+        pc_cwi_icar_area,
+        pc_cwi_icar_drains_area,
+        pc_icar_only,
+        pc_icar_drains,
+        pc_icar_area,
+        pc_icar_drains_area
+      )
+    )
+  )
 )
