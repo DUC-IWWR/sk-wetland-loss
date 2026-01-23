@@ -76,31 +76,38 @@ data_wrangling_targets <- list(
       terra::project(terra::vect(drains_vb_shapefile))
   ),
   
-  tar_target(
-    name = drains_per_basin,
-    command = terra::extract(hydro_basins, drains_vb) |>
-      dplyr::bind_cols(dplyr::select(data.frame(drains_vb), Polyline_C)) |>
-      dplyr::select(HYBAS_ID, Polyline_C) |>
-      dplyr::group_by(HYBAS_ID) |>
-      dplyr::summarise(n_drains = sum(Polyline_C)) |>
-      dplyr::filter(!is.na(HYBAS_ID))
+  tar_terra_rast(
+    name = cwi_drainage_rast,
+    command = cwi_drains_vect |>
+      tidyterra::mutate(Length_KM = Shape_Leng / 1000) |>
+      terra::rasterize(
+        terra::rast(
+          xmin = terra::ext(dd_ua_2023)[1], 
+          xmax = terra::ext(dd_ua_2023)[2], 
+          ymin = terra::ext(dd_ua_2023)[3], 
+          ymax = terra::ext(dd_ua_2023)[4], 
+          res = terra::res(dd_ua_2023),
+          crs = terra::crs(dd_ua_2023)
+        ),
+        field = "Length_KM",
+        fun = sum
+      )
   ),
-  tar_target(
-    name = drains_per_basin_reduced,
-    command = terra::extract(hydro_basins_reduced, drains_vb) |>
-      dplyr::bind_cols(dplyr::select(data.frame(drains_vb), Polyline_C)) |>
-      dplyr::select(HYBAS_ID, Polyline_C) |>
-      dplyr::group_by(HYBAS_ID) |>
-      dplyr::summarise(n_drains = sum(Polyline_C)) |>
-      dplyr::filter(!is.na(HYBAS_ID))
-  ),
-  tar_target(
-    name = drains_per_basin_sc,
-    command = terra::extract(smith_creek, drains_vb) |>
-      dplyr::bind_cols(dplyr::select(data.frame(drains_vb), Polyline_C)) |>
-      dplyr::select(HYBAS_ID, Polyline_C) |>
-      dplyr::group_by(HYBAS_ID) |>
-      dplyr::summarise(n_drains = sum(Polyline_C)) |>
-      dplyr::filter(!is.na(HYBAS_ID))
+  
+  tar_terra_rast(
+    name = ua_drainage_rast,
+    command = ua_drainage_vect |>
+      terra::rasterize(
+        terra::rast(
+          xmin = terra::ext(dd_ua_2023)[1], 
+          xmax = terra::ext(dd_ua_2023)[2], 
+          ymin = terra::ext(dd_ua_2023)[3], 
+          ymax = terra::ext(dd_ua_2023)[4], 
+          res = terra::res(dd_ua_2023),
+          crs = terra::crs(dd_ua_2023)
+        ),
+        field = "LengthKM",
+        fun = sum
+      )
   )
 )

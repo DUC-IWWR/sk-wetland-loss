@@ -1,29 +1,13 @@
 prepare_stan_data <- function(
-  data = NULL, 
-  drains_per_basin = NULL,
-  shapefile = NULL)
-{
-  # Filter the shapefile to ONLY the polygons where we have drain info
-  shapefile <- tidyterra::filter(shapefile,
-  HYBAS_ID %in% drains_per_basin$HYBAS_ID) %>%
-  tidyterra::mutate(HYBAS_ID_Factor = seq(1, nrow(.)))
+    data = NULL, 
+    cwi_drainage = NULL,
+    lidar_drainage = NULL,
+    shapefile = NULL) {
   
-  # Order the drains in each polygon based on factor
-  drains_per_basin_vector <- dplyr::left_join(
-    drains_per_basin,
-    dplyr::select(
-      data.frame(
-        shapefile
-      ),
-      HYBAS_ID, HYBAS_ID_Factor
-    ),
-    by = "HYBAS_ID"
-  ) |>
-  dplyr::arrange(HYBAS_ID_Factor) |>
-  dplyr::pull(n_drains)
-
-  # Put together the polygon factors iwth the data, filter out data not associated with drains, and numerically assign impact
-  df <- tidyterra::bind_spat_cols(
+  shapefile <- tidyterra::mutate(shapefile, HYBAS_ID_Factor = seq(1, nrow(shapefile)))
+  
+  # numerically assign impact
+  data_basins <- tidyterra::bind_spat_cols(
     data,
     terra::extract(
       tidyterra::select(
@@ -32,19 +16,30 @@ prepare_stan_data <- function(
       data
     )
   ) |>
-  tidyterra::filter(!is.na(HYBAS_ID)) |>
-  data.frame() |>
+    tidyterra::filter(!is.na(HYBAS_ID)) |>
     dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 0))
-
-  # generate ICAR Matrix based on subsetted shapefile
+  
+  df <- tidyterra::bind_spat_cols(
+    data_basins,
+    terra::extract(
+      lidar_drainage,
+      terra::buffer(data_basins, 500),
+      fun = sum
+    ),
+  ) |> data.frame() |>
+    dplyr::filter(!is.na(UA_DD_2023)) |>
+    dplyr::mutate(
+      DD_Scaled = scale(UA_DD_2023)[,1]
+    )
+  
   icar_matrix <- generate_icar_matrix(shapefile)
-
+  
   return(
     list(
       # Overall data
       n_basins = length(unique(shapefile$HYBAS_ID_Factor)),
-      n_datasets = length(unique(df$Model)),
-
+      n_datasets = 2,
+      
       # CWI-related Data
       n_cwi = dplyr::filter(df, Model == "CWI") |>
         nrow(x = _),
@@ -54,8 +49,14 @@ prepare_stan_data <- function(
         dplyr::pull(HYBAS_ID_Factor),
       area_cwi = dplyr::filter(df, Model == "CWI") |>
         dplyr::pull(Area_Scaled),
-
-
+      area_unscaled_cwi = dplyr::filter(df, Model == "CWI") |>
+        dplyr::pull(Area),
+      dd_cwi = dplyr::filter(df, Model == "CWI") |>
+        dplyr::pull(DD_Scaled),
+      dd_cwi_unscaled = dplyr::filter(df, Model == "CWI") |>
+        dplyr::pull(UA_DD_2023),
+      
+      
       # CD-related Data
       n_cd = dplyr::filter(df, Model == "CD") |>
         nrow(x = _),
@@ -65,30 +66,22 @@ prepare_stan_data <- function(
         dplyr::pull(HYBAS_ID_Factor),
       area_cd = dplyr::filter(df, Model == "CD") |>
         dplyr::pull(Area_Scaled),
-
-      #CWI Point-only data
-      n_cwi_p = dplyr::filter(df, Model == "CWI_Point") |>
-        nrow(x = _),
-      impact_cwi_p = dplyr::filter(df, Model == "CWI_Point") |>
-        dplyr::pull(Impact_Code),
-      basin_cwi_p = dplyr::filter(df, Model == "CWI_Point") |> 
-        dplyr::pull(HYBAS_ID_Factor),
-      area_cwi_p = dplyr::filter(df, Model == "CWI_Point") |> 
-        dplyr::pull(Area_Scaled),
-
+      area_unscaled_cd = dplyr::filter(df, Model == "CD") |>
+        dplyr::pull(Area),
+      dd_cd = dplyr::filter(df, Model == "CD") |>
+        dplyr::pull(DD_Scaled),
+      dd_cd_unscaled = dplyr::filter(df, Model == "CD") |>
+        dplyr::pull(UA_DD_2023),
+      
       # ICAR related things
       N_icar = icar_matrix$N,
       N_icar_edges = as.integer(floor(icar_matrix$N_edges)),
       node1 = icar_matrix$node1,
       node2 = icar_matrix$node2,
-
-      # Basin-related covariates
-      n_drains_unscaled = drains_per_basin_vector,
-      n_drains = scale(drains_per_basin_vector)[,1],
-
+      
       # Multi-threading
       grainsize = 1
-
+      
     )
   )
 }

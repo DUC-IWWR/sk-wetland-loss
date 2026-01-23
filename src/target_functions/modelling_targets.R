@@ -1,45 +1,19 @@
 modelling_targets <- list(
-  tar_target(
-    name = stan_data,
-    command = prepare_stan_data(combined_point_data, drains_per_basin, hydro_basins)
-  ),
-  tar_target(
-    name = stan_data_reduced,
-    command = prepare_stan_data(combined_point_data, drains_per_basin_reduced, hydro_basins_reduced)
-  ),
-  
-  tar_target(
-    name = stan_data_sc,
-    command = prepare_stan_data(combined_point_data, drains_per_basin_reduced, smith_creek)
-  ),
-  
-  tar_target(
-    name = stan_data_gamma_sc,
-    command = prepare_stan_data_gamma(combined_point_data, drains_per_basin_sc, smith_creek)
-  ),
 
   tar_target(
-    name = stan_data_dd,
-    command = prepare_stan_data_dd(combined_point_data, dd_ua_2023, smith_creek_reduced)
-  ),
-  
-  
-  
-  tar_target(
-    name = prediction_list,
-    command = generate_prediction_list(combined_point_data, drains_per_basin, hydro_basins)
-  ),
-  
-  tar_target(
-    name = prediction_list_reduced,
-    command = generate_prediction_list(combined_point_data, drains_per_basin_reduced, hydro_basins_reduced)
-  ),
-  
-  tar_target(
-    name = prediction_list_sc,
-    command = generate_prediction_list(combined_point_data, drains_per_basin_sc, smith_creek)
+    name = stan_data,
+    command = prepare_stan_data(
+      data = combined_point_data,
+      cwi_drainage = cwi_drainage_rast,
+      lidar_drainage = dd_ua_2023,
+      shapefile = smith_creek)
   ),
   # 
+  # tar_target(
+  #   name = prediction_list_sc,
+  #   command = generate_prediction_list(combined_point_data, drains_per_basin_sc, smith_creek)
+  # ),
+  # # 
   # tar_stan_mcmc(
   #   name = sc_gamma_model,
   #   stan_files = c(
@@ -56,17 +30,19 @@ modelling_targets <- list(
   # ),
 
   tar_stan_mcmc(
-    name = sc_model,
+    name = model,
     stan_files = c(
       "models/drainage_model_cwi_icar_only.stan",
       "models/drainage_model_cwi_icar_drains.stan",
+      "models/drainage_model_cwi_icar_area.stan",
       "models/drainage_model_cwi_icar_drains_area.stan",
 
       "models/drainage_model_icar_only.stan",
       "models/drainage_model_icar_drains.stan",
+      "models/drainage_model_icar_area.stan",
       "models/drainage_model_icar_drains_area.stan"
     ),
-    data = stan_data_dd,
+    data = stan_data,
     chains = 4,
     parallel_chains = 4,
     threads_per_chain = 3,
