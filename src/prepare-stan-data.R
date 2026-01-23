@@ -30,7 +30,23 @@ prepare_stan_data <- function(
     dplyr::filter(!is.na(UA_DD_2023)) |>
     dplyr::mutate(
       DD_Scaled = scale(UA_DD_2023)[,1]
-    )
+    ) |> 
+    dplyr::mutate(HYBAS_Impact = paste0(HYBAS_ID_Factor, "-", Impact_Code)) 
+  
+  folds <- data.frame(HYBAS_Impact = df[which(df$Model == "CWI"), "HYBAS_Impact"])
+  folds$index <- which(df$Model == "CWI")
+  folds$Test <- 0
+  
+  for (f in unique(folds$HYBAS_Impact)) {
+    temp <- folds[which(folds$HYBAS_Impact == f),]
+    if (nrow(temp) >= 10) {
+      temp$Test[sample(.2 * seq_len(nrow(temp)))] <- 1
+      folds[which(folds$index %in% temp$index), "Test"] <- temp$Test
+    }
+  }
+  
+  df$Test <- 0
+  df[folds$index, "Test"] <- folds$Test
   
   icar_matrix <- generate_icar_matrix(shapefile)
   
@@ -40,20 +56,36 @@ prepare_stan_data <- function(
       n_basins = length(unique(shapefile$HYBAS_ID_Factor)),
       n_datasets = 2,
       
-      # CWI-related Data
-      n_cwi = dplyr::filter(df, Model == "CWI") |>
+      # CWI-training Data
+      n_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
         nrow(x = _),
-      impact_cwi = dplyr::filter(df, Model == "CWI") |> 
+      impact_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |> 
         dplyr::pull(Impact_Code),
-      basin_cwi = dplyr::filter(df, Model == "CWI") |> 
+      basin_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |> 
         dplyr::pull(HYBAS_ID_Factor),
-      area_cwi = dplyr::filter(df, Model == "CWI") |>
+      area_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
         dplyr::pull(Area_Scaled),
-      area_unscaled_cwi = dplyr::filter(df, Model == "CWI") |>
+      area_unscaled_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
         dplyr::pull(Area),
-      dd_cwi = dplyr::filter(df, Model == "CWI") |>
+      dd_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
         dplyr::pull(DD_Scaled),
-      dd_cwi_unscaled = dplyr::filter(df, Model == "CWI") |>
+      dd_cwi_unscaled_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
+        dplyr::pull(UA_DD_2023),
+      
+      # CWI-testing Data
+      n_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
+        nrow(x = _),
+      impact_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |> 
+        dplyr::pull(Impact_Code),
+      basin_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |> 
+        dplyr::pull(HYBAS_ID_Factor),
+      area_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
+        dplyr::pull(Area_Scaled),
+      area_unscaled_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
+        dplyr::pull(Area),
+      dd_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
+        dplyr::pull(DD_Scaled),
+      dd_cwi_unscaled_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
         dplyr::pull(UA_DD_2023),
       
       

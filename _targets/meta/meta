@@ -154,12 +154,6 @@ smith_creek|stem|682477d24800284c|65f6d32d0c9c0feb|2fba305fad0809b4|-1205315672|
 sc_spatial_coverage_map_cwi|stem|c0dc9a903cfe061f|f60c2af99d0215cc|fb0036bbb63ea042|-184682352||t20475.8317843716s|s1953376b|1953376|rds|local|vector|||4.86||
 sc_spatial_coverage_map|stem|e7db14da769048fd|89e23c8d3a4deb95|fb0036bbb63ea042|297170692||t20475.831993283s|s3074331b|3074331|rds|local|vector|||3.36||
 drains_per_basin_sc|stem|f3b5d88d23c484ec|c763d699c537ae69|fc0f60dc22dca6b5|929551891||t20475.8319945892s|s357b|357|rds|local|vector|||0.03||
-model_data|stem|8b7976dc96173480|77b402edb6b70a79|37f2bfe3b5c20125|-1204036396||t20475.8771123906s|s1837860b|1837860|qs|local|vector|||0||
-model_file_drainage_model_cwi_icar_only|stem|19abf2136ca914c4|f8d197f1b791091d|2c530c1562a7fbd1|-904641203|models/drainage_model_cwi_icar_only.stan|t20475.897840852s|s882b|882|file|local|vector|||0||
-model_mcmc_drainage_model_cwi_icar_only|stem|fef46b23a136b273|4c9766597e1215bd|a9c19724e1c51fb3|685300058||t20475.9007031726s|s892267b|892267|qs|local|vector|||225.61||
-model_diagnostics_drainage_model_cwi_icar_only|stem|6aa18e8f8d9df5fe|d19147e36e3d581f|3ce496e4d075de3b|-862449213||t20475.9007042858s|s80850b|80850|fst_tbl|local|vector|||0|package 'fstcore' was built under R version 4.4.3|
-model_draws_drainage_model_cwi_icar_only|stem|1cb634931b9ed83c|cc459f764afa01d1|3ce496e4d075de3b|-1647369154||t20475.9007050142s|s908914b|908914|fst_tbl|local|vector|||0.02||
-model_summary_drainage_model_cwi_icar_only|stem|69b0f974d66b8d14|165062c45120add1|8d126b60ccb7dcd5|-1352433489||t20475.9007098616s|s3314b|3314|fst_tbl|local|vector|||0.36||
 log_lik|function|baa57093990ad08c
 ll_cwi_icar_only|stem||8636864c3e5edd1f|e27d93ed8835a4ca|-1515030088||t20475.928596756s||0|rds|local|vector|||154.58||error writing to connection
 cwi_drains_file|stem|0eb0e507eaee526f|9547fab917541481|2c530c1562a7fbd1|-1219744301||t20475.9659103162s|s88b|88|rds|local|vector|||0.17|package 'tibble' was built under R version 4.4.3. package 'foreach' was built under R version 4.4.3. package 'doParallel' was built under R version 4.4.3. package 'iterators' was built under R version 4.4.3. package 'loo' was built under R version 4.4.3|
@@ -169,14 +163,6 @@ cwi_drains_vect|stem|556deda1c9cfe4b2|17977c8d00537a10|f6ba8bf6200f11be|11937437
 cwi_drainage_rast|stem|70852cf3959b50fa|9647b8398858b58d|a3e86a40afdd1494|926217849||t20475.9840707501s|s6054339b|6054339|format_custom&read=dGVycmE6OnJhc3QocGF0aCk&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVSYXN0ZXIsIGMobGlzdChvYmplY3QsIGZpbGVuYW1lID0gcGF0aCwgCiAgICAgICAgZmlsZXR5cGUgPSAiR1RpZmYiLCBvdmVyd3JpdGUgPSBUUlVFLCBnZGFsID0gTlVMTCksIGxpc3QoKSkpCn0&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||22.69|PROJ: proj_create_from_name: Cannot find proj.db (GDAL error 1)|
 ua_drainage_vect|stem|ee7a2d2feefe82fd|b39129406292e522|36b16beb2f4b6e3b|-322668420||t20475.9893250871s|s132497408b|132497408|format_custom&read=ewogICAgaWYgKCJHUEtHIiA9PSAiRVNSSSBTaGFwZWZpbGUiKSB7CiAgICAgICAgdGVycmE6OnZlY3QocGFzdGUwKCIvdnNpemlwL3siLCBwYXRoLCAifSIpKQogICAgfQogICAgZWxzZSB7CiAgICAgICAgdGVycmE6OnZlY3QocGF0aCkKICAgIH0KfQ&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVWZWN0b3IsIGMobGlzdCh4ID0gb2JqZWN0LCBmaWxlbmFtZSA9IGlmZWxzZSgiR1BLRyIgPT0gCiAgICAgICAgIkVTUkkgU2hhcGVmaWxlIiwgeWVzID0gcGFzdGUwKHBhdGgsICIuc2h6IiksIG5vID0gcGF0aCksIAogICAgICAgIGZpbGV0eXBlID0gIkdQS0ciLCBvdmVyd3JpdGUgPSBUUlVFLCBvcHRpb25zID0gIkVOQ09ESU5HPVVURi04IiksIAogICAgICAgIGxpc3QoKSkpCiAgICBpZiAoIkdQS0ciID09ICJFU1JJIFNoYXBlZmlsZSIpIHsKICAgICAgICBmaWxlLnJlbmFtZShwYXN0ZTAocGF0aCwgIi5zaHoiKSwgcGF0aCkKICAgIH0KfQ&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||6.89|PROJ: proj_identify: Cannot find proj.db (GDAL error 1). [vect] Z coordinates ignored. PROJ: proj_create_from_name: Cannot find proj.db (GDAL error 1). PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)|
 ua_drainage_rast|stem|89ed944a13916b28|0caf5078fd24f419|1403fdc6cbb79158|742918866||t20475.9894972349s|s8153975b|8153975|format_custom&read=dGVycmE6OnJhc3QocGF0aCk&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVSYXN0ZXIsIGMobGlzdChvYmplY3QsIGZpbGVuYW1lID0gcGF0aCwgCiAgICAgICAgZmlsZXR5cGUgPSAiR1RpZmYiLCBvdmVyd3JpdGUgPSBUUlVFLCBnZGFsID0gTlVMTCksIGxpc3QoKSkpCn0&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||10.97|PROJ: proj_create_from_name: Cannot find proj.db (GDAL error 1)|
-mungeCARdata4stan|function|175bc7af67a484f8
-generate_spatial_effects_map|function|0cefd75f3d8d98a1
-generate_fitted_shapefile_gamma|function|e23e89a6b758877f
-.Random.seed|object|7cfe40da649dd29d
-generate_prediction_list|function|8a051d7052a7b8d2
-generate_icar_matrix|function|4588c763734aa584
-generate_fitted_shapefile|function|d78fc360b7652165
-prepare_stan_data|function|07ea1a04caf18583
 model_file_drainage_model_icar_drains_area|stem|15a5d8149fd31d5b|f76970e1f9af9b05|2c530c1562a7fbd1|-1800032677|models/drainage_model_icar_drains_area.stan|t20475.6670245404s|s2543b|2543|file|local|vector|||0||
 model_file_drainage_model_cwi_icar_area|stem|e55afd0cd652b488|69cab44aafc341a9|2c530c1562a7fbd1|1598485119|models/drainage_model_cwi_icar_area.stan|t20475.6678204796s|s1369b|1369|file|local|vector|||0||
 model_file_drainage_model_icar_area|stem|b768fe8a9c2441ec|0af681dcb2b05913|2c530c1562a7fbd1|1849064901|models/drainage_model_icar_area.stan|t20475.6686382448s|s2072b|2072|file|local|vector|||0||
@@ -184,7 +170,6 @@ model_file_drainage_model_cwi_icar_drains_area|stem|596bcd0c7669b21d|0fb9c73de9d
 model_file_drainage_model_cwi_icar_drains|stem|d610fe8ad38662d5|873c424c5e7b452f|2c530c1562a7fbd1|642138084|models/drainage_model_cwi_icar_drains.stan|t20474.8702546508s|s1421b|1421|file|local|vector|||0||
 model_file_drainage_model_icar_drains|stem|4f205ea5c595b0ba|fe9a5ea9b1228786|2c530c1562a7fbd1|1356187414|models/drainage_model_icar_drains.stan|t20474.9195003943s|s2124b|2124|file|local|vector|||0||
 model_file_drainage_model_icar_only|stem|e34e3ce0c085303f|d7834c01d6df03ea|2c530c1562a7fbd1|-1880372236|models/drainage_model_icar_only.stan|t20474.9061014522s|s1630b|1630|file|local|vector|||0||
-stan_data|stem|a3324068500a56b0|ea65278193edee8b|d0e09e1fedfd55d2|2113801197||t20476.0140705289s|s1877369b|1877369|rds|local|vector|||416.19|bounding box has potentially an invalid value range for longlat data. bounding box has potentially an invalid value range for longlat data. bounding box has potentially an invalid value range for longlat data|
 model_mcmc_drainage_model_icar_drains_area|stem|e57f04907c955505|478820e74763812d|904b6c12184c8d27|741707486||t20476.0424407227s|s6359034b|6359034|qs|local|vector|||2451||
 model_mcmc_drainage_model_cwi_icar_area|stem|94db4d75ba700d6c|5141c07e875b2112|067c8cce83442fd9|690071097||t20476.0456696937s|s2407145b|2407145|qs|local|vector|||278.87||
 model_mcmc_drainage_model_icar_only|stem|a7f52dd13dd0d798|bac94a4b3047dd1b|8d6a48ad66666bae|157776842||t20476.0722100145s|s3246112b|3246112|qs|local|vector|||2292.87||
@@ -213,3 +198,21 @@ model_summary_drainage_model_icar_area|stem|abcae6393ebff3d4|d4ce07c5ad2196b6|46
 model_draws_drainage_model_icar_drains|stem|551698b741409204|8620871aa830c65a|01250d38779b7fa5|1902239711||t20476.1527588905s|s5417159b|5417159|fst_tbl|local|vector|||0.02||
 model_diagnostics_drainage_model_icar_drains|stem|62fb985eef9908f6|ddf3e37bb5dc8596|01250d38779b7fa5|-394820201||t20476.1527596137s|s80407b|80407|fst_tbl|local|vector|||0||
 model_summary_drainage_model_icar_drains|stem|c3789182cb901908|1d6a2b29eed6c9e9|c9a5af785b18dd16|378918797||t20476.1527818815s|s15638b|15638|fst_tbl|local|vector|||1.87||
+stan_data|stem|b700667b58859724|ea65278193edee8b|a7f4bcde75d349da|2113801197||t20476.7158216374s|s1879144b|1879144|rds|local|vector|||452.86|bounding box has potentially an invalid value range for longlat data. bounding box has potentially an invalid value range for longlat data. bounding box has potentially an invalid value range for longlat data|
+model_data|stem|82c94e5304b90450|77b402edb6b70a79|9b079edcb909a4a4|-1204036396||t20476.7215731945s|s1789212b|1789212|qs|local|vector|||0||
+model_file_drainage_model_cwi_icar_only|stem|c99099afd816c567|f8d197f1b791091d|2c530c1562a7fbd1|-904641203|models/drainage_model_cwi_icar_only.stan|t20476.7230257385s|s1067b|1067|file|local|vector|||0||
+model_mcmc_drainage_model_cwi_icar_only|stem|392a13624b293f66|6e218f9ee229a383|9820019c95ea7d58|685300058||t20476.7253467444s|s14199629b|14199629|qs|local|vector|||191.76||
+model_summary_drainage_model_cwi_icar_only|stem|809a0ab2e322685e|165062c45120add1|a98ece8ec4144b11|-1352433489||t20476.7264778271s|s142586b|142586|fst_tbl|local|vector|||97.31|package 'fstcore' was built under R version 4.4.3|
+model_diagnostics_drainage_model_cwi_icar_only|stem|9bdcb40a6f061b01|d19147e36e3d581f|09af60bcd4e16da5|-862449213||t20476.7264813076s|s80283b|80283|fst_tbl|local|vector|||0||
+model_draws_drainage_model_cwi_icar_only|stem|bcaab93eca4a287e|cc459f764afa01d1|09af60bcd4e16da5|-1647369154||t20476.7265088805s|s291767709b|291767709|fst_tbl|local|vector|||1.5||
+pred_cwi_icar_only|stem|6f48443dc417389b|f7211fae4905b771|4707630cdbe21af7|1515227992||t20476.7507707077s|s418497b|418497|rds|local|vector|||32.32|Dropping 'draws_df' class as required metadata was removed.|
+mungeCARdata4stan|function|175bc7af67a484f8
+generate_spatial_effects_map|function|0cefd75f3d8d98a1
+generate_fitted_shapefile_gamma|function|e23e89a6b758877f
+.Random.seed|object|d06e39850957e9c1
+generate_prediction_matrix|function|01f567769246f093
+generate_prediction_list|function|8a051d7052a7b8d2
+generate_icar_matrix|function|4588c763734aa584
+generate_fitted_shapefile|function|d78fc360b7652165
+prepare_stan_data|function|8f61f59bd7cdb81e
+pc_cwi_icar_only|stem|5e652a08dc13efc4|956d2343d382c358|2b462e20e4118870|1059823004||t20476.7560593262s|s55b|55|rds|local|vector|||0.13||
