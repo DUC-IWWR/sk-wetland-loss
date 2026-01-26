@@ -112,26 +112,5 @@ post_hoc_plotting_targets <- list(
   #   )
   # ),
   
-  tar_target(
-    name = sc_spatial_coverage_map,
-    command = ggplot() + 
-      geom_spatvector(
-        data = tidyterra::filter(
-          .data = terra::mask(combined_point_data, smith_creek),
-          Impact == "Drained"), 
-        aes(color = Model), 
-        size = 0.5) + geom_spatvector(data = smith_creek, fill = NA)
-  ),
-  
-  tar_target(
-    name = sc_spatial_coverage_map_cwi,
-    command = ggplot() + 
-      geom_spatvector(
-        data = tidyterra::filter(
-          .data = terra::mask(combined_point_data, smith_creek),
-          Impact == "Drained",
-          Model == "CWI"), 
-        color = "darkgreen", 
-        size = 0.5) + geom_spatvector(data = smith_creek, fill = NA)
-  )
+
 )

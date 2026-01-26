@@ -152,7 +152,6 @@ prepare_stan_data_dd|function|4be00b9aaecf111b
 smith_creek_shapefile|stem|bb97d5e63c90ebfc|ef227b6790a313b3|2c530c1562a7fbd1|1808797618|data/raw/smith_creek/smith_creek.shp|t20475.8275250471s|s40412b|40412|file|local|vector|||0.02|package 'tibble' was built under R version 4.4.3|
 smith_creek|stem|682477d24800284c|65f6d32d0c9c0feb|2fba305fad0809b4|-1205315672||t20475.8315421092s|s159744b|159744|format_custom&read=ewogICAgaWYgKCJHUEtHIiA9PSAiRVNSSSBTaGFwZWZpbGUiKSB7CiAgICAgICAgdGVycmE6OnZlY3QocGFzdGUwKCIvdnNpemlwL3siLCBwYXRoLCAifSIpKQogICAgfQogICAgZWxzZSB7CiAgICAgICAgdGVycmE6OnZlY3QocGF0aCkKICAgIH0KfQ&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVWZWN0b3IsIGMobGlzdCh4ID0gb2JqZWN0LCBmaWxlbmFtZSA9IGlmZWxzZSgiR1BLRyIgPT0gCiAgICAgICAgIkVTUkkgU2hhcGVmaWxlIiwgeWVzID0gcGFzdGUwKHBhdGgsICIuc2h6IiksIG5vID0gcGF0aCksIAogICAgICAgIGZpbGV0eXBlID0gIkdQS0ciLCBvdmVyd3JpdGUgPSBUUlVFLCBvcHRpb25zID0gIkVOQ09ESU5HPVVURi04IiksIAogICAgICAgIGxpc3QoKSkpCiAgICBpZiAoIkdQS0ciID09ICJFU1JJIFNoYXBlZmlsZSIpIHsKICAgICAgICBmaWxlLnJlbmFtZShwYXN0ZTAocGF0aCwgIi5zaHoiKSwgcGF0aCkKICAgIH0KfQ&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||0.01|PROJ: proj_identify: Cannot find proj.db (GDAL error 1). PROJ: proj_create_from_name: Cannot find proj.db (GDAL error 1). PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)|
 sc_spatial_coverage_map_cwi|stem|c0dc9a903cfe061f|f60c2af99d0215cc|fb0036bbb63ea042|-184682352||t20475.8317843716s|s1953376b|1953376|rds|local|vector|||4.86||
-sc_spatial_coverage_map|stem|e7db14da769048fd|89e23c8d3a4deb95|fb0036bbb63ea042|297170692||t20475.831993283s|s3074331b|3074331|rds|local|vector|||3.36||
 drains_per_basin_sc|stem|f3b5d88d23c484ec|c763d699c537ae69|fc0f60dc22dca6b5|929551891||t20475.8319945892s|s357b|357|rds|local|vector|||0.03||
 log_lik|function|baa57093990ad08c
 ll_cwi_icar_only|stem||8636864c3e5edd1f|e27d93ed8835a4ca|-1515030088||t20475.928596756s||0|rds|local|vector|||154.58||error writing to connection
@@ -223,15 +222,6 @@ pc_cwi_icar_drains_area_0.9|stem|4eca61d3e3aa38b8|c3c668ce2345b310|a72c4ab7323af
 pc_icar_only_0.9|stem|c3520d0b41d8f36e|360d9ad6e2095f4d|bf2eaed9154d7dd1|-1364860731||t20477.6477595865s|s55b|55|rds|local|vector|||0.19||
 pc_icar_area_0.9|stem|c3c77230bf40199d|a71f49f0df2bf795|b0177cfe418ea044|-1754686336||t20477.6477687337s|s55b|55|rds|local|vector|||0.13||
 percent_correct_summary_0.9|stem|067c288d750023c1|4a890fb0b1f18844|74afe1441110537d|-2121796802||t20477.6477693169s|s278b|278|rds|local|vector|||0||
-mungeCARdata4stan|function|175bc7af67a484f8
-generate_spatial_effects_map|function|0cefd75f3d8d98a1
-generate_fitted_shapefile_gamma|function|e23e89a6b758877f
-.Random.seed|object|dbbc79b30fe98aaa
-generate_prediction_matrix|function|2065e2f5b1f559b6
-generate_prediction_list|function|8a051d7052a7b8d2
-generate_icar_matrix|function|4588c763734aa584
-generate_fitted_shapefile|function|d78fc360b7652165
-prepare_stan_data|function|8f61f59bd7cdb81e
 pred_icar_drains|stem|a1d95902beb7b949|883efcf6fddfa7c3|eba6e45d0661efb7|-1835731569||t20477.6562013815s|s510716b|510716|rds|local|vector|||31.28|Dropping 'draws_df' class as required metadata was removed.|
 pred_icar_drains_0.9|stem|9fa669760ad8432f|c8552df19ac0bffc|eba6e45d0661efb7|-1037516127||t20477.6565324295s|s418163b|418163|rds|local|vector|||26.52|Dropping 'draws_df' class as required metadata was removed.|
 pred_cwi_icar_drains|stem|b33c71f879318a15|0a270f24f56f6f7d|20ed8d7cf21f1ab0|813932033||t20477.6568610208s|s510941b|510941|rds|local|vector|||26.3|Dropping 'draws_df' class as required metadata was removed.|
@@ -248,3 +238,13 @@ pred_icar_only|stem|ee770f8e4b9e866c|868180fee3fa3c9e|f7e128a70b224057|-15830048
 pred_icar_only_0.9|stem|98f7dc5d08717020|d08e21fdd22c74b7|f7e128a70b224057|-2131302680||t20477.660214492s|s400743b|400743|rds|local|vector|||23.47|Dropping 'draws_df' class as required metadata was removed.|
 pred_icar_area_0.9|stem|11408cfaff95b16e|72830f88efde0188|1dee5dd5369b910e|-467580256||t20477.6605133055s|s426675b|426675|rds|local|vector|||23.9|Dropping 'draws_df' class as required metadata was removed.|
 pred_icar_area|stem|59bdd948c55def05|e9c384152824b0a3|1dee5dd5369b910e|154457043||t20477.6608113764s|s448729b|448729|rds|local|vector|||23.9|Dropping 'draws_df' class as required metadata was removed.|
+mungeCARdata4stan|function|175bc7af67a484f8
+generate_spatial_effects_map|function|0cefd75f3d8d98a1
+generate_fitted_shapefile_gamma|function|e23e89a6b758877f
+.Random.seed|object|20a5c355ae49d049
+generate_prediction_matrix|function|2065e2f5b1f559b6
+generate_prediction_list|function|8a051d7052a7b8d2
+generate_icar_matrix|function|4588c763734aa584
+generate_fitted_shapefile|function|d78fc360b7652165
+prepare_stan_data|function|8f61f59bd7cdb81e
+sc_spatial_coverage_map|stem|b8ee7aff0171e430|06eec927796b1368|fb0036bbb63ea042|297170692||t20479.6007029185s|s3032971b|3032971|rds|local|vector|||4.42||
