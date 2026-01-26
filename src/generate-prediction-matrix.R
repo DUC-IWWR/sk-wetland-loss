@@ -1,4 +1,4 @@
-generate_prediction_matrix <- function(draws = NULL, threshold = 0.50, data = NULL) {
+generate_prediction_matrix <- function(draws = NULL, threshold = NULL, data = NULL) {
   inv_logit <- function(x) exp(x)/(1+exp(x))
   n_cores <- detectCores()
   cluster <- makeCluster(n_cores - 1)

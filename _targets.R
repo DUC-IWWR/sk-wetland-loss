@@ -72,5 +72,22 @@ list(
         pc_icar_drains_area
       )
     )
+  ),
+  
+  tar_target(
+    name = percent_correct_summary_0.9,
+    command = tibble(
+      Model = c("CWI_ICAR", "CWI_ICAR_Area", "CWI_ICAR_Drains", "CWI_ICAR_Drains_Area", "ICAR", "ICAR_Area", "ICAR_Drains", "ICAR_Drains_Area"),
+      Percent_Correct = c(
+        pc_cwi_icar_only_0.9,
+        pc_cwi_icar_drains_0.9,
+        pc_cwi_icar_area_0.9,
+        pc_cwi_icar_drains_area_0.9,
+        pc_icar_only_0.9,
+        pc_icar_drains_0.9,
+        pc_icar_area_0.9,
+        pc_icar_drains_area_0.9
+      )
+    )
   )
 )
