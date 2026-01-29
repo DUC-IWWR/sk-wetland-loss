@@ -111,6 +111,25 @@ post_hoc_plotting_targets <- list(
   #     common.legend = TRUE
   #   )
   # ),
+
+  tar_target(
+    name = icar_vs_micar_plot,
+    command = ggplot(
+      data = data.frame(
+        diff = abs(
+          inv_logit(
+          model_mcmc_drainage_model_cwi_icar_drains_area$summary(variables = "score")$mean
+        ) - 
+        inv_logit(
+          model_mcmc_drainage_model_icar_drains_area$summary(variables = "score")$mean
+        )),
+        area = sqrt(stan_data$area_unscaled_cwi_te),
+        dd = stan_data$dd_cwi_te
+      ),
+      aes(x = area, y = diff)
+    ) + 
+      geom_point()
+  )
   
 
 )

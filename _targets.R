@@ -30,6 +30,7 @@ tar_source("src/generate-prediction-list.R")
 tar_source("src/generate-spatial-effects-map.R")
 tar_source("src/generate-fitted-shapefile.R")
 tar_source("src/generate-prediction-matrix.R")
+tar_source("src/inv_logit.R")
 #tar_source("src/log_lik.R")
 
 # Functions to generate grouped targets
