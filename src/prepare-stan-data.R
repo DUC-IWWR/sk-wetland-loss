@@ -1,6 +1,5 @@
 prepare_stan_data <- function(
-    data = NULL, 
-    cwi_drainage = NULL,
+    data = NULL,
     lidar_drainage = NULL,
     shapefile = NULL) {
   

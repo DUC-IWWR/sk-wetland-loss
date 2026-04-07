@@ -77,25 +77,6 @@ data_wrangling_targets <- list(
       ) |>
       terra::project(hydro_basins)
   ),
-  
-  ### CWI_drainage_rast
-  tar_terra_rast(
-    name = cwi_drainage_rast,
-    command = cwi_drains_vect |>
-      tidyterra::mutate(Length_KM = Shape_Leng / 1000) |>
-      terra::rasterize(
-        terra::rast(
-          xmin = terra::ext(dd_ua_2023)[1], 
-          xmax = terra::ext(dd_ua_2023)[2], 
-          ymin = terra::ext(dd_ua_2023)[3], 
-          ymax = terra::ext(dd_ua_2023)[4], 
-          res = terra::res(dd_ua_2023),
-          crs = terra::crs(dd_ua_2023)
-        ),
-        field = "Length_KM",
-        fun = sum
-      )
-  ),
 
   tar_terra_vect(
     name = smith_creek,

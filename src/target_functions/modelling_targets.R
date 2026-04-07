@@ -4,7 +4,6 @@ modelling_targets <- list(
     name = stan_data,
     command = prepare_stan_data(
       data = combined_point_data,
-      cwi_drainage = cwi_drainage_rast,
       lidar_drainage = dd_ua_2023,
       shapefile = smith_creek)
   ),
