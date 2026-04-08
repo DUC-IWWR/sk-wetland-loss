@@ -1,12 +1,5 @@
 exploratory_analysis_targets <- list(
   tar_target(
-    name = drains_by_vb_plot,
-    command = ggplot() +
-      geom_spatvector(data = drains_vb, aes(fill = Polyline_C))
-  ),
-  
-  
-  tar_target(
     name = drainage_distribution_plot,
     command = ggplot() +
       geom_spatvector(

@@ -31,16 +31,6 @@ file_io_targets <- list(
   
   # Shapefiles
   tar_target(
-    name = drains_vb_shapefile,
-    command = "data/raw/Drains_VirtualBasin_summary/Drains_VirtualBasin_summary.shp",
-    format = "file"
-  ),
-  tar_terra_vect(
-    name = drains_vb,
-    command = terra::vect(drains_vb_shapefile) |> 
-      tidyterra::mutate(dplyr::across(HYBAS_ID, as.character))
-  ),
-  tar_target(
     name = hydro_basins_shapefile,
     command = "data/raw/hydro_basins/hybas_na_lev12_v1c.shp",
     format = "file"
