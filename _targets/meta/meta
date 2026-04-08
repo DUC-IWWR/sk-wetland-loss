@@ -6,7 +6,6 @@ cwi_points_file|stem|fdada7065b608a64|348ddaeed592adcc|2c530c1562a7fbd1|-9744571
 cd_drainage|stem|f8efed5472285a92|3928242b8adc1ade|09e29a13128cdb42|-629267051||t20426.9342987201s|s978739b|978739|rds|local|vector|||0.156||
 cwi_points|stem|c13b11056e186a8e|f451a12d82b0dd48|6ba155934d76786c|1811184017||t20426.9342998804s|s105251b|105251|rds|local|vector|||0.015||
 hydro_basins_shapefile|stem|f952293644ff6de3|a5a9ba8a28d4ac7e|2c530c1562a7fbd1|936526418|data/raw/hydro_basins/hybas_na_lev12_v1c.shp|t16276.25s|s160813440b|160813440|file|local|vector|||0.016|package 'tibble' was built under R version 4.4.3|
-drainage_distribution_plot|stem|d48821ccb075ea91|ea2a71441fc95c7f|24236b846bfaa24b|-421558469||t20440.9350537143s|s38378207b|38378207|rds|local|vector|||11.547||
 dd_ua_2023_file|stem|3dd8cf39fbf6b48b|a266550b20e1634c|2c530c1562a7fbd1|-328256643|data/raw/UA_DD_2023.tif|t20474.009584041s|s112914672b|112914672|file|local|vector|||0||
 sc_spatial_coverage_map_cwi|stem|c0dc9a903cfe061f|f60c2af99d0215cc|fb0036bbb63ea042|-184682352||t20475.8317843716s|s1953376b|1953376|rds|local|vector|||4.86||
 model_mcmc_drainage_model_cwi_icar_only|stem|392a13624b293f66|6e218f9ee229a383|9820019c95ea7d58|685300058||t20476.7253467444s|s14199629b|14199629|qs|local|vector|||191.76||
@@ -91,10 +90,21 @@ smith_creek|stem|9b065da08742d5af|c6e54e0eba667f2f|005169ecf6c063e1|-1205315672|
 dd_ua_2023|stem|747e4a01162e216b|af77eb13a424867e|892dba18ac55165e|-1430761019||t20550.9207626075s|s65054329b|65054329|format_custom&read=dGVycmE6OnJhc3QocGF0aCk&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVSYXN0ZXIsIGMobGlzdChvYmplY3QsIGZpbGVuYW1lID0gcGF0aCwgCiAgICAgICAgZmlsZXR5cGUgPSAiR1RpZmYiLCBvdmVyd3JpdGUgPSBUUlVFLCBnZGFsID0gTlVMTCksIGxpc3QoKSkpCn0&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||15.25||
 stan_data|stem|69ec17db2859f2fe|540f1fd29bdec9a0|5cb18107769d58b7|2113801197||t20550.988901814s|s1888366b|1888366|rds|local|vector|||244.282||
 model_data|stem|e20fd91be239caf0|77b402edb6b70a79|ab9b944701792d6a|-1204036396||t20550.9889032296s|s1796437b|1796437|qs|local|vector|||0||
-mungeCARdata4stan|function|175bc7af67a484f8|||||||||||||||
-.Random.seed|object|b5a20aa7d0c9ec3c|||||||||||||||
-generate_prediction_matrix|function|2065e2f5b1f559b6|||||||||||||||
-inv_logit|function|496557eecdf2fe7f|||||||||||||||
-generate_icar_matrix|function|4588c763734aa584|||||||||||||||
-prepare_stan_data|function|eff590bf32b12d35|||||||||||||||
 combined_point_data|stem|693c400ce975d058|df42eabdf8928480|4e354a21e5168da2|-271215542||t20551.5885981869s|s509247488b|509247488|format_custom&read=ewogICAgaWYgKCJHUEtHIiA9PSAiRVNSSSBTaGFwZWZpbGUiKSB7CiAgICAgICAgdGVycmE6OnZlY3QocGFzdGUwKCIvdnNpemlwL3siLCBwYXRoLCAifSIpKQogICAgfQogICAgZWxzZSB7CiAgICAgICAgdGVycmE6OnZlY3QocGF0aCkKICAgIH0KfQ&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVWZWN0b3IsIGMobGlzdCh4ID0gb2JqZWN0LCBmaWxlbmFtZSA9IGlmZWxzZSgiR1BLRyIgPT0gCiAgICAgICAgIkVTUkkgU2hhcGVmaWxlIiwgeWVzID0gcGFzdGUwKHBhdGgsICIuc2h6IiksIG5vID0gcGF0aCksIAogICAgICAgIGZpbGV0eXBlID0gIkdQS0ciLCBvdmVyd3JpdGUgPSBUUlVFLCBvcHRpb25zID0gIkVOQ09ESU5HPVVURi04IiksIAogICAgICAgIGxpc3QoKSkpCiAgICBpZiAoIkdQS0ciID09ICJFU1JJIFNoYXBlZmlsZSIpIHsKICAgICAgICBmaWxlLnJlbmFtZShwYXN0ZTAocGF0aCwgIi5zaHoiKSwgcGF0aCkKICAgIH0KfQ&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||3.766||
+drainage_distribution_plot|stem|e700305fbd00c73d|daa2fc073bebc961|bda185e15c3982ac|-421558469||t20551.8275030632s|s35319573b|35319573|rds|local|vector|||18.516||
+drainage_distribution_plot_full|stem|7398528f0b9d629d|c46a517aa3833ebd|1000d5e2d5a46901|509976696||t20551.8359026273s|s35324015b|35324015|rds|local|vector|||15.172||
+mungeCARdata4stan|function|175bc7af67a484f8
+.Random.seed|object|40b2959db9bc1285
+plot_drainage_on_map|function|1dacefef6c08da26
+generate_prediction_matrix|function|2065e2f5b1f559b6
+inv_logit|function|496557eecdf2fe7f
+generate_icar_matrix|function|4588c763734aa584
+prepare_stan_data|function|eff590bf32b12d35
+drainage_distribution_plot_sc|stem|d874a19f8084e0de|f5f2b82c118d9de1|fd28e50cc83308ab|-1109071039||t20551.8454960307s|s3057541b|3057541|rds|local|vector|||7.375||
+mungeCARdata4stan|function|175bc7af67a484f8
+.Random.seed|object|a2924d1de24c87d4
+plot_drainage_on_map|function|1dacefef6c08da26
+generate_prediction_matrix|function|2065e2f5b1f559b6
+inv_logit|function|496557eecdf2fe7f
+generate_icar_matrix|function|4588c763734aa584
+prepare_stan_data|function|eff590bf32b12d35

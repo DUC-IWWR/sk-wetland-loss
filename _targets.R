@@ -27,6 +27,7 @@ tar_source("src/generate-icar-matrix.R")
 tar_source("src/mungeCARdata4stan.R")
 tar_source("src/generate-prediction-matrix.R")
 tar_source("src/inv_logit.R")
+tar_source("src/plot-drainage-on-map.R")
 
 # Functions to generate grouped targets
 tar_source("src/target_functions/file_io_targets.R")
