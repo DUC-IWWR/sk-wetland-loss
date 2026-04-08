@@ -4,19 +4,27 @@ functions {
         int start,
         int end,
         array [] int basin,
-        row_vector Theta
+        vector drainage,
+        vector area,
+        row_vector Theta,
+        vector beta_drainage,
+        vector beta_area
     ) {
-        return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]]);
-    }
+        return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]]' + beta_drainage[basin[start:end]] .* drainage[start:end] + beta_area[basin[start:end]] .* area[start:end]);
+  }
 }
 
 data {
     int <lower = 0> n_cwi_tr;
     array[n_cwi_tr] int impact_cwi_tr;
     array[n_cwi_tr] int basin_cwi_tr;
+    vector [n_cwi_tr] dd_cwi_tr;
+    vector [n_cwi_tr] area_cwi_tr;
     
     int <lower = 0> n_cwi_te;
     array[n_cwi_te] int basin_cwi_te;
+    vector [n_cwi_te] dd_cwi_te;
+    vector [n_cwi_te] area_cwi_te;
 
     int <lower = 0> n_basins;
 
@@ -30,22 +38,47 @@ data {
 
 parameters {
     sum_to_zero_vector[n_basins] Theta;
+    
+    vector[n_basins] beta_drainage_raw;
+    real <lower = 0> sigma_drainage;
+    
+    vector[n_basins] beta_area_raw;
+    real <lower = 0> sigma_area;
+}
+
+transformed parameters {
+  vector[n_basins] beta_drainage;
+  vector[n_basins] beta_area;
+  
+  beta_drainage = beta_drainage_raw * sigma_drainage;
+  beta_area = beta_area_raw * sigma_area;
 }
 
 model {
     // ICAR sampling
     target += -0.5 * dot_self(Theta[node1] - Theta[node2]);
+    
+    target += std_normal_lupdf(beta_drainage_raw);
+    target += std_normal_lupdf(sigma_drainage);
+    
+    target += std_normal_lupdf(beta_area_raw);
+    target += std_normal_lupdf(sigma_area);
 
     target += reduce_sum(
         partial_sum_lupmf,
         impact_cwi_tr,
         grainsize,
         basin_cwi_tr,
-        Theta'
+        dd_cwi_tr,
+        area_cwi_tr,
+        Theta',
+        beta_drainage,
+        beta_area
+        
     );
 }
 
 generated quantities {
   vector[n_cwi_te] score;
-  score = Theta[basin_cwi_te];
+  score = Theta[basin_cwi_te] + (beta_area[basin_cwi_te] .* area_cwi_te) + (beta_drainage[basin_cwi_te] .* dd_cwi_te);
 }

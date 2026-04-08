@@ -12,14 +12,7 @@ modelling_targets <- list(
     name = model,
     stan_files = c(
       "models/icar.stan",
-      "models/icar_drains.stan",
-      "models/icar_area.stan",
-       "models/icar_drains_area.stan",
-      
-       "models/micar.stan",
-       "models/micar_drains.stan",
-       "models/micar_area.stan",
-      "models/micar_drains_area.stan"
+      "models/micar.stan"
     ),
     data = stan_data,
     chains = 4,
