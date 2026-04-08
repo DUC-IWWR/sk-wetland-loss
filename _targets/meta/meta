@@ -24,3 +24,12 @@ generate_prediction_matrix|function|2065e2f5b1f559b6|||||||||||||||
 inv_logit|function|496557eecdf2fe7f|||||||||||||||
 generate_icar_matrix|function|4588c763734aa584|||||||||||||||
 prepare_stan_data|function|eff590bf32b12d35|||||||||||||||
+mungeCARdata4stan|function|175bc7af67a484f8
+.Random.seed|object|292ac1368d8bd0d1
+plot_drainage_on_map|function|1dacefef6c08da26
+generate_prediction_matrix|function|2065e2f5b1f559b6
+inv_logit|function|496557eecdf2fe7f
+generate_icar_matrix|function|4588c763734aa584
+prepare_stan_data|function|eff590bf32b12d35
+model_file_icar|stem|d7822846bb294b60|3f8fe81b53382ccc|2c530c1562a7fbd1|-1781060430|models/icar.stan|t20551.8536732086s|s2169b|2169|file|local|vector|||0||
+model_file_micar|stem|38b4121c79c985ce|a584d14895aa8e70|2c530c1562a7fbd1|-1130716742|models/micar.stan|t20551.8536732086s|s2917b|2917|file|local|vector|||0||
