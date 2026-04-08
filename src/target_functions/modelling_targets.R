@@ -7,39 +7,19 @@ modelling_targets <- list(
       lidar_drainage = dd_ua_2023,
       shapefile = smith_creek)
   ),
-  # 
-  # tar_target(
-  #   name = prediction_list_sc,
-  #   command = generate_prediction_list(combined_point_data, drains_per_basin_sc, smith_creek)
-  # ),
-  # # 
-  # tar_stan_mcmc(
-  #   name = sc_gamma_model,
-  #   stan_files = c(
-  #     "models/drainage_model_cwi_icar_only_gamma.stan",
-  #     "models/drainage_model_cwi_icar_impact_gamma.stan",
-  #     "models/drainage_model_icar_only_gamma.stan",
-  #     "models/drainage_model_icar_impact_gamma.stan"
-  #   ),
-  #   data = stan_data_gamma_sc,
-  #   chains = 4,
-  #   parallel_chains = 4,
-  #   threads_per_chain = 3,
-  #   cpp_options = list(stan_threads = TRUE)
-  # ),
 
   tar_stan_mcmc(
     name = model,
     stan_files = c(
-      "models/drainage_model_cwi_icar_only.stan",
-      "models/drainage_model_cwi_icar_drains.stan",
-        "models/drainage_model_cwi_icar_area.stan",
-       "models/drainage_model_cwi_icar_drains_area.stan",
+      "models/icar.stan",
+      "models/icar_drains.stan",
+      "models/icar_area.stan",
+       "models/icar_drains_area.stan",
       
-       "models/drainage_model_icar_only.stan",
-       "models/drainage_model_icar_drains.stan",
-       "models/drainage_model_icar_area.stan",
-      "models/drainage_model_icar_drains_area.stan"
+       "models/micar.stan",
+       "models/micar_drains.stan",
+       "models/micar_area.stan",
+      "models/micar_drains_area.stan"
     ),
     data = stan_data,
     chains = 4,
