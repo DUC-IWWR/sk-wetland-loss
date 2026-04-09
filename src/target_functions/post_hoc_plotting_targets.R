@@ -129,6 +129,24 @@ post_hoc_plotting_targets <- list(
       aes(x = area, y = diff)
     ) + 
       geom_point()
+  ),
+
+  tar_target(
+    name = prf1_plot_icar,
+    command = ggplot(data = prf1_icar, aes(x = threshold)) +
+      geom_line(aes(y = precision, group = draw, color = "Precision")) +
+      geom_line(aes(y = recall, group = draw, color = "Recall")) +
+      geom_line(aes(y = f1, group = draw, color = "F1")) +
+      ylim(0,1)
+  ),
+
+  tar_target(
+    name = prf1_plot_micar,
+    command = ggplot(data = prf1_micar, aes(x = threshold)) +
+      geom_line(aes(y = precision, group = draw, color = "Precision")) +
+      geom_line(aes(y = recall, group = draw, color = "Recall")) +
+      geom_line(aes(y = f1, group = draw, color = "F1")) +
+      ylim(0,1)
   )
   
 
