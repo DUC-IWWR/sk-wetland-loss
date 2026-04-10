@@ -139,6 +139,61 @@ post_hoc_plotting_targets <- list(
   tar_target(
     name = prf1_plot_micar,
     command = plot_prf1(prf1_micar)
+  ),
+
+  tar_target(
+    name = spatial_effects_plot,
+    command = ggarrange(
+      ggarrange(
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar,
+        parameter = "theta"
+      ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar,
+        parameter = "theta"
+      ),
+      common.legend = TRUE
+      ),
+      plot_spatial_effects(
+        shapefile = tidyterra::mutate(
+          fitted_shapefile_micar,
+          median_difference = fitted_shapefile_micar$median_theta - fitted_shapefile_icar$median_theta
+        ),
+        parameter = "difference"
+      ),
+      widths = c(2,1)
+
+    )
+  ),
+
+    tar_target(
+    name = spatial_effects_sd_plot,
+    command = ggarrange(
+      ggarrange(
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar,
+        parameter = "theta",
+        metric = "sd"
+      ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar,
+        parameter = "theta",
+        metric = "sd"
+      ),
+      common.legend = TRUE
+      ),
+      plot_spatial_effects(
+        shapefile = tidyterra::mutate(
+          fitted_shapefile_micar,
+          sd_difference = fitted_shapefile_micar$sd_theta - fitted_shapefile_icar$sd_theta
+        ),
+        parameter = "difference",
+        metric = "sd"
+      ),
+      widths = c(2,1)
+
+    )
   )
   
 
