@@ -31,6 +31,7 @@ tar_source("src/generate-score-matrix.R")
 tar_source("src/generate-prf1-df.R")
 tar_source("src/calculate-precision.R")
 tar_source("src/calculate-recall.R")
+tar_source("src/plot-prf1.R")
 
 # Functions to generate grouped targets
 tar_source("src/target_functions/file_io_targets.R")
