@@ -19,7 +19,9 @@ generate_prf1_df <- function(score_matrix, data, increment) {
 
     recall = NA,
 
-    f1 = NA
+    f1 = NA,
+
+    mcc = NA
   )
 
   predictions_list <- vector(mode = "list", length = length(thresholds))
@@ -35,15 +37,15 @@ generate_prf1_df <- function(score_matrix, data, increment) {
     #' Should return a vector of the same length of the held out data
     pred_vector <- unlist(predictions_list[[as.character(df$threshold[i])]][df$draw[i],])
 
-    df$precision[i] <- calculate_precision(pred_vector, data$impact_cwi_te)
+    confusion_matrix <- generate_confusion_matrix(pred_vector, data$impact_cwi_te)
 
-    df$recall[i] <- calculate_recall(pred_vector, data$impact_cwi_te)
+    df$precision[i] <- calculate_precision(confusion_matrix)
 
-    df$f1[i] <- ifelse(
-      (df$precision[i] == 0 && df$recall[i] == 0),
-      0,
-      2 * ((df$precision[i] * df$recall[i])/(df$precision[i] + df$recall[i]))
-    )
+    df$recall[i] <- calculate_recall(confusion_matrix)
+
+    df$f1[i] <- calculate_f1(confusion_matrix)
+
+    df$mcc[i] <- calculate_mcc(confusion_matrix)
     
   }
 
