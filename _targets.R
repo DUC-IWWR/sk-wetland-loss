@@ -57,14 +57,5 @@ list(
   fitted_shapefile_targets,
   
   post_hoc_plotting_targets
-  # tar_target(
-  #   name = percent_correct_summary,
-  #   command = tibble(
-  #     Model = c("ICAR", "MICAR"),
-  #     Percent_Correct = c(
-  #       pc_icar,
-  #       pc_micar
-  #     )
-  #   )
-  # )
+
 )

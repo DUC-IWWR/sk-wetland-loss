@@ -51,6 +51,16 @@ file_io_targets <- list(
     command = terra::rast(dd_ua_2023_file) |> terra::project(hydro_basins)
   ),
 
+  tar_target(
+    name = cwi_drainage_ditches_file,
+    command = "data/raw/cwi_drainage/cwi_drainage.shp",
+    format = "file"
+  ),
+  tar_terra_vect(
+    name = cwi_dd,
+    command = terra::vect(cwi_drainage_ditches_file)
+  ),
+
   # HYBAS IDs of Hydro basin subsets
   tar_target(
     name = smith_creek_hybas_id,
