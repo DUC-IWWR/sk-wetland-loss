@@ -58,7 +58,21 @@ file_io_targets <- list(
   ),
   tar_terra_vect(
     name = cwi_dd,
-    command = terra::vect(cwi_drainage_ditches_file)
+    command = terra::vect(cwi_drainage_ditches_file) |>
+    #  tidyterra::rename(Shape_leng = length_cwi) |>
+      terra::project(hydro_basins)
+  ),
+
+  tar_target(
+    name = ua_lidar_drainage_file,
+    command = "data/raw/UA_Drainage2024/UA_Drainage2024.shp",
+    format = "file"
+  ),
+  tar_terra_vect(
+    name = ua_dd,
+    command = terra::vect(ua_lidar_drainage_file) |>
+     # tidyterra::rename(Shape_leng = length_lidar) |>
+      terra::project(hydro_basins)
   ),
 
   # HYBAS IDs of Hydro basin subsets
