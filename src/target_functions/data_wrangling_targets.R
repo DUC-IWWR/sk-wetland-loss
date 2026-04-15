@@ -179,5 +179,32 @@ data_wrangling_targets <- list(
   tar_target(
     name = icar_matrix,
     command = generate_icar_matrix(smith_creek)
+  ),
+
+  tar_target(
+    name = train_test_indices,
+    command = generate_train_test_indices(
+      df = point_data_subset
+    )
+  ),
+
+  tar_target(
+    name = stan_data_cwi,
+    command = prepare_stan_data(
+      data = point_data_subset,
+      covariates = covariate_df_cwi,
+      icar_matrix = icar_matrix,
+      train_test_indices = train_test_indices
+    )
+  ),
+  tar_target(
+    name = stan_data_lidar,
+    command = prepare_stan_data(
+      data = point_data_subset,
+      covariates = covariate_df_lidar,
+      icar_matrix = icar_matrix,
+      train_test_indices = train_test_indices
+    )
   )
+
 )

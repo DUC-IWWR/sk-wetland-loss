@@ -45,9 +45,13 @@ cwi_drainage_rast|stem|1f60fa0e3f6877c4|59f21c5e975048c8|ecf4701a0c2536da|926217
 ua_drainage_rast|stem|3531c39c82bc8768|b6d3197ccbda3b84|373d19e52a746e1a|742918866||t20558.6733957143s|s1507917b|1507917|format_custom&read=dGVycmE6OnJhc3QocGF0aCk&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVSYXN0ZXIsIGMobGlzdChvYmplY3QsIGZpbGVuYW1lID0gcGF0aCwgCiAgICAgICAgZmlsZXR5cGUgPSAiR1RpZmYiLCBvdmVyd3JpdGUgPSBUUlVFLCBnZGFsID0gTlVMTCksIGxpc3QoKSkpCn0&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||5.015||
 icar_matrix|stem|ffa0da8b8c12f864|b61ac197631bc273|274ac0d2dc9de25f|1955256420||t20558.6969238692s|s266b|266|rds|local|vector|||5.282||
 covariate_df_cwi|stem|4afe1b699d054389|40319183ec4b6095|94bc30805dc639a5|-1326724939||t20558.7124881762s|s1815408b|1815408|rds|local|vector|||497.797||
+covariate_df_lidar|stem|7dce53ddaf04f6f2|e9ff4ed94d4b0569|4ad827f2f97a15e3|-1866454902||t20558.7622591877s|s1998312b|1998312|rds|local|vector|||367.688||
+train_test_indices|stem|1697e53bae534f79|b7c4897a8f8abe3b|db4bed8d63079045|1357408447||t20558.7834192224s|s115665b|115665|rds|local|vector|||0.312||
+stan_data_cwi|stem|31b0c62007eafc9d|7a8583b8afeb85c8|230a59e682b464f1|-1476057467||t20558.7965394103s|s1030948b|1030948|rds|local|vector|||0.672||
 generate_confusion_matrix|function|c2343c1e31652db0
 plot_spatial_effects|function|30ce401d4a7e8acb
 plot_prf1|function|a1d13458fc19a802
+prepare_stan_data|function|732e95e024278929
 inv_logit|function|496557eecdf2fe7f
 mungeCARdata4stan|function|175bc7af67a484f8
 generate_fitted_shapefile|function|04f4d3bb96c52138
@@ -55,10 +59,10 @@ calculate_f1|function|519583bc4f3339e2
 calculate_mcc|function|d922f383a5ada66f
 calculate_precision|function|ef488e573fb10bca
 calculate_recall|function|e2272badf421cc95
-.Random.seed|object|56653c18c19a8097
+.Random.seed|object|fa0b407216008f24
 plot_drainage_on_map|function|1dacefef6c08da26
+generate_train_test_indices|function|a1df0fe5af29245b
 generate_score_matrix|function|a1ad7f15ea95295f
 generate_icar_matrix|function|4588c763734aa584
 generate_prf1_df|function|d7d47cb3d3af5796
-prepare_stan_data|function|eff590bf32b12d35
-covariate_df_lidar|stem|7dce53ddaf04f6f2|e9ff4ed94d4b0569|4ad827f2f97a15e3|-1866454902||t20558.7622591877s|s1998312b|1998312|rds|local|vector|||367.688||
+stan_data_lidar|stem|d3fb2eb2c4bb4e17|0326f057b93b7f19|da20c7dd43686475|1227755751||t20558.7969646408s|s1147378b|1147378|rds|local|vector|||0.719||
