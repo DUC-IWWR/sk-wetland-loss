@@ -8,7 +8,7 @@ prepare_stan_data <- function(
   data$Test <- 0
   data[train_test_indices$index, "Test"] <- train_test_indices$Test
 
-  data <- data.frame(cbind(data,covariates[,c("DD_Scaled", "Area_Scaled", "Impact_Code", "HYBAS_ID_Factor")]))
+  data <- data.frame(data.frame(data),covariates[,c("DD_Scaled", "Area_Scaled", "Impact_Code", "HYBAS_ID_Factor")])
   
   return(
     list(
@@ -24,9 +24,9 @@ prepare_stan_data <- function(
       basin_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |> 
         dplyr::pull(HYBAS_ID_Factor),
       area_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |>
-        dplyr::pull(Area_Scaled),
-      dd_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |>
-        dplyr::pull(DD_Scaled),
+        dplyr::pull(Area_Scaled) |> data.frame() |> dplyr::pull(var = 1),
+      dd_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) %>%
+        dplyr::pull(DD_Scaled) |> data.frame() |> dplyr::pull(var = 1),
       
       # CWI-testing Data
       n_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |>
@@ -35,10 +35,10 @@ prepare_stan_data <- function(
         dplyr::pull(Impact_Code),
       basin_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |> 
         dplyr::pull(HYBAS_ID_Factor),
-      area_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |>
-        dplyr::pull(Area_Scaled),
-      dd_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |>
-        dplyr::pull(DD_Scaled),
+      area_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) %>%
+        dplyr::pull(Area_Scaled) |> data.frame() |> dplyr::pull(var = 1),
+      dd_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) %>%
+        dplyr::pull(DD_Scaled) |> data.frame() |> dplyr::pull(var = 1),
       
       
       # CD-related Data
@@ -48,10 +48,10 @@ prepare_stan_data <- function(
         dplyr::pull(Impact_Code),
       basin_cd = dplyr::filter(data, Model == "CD") |> 
         dplyr::pull(HYBAS_ID_Factor),
-      area_cd = dplyr::filter(data, Model == "CD") |>
-        dplyr::pull(Area_Scaled),
-      dd_cd = dplyr::filter(data, Model == "CD") |>
-        dplyr::pull(DD_Scaled),
+      area_cd = dplyr::filter(data, Model == "CD") %>%
+        dplyr::pull(Area_Scaled) |> data.frame() |> dplyr::pull(var = 1),
+      dd_cd = dplyr::filter(data, Model == "CD") %>%
+        dplyr::pull(DD_Scaled) |> data.frame() |> dplyr::pull(var = 1),
 
       # CWI Point-related Data
       n_cwi_p = dplyr::filter(data, Model == "CWI_Point") |>
@@ -60,10 +60,10 @@ prepare_stan_data <- function(
         dplyr::pull(Impact_Code),
       basin_cwi_p = dplyr::filter(data, Model == "CWI_Point") |> 
         dplyr::pull(HYBAS_ID_Factor),
-      area_cwi_p = dplyr::filter(data, Model == "CWI_Point") |>
-        dplyr::pull(Area_Scaled),
-      dd_cwi_p = dplyr::filter(data, Model == "CWI_Point") |>
-        dplyr::pull(DD_Scaled),
+      area_cwi_p = dplyr::filter(data, Model == "CWI_Point") %>%
+        dplyr::pull(Area_Scaled) |> data.frame() |> dplyr::pull(var = 1),
+      dd_cwi_p = dplyr::filter(data, Model == "CWI_Point") %>%
+        dplyr::pull(DD_Scaled) |> data.frame() |> dplyr::pull(var = 1),
       
       # ICAR related things
       N_icar = icar_matrix$N,

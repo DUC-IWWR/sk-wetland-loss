@@ -8,9 +8,15 @@ functions {
         vector area,
         row_vector Theta,
         vector beta_drainage,
-        vector beta_area
+        vector beta_area,
+        int point
     ) {
-        return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]]' + beta_drainage[basin[start:end]] .* drainage[start:end] + beta_area[basin[start:end]] .* area[start:end]);
+        if (point == 1) {
+          return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]]' + beta_drainage[basin[start:end]] .* drainage[start:end]);
+        } else {
+          return bernoulli_logit_lupmf(slice_impact | Theta[basin[start:end]]' + beta_drainage[basin[start:end]] .* drainage[start:end] + beta_area[basin[start:end]] .* area[start:end]);
+        }
+        
   }
 }
 
@@ -31,6 +37,12 @@ data {
   array[n_cd] int basin_cd;
   vector [n_cd] area_cd;
   vector [n_cd] dd_cd;
+
+  int <lower = 0> n_cwi_p;
+  array[n_cwi_p] int impact_cwi_p;
+  array[n_cwi_p] int basin_cwi_p;
+  vector [n_cwi_p] area_cwi_p;
+  vector [n_cwi_p] dd_cwi_p;
   
   int <lower = 0> n_basins;
   int <lower = 0> n_datasets;
@@ -47,6 +59,7 @@ parameters {
   vector <lower = 0>[n_datasets] alpha;
   sum_to_zero_vector[n_basins] u_cwi;
   sum_to_zero_vector[n_basins] u_cp;
+  sum_to_zero_vector[n_basins] u_cwi_p;
   cholesky_factor_corr[n_datasets] L;
   
   vector[n_basins] beta_drainage_raw;
@@ -65,7 +78,7 @@ transformed parameters {
   beta_drainage = beta_drainage_raw * sigma_drainage;
   beta_area = beta_area_raw * sigma_area;
 
-  Theta = diag_pre_multiply(alpha, L) * append_col(u_cwi, u_cp)';
+  Theta = diag_pre_multiply(alpha, L) * append_col(append_col(u_cwi, u_cp), u_cwi_p)';
 }
 
 model {
@@ -74,6 +87,7 @@ model {
     target += std_normal_lupdf(alpha);
     target += -0.5 * dot_self(u_cwi[node1] - u_cwi[node2]);
     target += -0.5 * dot_self(u_cp[node1] - u_cp[node2]);
+    target += -0.5 * dot_self(u_cwi_p[node1] - u_cwi_p[node2]);
     
     target += std_normal_lupdf(beta_drainage_raw);
     target += std_normal_lupdf(sigma_drainage);
@@ -81,6 +95,7 @@ model {
     target += std_normal_lupdf(beta_area_raw);
     target += std_normal_lupdf(sigma_area);
     
+    // CWI Likelihood contributions
     target += reduce_sum(
         partial_sum_lupmf,
         impact_cwi_tr,
@@ -90,9 +105,11 @@ model {
         area_cwi_tr,
         Theta[1,],
         beta_drainage,
-        beta_area
+        beta_area,
+        0
     );
 
+    // CD Likelihood contributions
     target += reduce_sum(
         partial_sum_lupmf,
         impact_cd,
@@ -102,7 +119,22 @@ model {
         area_cd,
         Theta[2,],
         beta_drainage,
-        beta_area
+        beta_area,
+        0
+    );
+
+    // CWI Point likelihood contributions
+    target += reduce_sum(
+        partial_sum_lupmf,
+        impact_cwi_p,
+        grainsize,
+        basin_cwi_p,
+        dd_cwi_p,
+        area_cwi_p,
+        Theta[3,],
+        beta_drainage,
+        beta_area,
+        1
     );
 
 }
