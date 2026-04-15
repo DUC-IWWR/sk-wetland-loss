@@ -48,7 +48,7 @@ file_io_targets <- list(
   ),
   tar_terra_rast(
     name = dd_ua_2023,
-    command = terra::rast(dd_ua_2023_file) |> terra::project(hydro_basins)
+    command = terra::rast(dd_ua_2023_file)
   ),
 
   tar_target(
@@ -58,9 +58,7 @@ file_io_targets <- list(
   ),
   tar_terra_vect(
     name = cwi_dd,
-    command = terra::vect(cwi_drainage_ditches_file) |>
-    #  tidyterra::rename(Shape_leng = length_cwi) |>
-      terra::project(hydro_basins)
+    command = terra::vect(cwi_drainage_ditches_file)
   ),
 
   tar_target(
@@ -70,9 +68,7 @@ file_io_targets <- list(
   ),
   tar_terra_vect(
     name = ua_dd,
-    command = terra::vect(ua_lidar_drainage_file) |>
-     # tidyterra::rename(Shape_leng = length_lidar) |>
-      terra::project(hydro_basins)
+    command = terra::vect(ua_lidar_drainage_file)
   ),
 
   # HYBAS IDs of Hydro basin subsets

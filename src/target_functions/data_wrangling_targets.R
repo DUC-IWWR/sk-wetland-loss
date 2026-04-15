@@ -71,6 +71,9 @@ data_wrangling_targets <- list(
       terra::vect(
         geom = c("Longitude", "Latitude"),
         crs = terra::crs(hydro_basins)
+      ) |>
+      terra::project(
+        cwi_dd
       ) %>%
       
       #' Now we start extracting information from external datasets. This first call is to extract
@@ -87,7 +90,8 @@ data_wrangling_targets <- list(
 
   tar_terra_vect(
     name = smith_creek,
-    command = hydro_basins[which(hydro_basins$HYBAS_ID %in% smith_creek_hybas_id$HYBAS_ID), ]
+    command = hydro_basins[which(hydro_basins$HYBAS_ID %in% smith_creek_hybas_id$HYBAS_ID), ] |>
+      terra::project(cwi_dd)
   ),
 
   tar_terra_vect(
@@ -105,7 +109,7 @@ data_wrangling_targets <- list(
           xmax = ceiling(terra::ext(smith_creek)[2]),
           ymin = floor(terra::ext(smith_creek)[3]),
           ymax = ceiling(terra::ext(smith_creek)[4]),
-          res = c(0.0003569396, 0.0003569396),
+          res = c(50, 50),
           crs = terra::crs(smith_creek)
         ),
         field = "cwi_length_km",
@@ -123,7 +127,7 @@ data_wrangling_targets <- list(
           xmax = ceiling(terra::ext(smith_creek)[2]),
           ymin = floor(terra::ext(smith_creek)[3]),
           ymax = ceiling(terra::ext(smith_creek)[4]),
-          res = c(0.0003569396, 0.0003569396),
+          res = c(50, 50),
           crs = terra::crs(smith_creek)
         ),
         field = "ua_length_km",
