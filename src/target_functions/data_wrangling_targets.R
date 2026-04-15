@@ -89,7 +89,8 @@ data_wrangling_targets <- list(
   tar_terra_vect(
     name = smith_creek,
     command = hydro_basins[which(hydro_basins$HYBAS_ID %in% smith_creek_hybas_id$HYBAS_ID), ] |>
-      terra::project(cwi_dd)
+      terra::project(cwi_dd) %>%
+      tidyterra::mutate(HYBAS_ID_Factor = seq(1:nrow(.)))
   ),
 
   tar_terra_vect(
@@ -131,5 +132,50 @@ data_wrangling_targets <- list(
         field = "ua_length_km",
         fun = sum
       )
+  ),
+
+  tar_target(
+    name = covariate_df_cwi,
+    command = dplyr::bind_cols(
+      terra::extract(
+        cwi_drainage_rast,
+        terra::buffer(point_data_subset, 500),
+        fun = sum, na.rm = TRUE
+      ) |>
+        dplyr::mutate(DD_Scaled = scale(cwi_length_km)),
+
+      dplyr::select(data.frame(point_data_subset), Area, HYBAS_ID, Impact) |>
+        dplyr::mutate(Area_Scaled = scale(Area)) |>
+        dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 0))
+    ) |>
+      dplyr::left_join(
+        y = dplyr::select(data.frame(smith_creek), HYBAS_ID, HYBAS_ID_Factor),
+        by = "HYBAS_ID"
+      )
+  ),
+
+    tar_target(
+    name = covariate_df_lidar,
+    command = dplyr::bind_cols(
+      terra::extract(
+        ua_drainage_rast,
+        terra::buffer(point_data_subset, 500),
+        fun = sum, na.rm = TRUE
+      ) |>
+        dplyr::mutate(DD_Scaled = scale(ua_length_km)),
+
+      dplyr::select(data.frame(point_data_subset), Area, HYBAS_ID, Impact) |>
+        dplyr::mutate(Area_Scaled = scale(Area)) |>
+        dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 0))
+    ) |>
+      dplyr::left_join(
+        y = dplyr::select(data.frame(smith_creek), HYBAS_ID, HYBAS_ID_Factor),
+        by = "HYBAS_ID"
+      )
+  ),
+
+  tar_target(
+    name = icar_matrix,
+    command = generate_icar_matrix(smith_creek)
   )
 )
