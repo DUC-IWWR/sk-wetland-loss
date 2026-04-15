@@ -33,6 +33,7 @@ tar_source("src/confusion-matrix-functions.R")
 tar_source("src/plot-prf1.R")
 tar_source("src/generate-fitted-shapefile.R")
 tar_source("src/plot-spatial-effects.R")
+tar_source("src/generate-train-test-indices.R")
 
 # Functions to generate grouped targets
 tar_source("src/target_functions/file_io_targets.R")
@@ -57,14 +58,5 @@ list(
   fitted_shapefile_targets,
   
   post_hoc_plotting_targets
-  # tar_target(
-  #   name = percent_correct_summary,
-  #   command = tibble(
-  #     Model = c("ICAR", "MICAR"),
-  #     Percent_Correct = c(
-  #       pc_icar,
-  #       pc_micar
-  #     )
-  #   )
-  # )
+
 )

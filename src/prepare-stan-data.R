@@ -1,108 +1,69 @@
 prepare_stan_data <- function(
     data = NULL,
-    lidar_drainage = NULL,
-    shapefile = NULL) {
+    covariates = NULL,
+    icar_matrix = NULL,
+    train_test_indices = NULL
+  ) {
   
-  shapefile <- tidyterra::mutate(shapefile, HYBAS_ID_Factor = seq(1, nrow(shapefile)))
-  
-  # numerically assign impact
-  data_basins <- tidyterra::bind_spat_cols(
-    data,
-    terra::extract(
-      tidyterra::select(
-        shapefile, HYBAS_ID, HYBAS_ID_Factor
-      ),
-      data
-    )
-  ) |>
-    tidyterra::filter(!is.na(HYBAS_ID)) |>
-    dplyr::mutate(Impact_Code = dplyr::if_else(Impact == "Drained", 1, 0))
-  
-  df <- tidyterra::bind_spat_cols(
-    data_basins,
-    terra::extract(
-      lidar_drainage,
-      terra::buffer(data_basins, 500),
-      fun = sum
-    ),
-  ) |> data.frame() |>
-    dplyr::filter(!is.na(UA_DD_2023)) |>
-    dplyr::mutate(
-      DD_Scaled = scale(UA_DD_2023)[,1]
-    ) |> 
-    dplyr::mutate(HYBAS_Impact = paste0(HYBAS_ID_Factor, "-", Impact_Code)) 
-  
-  folds <- data.frame(HYBAS_Impact = df[which(df$Model == "CWI"), "HYBAS_Impact"])
-  folds$index <- which(df$Model == "CWI")
-  folds$Test <- 0
-  
-  for (f in unique(folds$HYBAS_Impact)) {
-    temp <- folds[which(folds$HYBAS_Impact == f),]
-    if (nrow(temp) >= 10) {
-      temp$Test[sample(.2 * seq_len(nrow(temp)))] <- 1
-      folds[which(folds$index %in% temp$index), "Test"] <- temp$Test
-    }
-  }
-  
-  df$Test <- 0
-  df[folds$index, "Test"] <- folds$Test
-  
-  icar_matrix <- generate_icar_matrix(shapefile)
+  data$Test <- 0
+  data[train_test_indices$index, "Test"] <- train_test_indices$Test
+
+  data <- data.frame(cbind(data,covariates[,c("DD_Scaled", "Area_Scaled", "Impact_Code", "HYBAS_ID_Factor")]))
   
   return(
     list(
       # Overall data
-      n_basins = length(unique(shapefile$HYBAS_ID_Factor)),
-      n_datasets = 2,
+      n_basins = length(unique(data$HYBAS_ID_Factor)),
+      n_datasets = length(unique(data$Model)),
       
       # CWI-training Data
-      n_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
+      n_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |>
         nrow(x = _),
-      impact_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |> 
+      impact_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |> 
         dplyr::pull(Impact_Code),
-      basin_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |> 
+      basin_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |> 
         dplyr::pull(HYBAS_ID_Factor),
-      area_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
+      area_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |>
         dplyr::pull(Area_Scaled),
-      area_unscaled_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
-        dplyr::pull(Area),
-      dd_cwi_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
+      dd_cwi_tr = dplyr::filter(data, Model == "CWI" & Test == 0) |>
         dplyr::pull(DD_Scaled),
-      dd_cwi_unscaled_tr = dplyr::filter(df, Model == "CWI" & Test == 0) |>
-        dplyr::pull(UA_DD_2023),
       
       # CWI-testing Data
-      n_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
+      n_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |>
         nrow(x = _),
-      impact_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |> 
+      impact_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |> 
         dplyr::pull(Impact_Code),
-      basin_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |> 
+      basin_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |> 
         dplyr::pull(HYBAS_ID_Factor),
-      area_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
+      area_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |>
         dplyr::pull(Area_Scaled),
-      area_unscaled_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
-        dplyr::pull(Area),
-      dd_cwi_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
+      dd_cwi_te = dplyr::filter(data, Model == "CWI" & Test == 1) |>
         dplyr::pull(DD_Scaled),
-      dd_cwi_unscaled_te = dplyr::filter(df, Model == "CWI" & Test == 1) |>
-        dplyr::pull(UA_DD_2023),
       
       
       # CD-related Data
-      n_cd = dplyr::filter(df, Model == "CD") |>
+      n_cd = dplyr::filter(data, Model == "CD") |>
         nrow(x = _),
-      impact_cd = dplyr::filter(df, Model == "CD") |>
+      impact_cd = dplyr::filter(data, Model == "CD") |>
         dplyr::pull(Impact_Code),
-      basin_cd = dplyr::filter(df, Model == "CD") |> 
+      basin_cd = dplyr::filter(data, Model == "CD") |> 
         dplyr::pull(HYBAS_ID_Factor),
-      area_cd = dplyr::filter(df, Model == "CD") |>
+      area_cd = dplyr::filter(data, Model == "CD") |>
         dplyr::pull(Area_Scaled),
-      area_unscaled_cd = dplyr::filter(df, Model == "CD") |>
-        dplyr::pull(Area),
-      dd_cd = dplyr::filter(df, Model == "CD") |>
+      dd_cd = dplyr::filter(data, Model == "CD") |>
         dplyr::pull(DD_Scaled),
-      dd_cd_unscaled = dplyr::filter(df, Model == "CD") |>
-        dplyr::pull(UA_DD_2023),
+
+      # CWI Point-related Data
+      n_cwi_p = dplyr::filter(data, Model == "CWI_Point") |>
+        nrow(x = _),
+      impact_cwi_p = dplyr::filter(data, Model == "CWI_Point") |>
+        dplyr::pull(Impact_Code),
+      basin_cwi_p = dplyr::filter(data, Model == "CWI_Point") |> 
+        dplyr::pull(HYBAS_ID_Factor),
+      area_cwi_p = dplyr::filter(data, Model == "CWI_Point") |>
+        dplyr::pull(Area_Scaled),
+      dd_cwi_p = dplyr::filter(data, Model == "CWI_Point") |>
+        dplyr::pull(DD_Scaled),
       
       # ICAR related things
       N_icar = icar_matrix$N,

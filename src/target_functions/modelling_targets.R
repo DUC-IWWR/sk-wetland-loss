@@ -1,13 +1,4 @@
 modelling_targets <- list(
-
-  tar_target(
-    name = stan_data,
-    command = prepare_stan_data(
-      data = combined_point_data,
-      lidar_drainage = dd_ua_2023,
-      shapefile = smith_creek)
-  ),
-
   tar_stan_mcmc(
     name = model,
     stan_files = c(
