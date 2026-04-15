@@ -72,16 +72,14 @@ data_wrangling_targets <- list(
         geom = c("Longitude", "Latitude"),
         crs = terra::crs(hydro_basins)
       ) |>
-      terra::project(
-        cwi_dd
-      ) %>%
+      terra::project(cwi_dd) %>%
       
       #' Now we start extracting information from external datasets. This first call is to extract
       #' the HYBAS_ID from the Hydrobasins shapefile
       tidyterra::bind_spat_cols(
         terra::extract(
           x = tidyterra::select(
-            hydro_basins, HYBAS_ID
+            terra::project(hydro_basins, cwi_dd), HYBAS_ID
           ),
           y = .
         )
