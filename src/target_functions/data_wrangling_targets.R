@@ -142,6 +142,7 @@ data_wrangling_targets <- list(
         terra::buffer(point_data_subset, 500),
         fun = sum, na.rm = TRUE
       ) |>
+        dplyr::mutate(cwi_length_km = ifelse(is.nan(cwi_length_km), 0, cwi_length_km)) |>
         dplyr::mutate(DD_Scaled = scale(cwi_length_km)),
 
       dplyr::select(data.frame(point_data_subset), Area, HYBAS_ID, Impact) |>
@@ -162,6 +163,7 @@ data_wrangling_targets <- list(
         terra::buffer(point_data_subset, 500),
         fun = sum, na.rm = TRUE
       ) |>
+        dplyr::mutate(ua_length_km = ifelse(is.nan(ua_length_km), 0, ua_length_km)) |>
         dplyr::mutate(DD_Scaled = scale(ua_length_km)),
 
       dplyr::select(data.frame(point_data_subset), Area, HYBAS_ID, Impact) |>
