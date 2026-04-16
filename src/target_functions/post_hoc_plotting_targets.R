@@ -112,88 +112,105 @@ post_hoc_plotting_targets <- list(
   #   )
   # ),
 
+  # tar_target(
+  #   name = icar_vs_micar_plot,
+  #   command = ggplot(
+  #     data = data.frame(
+  #       diff = abs(
+  #         inv_logit(
+  #         model_mcmc_icar$summary(variables = "score")$mean
+  #       ) - 
+  #       inv_logit(
+  #         model_mcmc_micar$summary(variables = "score")$mean
+  #       )),
+  #       area = sqrt(stan_data$area_unscaled_cwi_te),
+  #       dd = stan_data$dd_cwi_te
+  #     ),
+  #     aes(x = area, y = diff)
+  #   ) + 
+  #     geom_point()
+  # ),
+
   tar_target(
-    name = icar_vs_micar_plot,
-    command = ggplot(
-      data = data.frame(
-        diff = abs(
-          inv_logit(
-          model_mcmc_icar$summary(variables = "score")$mean
-        ) - 
-        inv_logit(
-          model_mcmc_micar$summary(variables = "score")$mean
-        )),
-        area = sqrt(stan_data$area_unscaled_cwi_te),
-        dd = stan_data$dd_cwi_te
-      ),
-      aes(x = area, y = diff)
-    ) + 
-      geom_point()
+    name = prf1_plot_icar_cwi,
+    command = plot_prf1(prf1_icar_cwi)
   ),
 
   tar_target(
-    name = prf1_plot_icar,
-    command = plot_prf1(prf1_icar)
+    name = prf1_plot_micar_cwi,
+    command = plot_prf1(prf1_micar_cwi)
   ),
 
   tar_target(
-    name = prf1_plot_micar,
-    command = plot_prf1(prf1_micar)
+    name = prf1_plot_icar_lidar,
+    command = plot_prf1(prf1_icar_lidar)
+  ),
+
+  tar_target(
+    name = prf1_plot_micar_lidar,
+    command = plot_prf1(prf1_micar_lidar)
   ),
 
   tar_target(
     name = spatial_effects_plot,
-    command = ggarrange(
+    command = 
       ggarrange(
       plot_spatial_effects(
-        shapefile = fitted_shapefile_micar,
-        parameter = "theta"
+        shapefile = fitted_shapefile_micar_cwi,
+        parameter = "theta", 
+        title = "MICAR CWI"
       ),
       plot_spatial_effects(
-        shapefile = fitted_shapefile_icar,
-        parameter = "theta"
-      ),
-      common.legend = TRUE
+        shapefile = fitted_shapefile_icar_cwi,
+        parameter = "theta", 
+        title = "ICAR CWI"
       ),
       plot_spatial_effects(
-        shapefile = tidyterra::mutate(
-          fitted_shapefile_micar,
-          median_difference = fitted_shapefile_micar$median_theta - fitted_shapefile_icar$median_theta
-        ),
-        parameter = "difference"
+        shapefile = fitted_shapefile_micar_lidar,
+        parameter = "theta", 
+        title = "MICAR LIDAR"
       ),
-      widths = c(2,1)
-
-    )
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar_lidar,
+        parameter = "theta", 
+        title = "ICAR LIDAR"
+      ),
+      common.legend = TRUE,
+      ncol = 2, nrow = 2
+      )
   ),
 
-    tar_target(
+  tar_target(
     name = spatial_effects_sd_plot,
-    command = ggarrange(
+    command = 
       ggarrange(
       plot_spatial_effects(
-        shapefile = fitted_shapefile_micar,
-        parameter = "theta",
-        metric = "sd"
+        shapefile = fitted_shapefile_micar_cwi,
+        parameter = "theta", 
+        metric = "sd",
+        title = "MICAR CWI"
       ),
       plot_spatial_effects(
-        shapefile = fitted_shapefile_icar,
-        parameter = "theta",
-        metric = "sd"
-      ),
-      common.legend = TRUE
+        shapefile = fitted_shapefile_icar_cwi,
+        parameter = "theta", 
+        metric = "sd",
+        title = "ICAR CWI"
       ),
       plot_spatial_effects(
-        shapefile = tidyterra::mutate(
-          fitted_shapefile_micar,
-          sd_difference = fitted_shapefile_micar$sd_theta - fitted_shapefile_icar$sd_theta
-        ),
-        parameter = "difference",
-        metric = "sd"
+        shapefile = fitted_shapefile_micar_lidar,
+        parameter = "theta", 
+        metric = "sd",
+        title = "MICAR LIDAR"
       ),
-      widths = c(2,1)
-
-    )
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar_lidar,
+        parameter = "theta", 
+        metric = "sd",
+        title = "ICAR LIDAR"
+      ),
+      common.legend = TRUE,
+      ncol = 2, nrow = 2
+      )
   )
   
 

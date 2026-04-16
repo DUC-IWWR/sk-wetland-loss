@@ -2,7 +2,7 @@ generate_fitted_shapefile <- function(shapefile, model, micar = FALSE) {
 
   theta_df <- model$summary(variables = "Theta")
   if (micar) {
-    theta_df <- theta_df[seq_len(nrow(theta_df)) %% 2 == 1, ]
+    theta_df <- theta_df[seq_len(nrow(theta_df)) %% 3 == 1, ]
   }
   names(theta_df) <- paste0(names(theta_df), "_theta")
 

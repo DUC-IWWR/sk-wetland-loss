@@ -34,6 +34,7 @@ tar_source("src/plot-prf1.R")
 tar_source("src/generate-fitted-shapefile.R")
 tar_source("src/plot-spatial-effects.R")
 tar_source("src/generate-train-test-indices.R")
+tar_source("src/calculate-holdout-loglik.R")
 
 # Functions to generate grouped targets
 tar_source("src/target_functions/file_io_targets.R")
@@ -50,7 +51,7 @@ list(
 
   data_wrangling_targets,
 
-  exploratory_analysis_targets,
+  #exploratory_analysis_targets,
  
   modelling_targets,
   prediction_targets,

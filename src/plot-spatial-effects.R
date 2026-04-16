@@ -1,4 +1,4 @@
-plot_spatial_effects <- function(shapefile, parameter, metric = "median") {
+plot_spatial_effects <- function(shapefile, parameter, metric = "median", title) {
 
   plot <- ggplot2::ggplot() +
     tidyterra::geom_spatvector(
@@ -19,7 +19,8 @@ plot_spatial_effects <- function(shapefile, parameter, metric = "median") {
               metric, 
               " ", 
               parameter
-            ))
+            )) +
+    ggplot2::ggtitle(title)
   
   return(plot)
 }
