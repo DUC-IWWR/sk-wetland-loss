@@ -32,7 +32,7 @@ prediction_targets <- list(
     command = generate_prf1_df(
       score_matrix = score_matrix_icar_cwi,
       data = stan_data_cwi,
-      increment = 0.05
+      increment = 0.01
     )
   ),
 
@@ -41,7 +41,7 @@ prediction_targets <- list(
     command = generate_prf1_df(
       score_matrix = score_matrix_micar_cwi,
       data = stan_data_cwi,
-      increment = 0.05
+      increment = 0.01
     )
   ),
     tar_target(
@@ -49,7 +49,7 @@ prediction_targets <- list(
       command = generate_prf1_df(
         score_matrix = score_matrix_icar_lidar,
         data = stan_data_lidar,
-        increment = 0.05
+        increment = 0.01
       )
     ),
     
@@ -58,7 +58,7 @@ prediction_targets <- list(
       command = generate_prf1_df(
         score_matrix = score_matrix_micar_lidar,
         data = stan_data_lidar,
-        increment = 0.05
+        increment = 0.01
       )
     ),
 

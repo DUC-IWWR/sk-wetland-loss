@@ -51,7 +51,7 @@ list(
 
   data_wrangling_targets,
 
-  #exploratory_analysis_targets,
+  exploratory_analysis_targets,
  
   modelling_targets,
   prediction_targets,
