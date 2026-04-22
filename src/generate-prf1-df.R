@@ -1,4 +1,8 @@
-generate_prf1_df <- function(score_matrix, data, increment) {
+generate_prf1_df <- function(score_matrix, data, increment, thin = 1) {
+  
+  if (thin > 1) {
+    score_matrix <- score_matrix[seq_len(nrow(score_matrix)) %% thin == 1, ]
+  }
 
   thresholds <- seq(0, 1, increment)
   df <- data.frame(
