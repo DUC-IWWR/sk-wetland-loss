@@ -205,6 +205,15 @@ data_wrangling_targets <- list(
       icar_matrix = icar_matrix,
       train_test_indices = train_test_indices
     )
+  ),
+  tar_target(
+    name = stan_data_full,
+    command = prepare_stan_data(
+      data = point_data_subset,
+      covariates = covariate_df_cwi,
+      icar_matrix = icar_matrix,
+      train_test_indices = NULL
+    )
   )
 
 )
