@@ -31,7 +31,10 @@ modelling_targets <- list(
 
   tar_stan_mcmc(
     name = model_full,
-    stan_files = "models/micar.stan",
+    stan_files = c(
+      "models/micar.stan",
+      "models/micar_pp.stan"
+    ),
     data = stan_data_full,
     chains = 4,
     parallel_chains = 4,

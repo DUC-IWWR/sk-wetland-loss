@@ -211,6 +211,22 @@ post_hoc_plotting_targets <- list(
       common.legend = TRUE,
       ncol = 2, nrow = 2
       )
+  ),
+
+  tar_target(
+    name = beta_drainage_ridgeline_plot,
+    command = bayesplot::mcmc_areas_ridges(
+      x = model_full_draws_micar,
+      regex_pars = "beta_drainage_raw"
+    )
+  ),
+
+  tar_target(
+    name = beta_area_ridgeline_plot,
+    command = bayesplot::mcmc_areas_ridges(
+      x = model_full_draws_micar,
+      regex_pars = "beta_area_raw"
+    )
   )
   
 
