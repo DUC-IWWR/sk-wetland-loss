@@ -61,12 +61,14 @@ parameters {
   sum_to_zero_vector[n_basins] u_cp;
   sum_to_zero_vector[n_basins] u_cwi_p;
   cholesky_factor_corr[n_datasets] L;
-  
-  vector[n_basins] beta_drainage_raw;
+
+  real mu_drainage;
   real <lower = 0> sigma_drainage;
-  
+  vector[n_basins] beta_drainage_raw;
+
+  real mu_area;
+  real <lower = 0> sigma_area;  
   vector[n_basins] beta_area_raw;
-  real <lower = 0> sigma_area;
   
 }
 
@@ -75,8 +77,8 @@ transformed parameters {
   vector[n_basins] beta_drainage;
   vector[n_basins] beta_area;
   
-  beta_drainage = beta_drainage_raw * sigma_drainage;
-  beta_area = beta_area_raw * sigma_area;
+  beta_drainage = mu_drainage + beta_drainage_raw * sigma_drainage;
+  beta_area = mu_area + beta_area_raw * sigma_area;
 
   Theta = diag_pre_multiply(alpha, L) * append_col(append_col(u_cwi, u_cp), u_cwi_p)';
 }
@@ -89,9 +91,11 @@ model {
     target += -0.5 * dot_self(u_cp[node1] - u_cp[node2]);
     target += -0.5 * dot_self(u_cwi_p[node1] - u_cwi_p[node2]);
     
+    target += normal_lpdf(mu_drainage | 0, 10);
     target += std_normal_lupdf(beta_drainage_raw);
     target += std_normal_lupdf(sigma_drainage);
     
+    target += normal_lpdf(mu_area | 0, 10);
     target += std_normal_lupdf(beta_area_raw);
     target += std_normal_lupdf(sigma_area);
     

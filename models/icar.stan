@@ -39,9 +39,11 @@ data {
 parameters {
     sum_to_zero_vector[n_basins] Theta;
     
+    real mu_drainage;
     vector[n_basins] beta_drainage_raw;
     real <lower = 0> sigma_drainage;
     
+    real mu_area;
     vector[n_basins] beta_area_raw;
     real <lower = 0> sigma_area;
 }
@@ -50,17 +52,19 @@ transformed parameters {
   vector[n_basins] beta_drainage;
   vector[n_basins] beta_area;
   
-  beta_drainage = beta_drainage_raw * sigma_drainage;
-  beta_area = beta_area_raw * sigma_area;
+  beta_drainage = mu_drainage + beta_drainage_raw * sigma_drainage;
+  beta_area = mu_area + beta_area_raw * sigma_area;
 }
 
 model {
     // ICAR sampling
     target += -0.5 * dot_self(Theta[node1] - Theta[node2]);
     
+    target += normal_lpdf(mu_drainage | 0, 10);
     target += std_normal_lupdf(beta_drainage_raw);
     target += std_normal_lupdf(sigma_drainage);
     
+    target += normal_lpdf(mu_area | 0, 10);
     target += std_normal_lupdf(beta_area_raw);
     target += std_normal_lupdf(sigma_area);
 

@@ -71,37 +71,57 @@ prediction_targets <- list(
       command = model_cwi_mcmc_icar$summary(variables = "score") |>
         dplyr::pull(mean) |> 
         inv_logit() |>
-        calculate_holdout_loglik(outcomes = stan_data_cwi$impact_cwi_te)
+        dbinom(
+          x = stan_data_cwi$impact_cwi_te,
+          size = 1,
+          prob = _,
+          log = TRUE
+        )
     ),
     tar_target(
       name = loglik_holdout_micar_cwi,
       command = model_cwi_mcmc_micar$summary(variables = "score") |>
         dplyr::pull(mean) |> 
         inv_logit() |>
-        calculate_holdout_loglik(outcomes = stan_data_cwi$impact_cwi_te)
+        dbinom(
+          x = stan_data_cwi$impact_cwi_te,
+          size = 1,
+          prob = _,
+          log = TRUE
+        )
     ),
     tar_target(
       name = loglik_holdout_icar_lidar,
       command = model_lidar_mcmc_icar$summary(variables = "score") |>
         dplyr::pull(mean) |> 
         inv_logit() |>
-        calculate_holdout_loglik(outcomes = stan_data_lidar$impact_cwi_te)
+        dbinom(
+          x = stan_data_lidar$impact_cwi_te,
+          size = 1,
+          prob = _,
+          log = TRUE
+        )
     ),
     tar_target(
       name = loglik_holdout_micar_lidar,
       command = model_lidar_mcmc_micar$summary(variables = "score") |>
         dplyr::pull(mean) |> 
         inv_logit() |>
-        calculate_holdout_loglik(outcomes = stan_data_lidar$impact_cwi_te)
+        dbinom(
+          x = stan_data_lidar$impact_cwi_te,
+          size = 1,
+          prob = _,
+          log = TRUE
+        )
     ),
 
     tar_target(
       name = holdout_likelihood,
       command = c(
-        loglik_holdout_icar_cwi,
-        loglik_holdout_micar_cwi,
-        loglik_holdout_icar_lidar,
-        loglik_holdout_micar_lidar
+        sum(loglik_holdout_icar_cwi, na.rm = TRUE),
+        sum(loglik_holdout_micar_cwi, na.rm = TRUE),
+        sum(loglik_holdout_icar_lidar, na.rm = TRUE),
+        sum(loglik_holdout_micar_lidar, na.rm = TRUE)
       ) |>
         setNames(c("ICAR CWI", "MICAR CWI",  "ICAR LIDAR", "MICAR LIDAR"))
     )
