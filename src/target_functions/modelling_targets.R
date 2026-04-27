@@ -8,7 +8,7 @@ modelling_targets <- list(
     data = stan_data_cwi,
     chains = 4,
     parallel_chains = 4,
-    threads_per_chain = 3,
+    threads_per_chain = 2,
     adapt_delta = 0.99,
     cpp_options = list(stan_threads = TRUE),
     output_dir = "output/stan_dump"
@@ -23,7 +23,7 @@ modelling_targets <- list(
     data = stan_data_lidar,
     chains = 4,
     parallel_chains = 4,
-    threads_per_chain = 3,
+    threads_per_chain = 2,
     adapt_delta = 0.99,
     cpp_options = list(stan_threads = TRUE),
     output_dir = "output/stan_dump"

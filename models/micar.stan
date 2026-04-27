@@ -143,7 +143,7 @@ model {
 
 }
 
-generated quantities {
-  vector[n_cwi_te] score;
-  score = Theta[1,basin_cwi_te]' + (beta_area[basin_cwi_te] .* area_cwi_te) + (beta_drainage[basin_cwi_te] .* dd_cwi_te);
-}
+// generated quantities {
+//   vector[n_cwi_te] score;
+//   score = Theta[1,basin_cwi_te]' + (beta_area[basin_cwi_te] .* area_cwi_te) + (beta_drainage[basin_cwi_te] .* dd_cwi_te);
+// }

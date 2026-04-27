@@ -131,25 +131,25 @@ post_hoc_plotting_targets <- list(
   #     geom_point()
   # ),
 
-  tar_target(
-    name = prf1_plot_icar_cwi,
-    command = plot_prf1(prf1_icar_cwi)
-  ),
+  # tar_target(
+  #   name = prf1_plot_icar_cwi,
+  #   command = plot_prf1(prf1_icar_cwi)
+  # ),
 
-  tar_target(
-    name = prf1_plot_micar_cwi,
-    command = plot_prf1(prf1_micar_cwi)
-  ),
+  # tar_target(
+  #   name = prf1_plot_micar_cwi,
+  #   command = plot_prf1(prf1_micar_cwi)
+  # ),
 
-  tar_target(
-    name = prf1_plot_icar_lidar,
-    command = plot_prf1(prf1_icar_lidar)
-  ),
+  # tar_target(
+  #   name = prf1_plot_icar_lidar,
+  #   command = plot_prf1(prf1_icar_lidar)
+  # ),
 
-  tar_target(
-    name = prf1_plot_micar_lidar,
-    command = plot_prf1(prf1_micar_lidar)
-  ),
+  # tar_target(
+  #   name = prf1_plot_micar_lidar,
+  #   command = plot_prf1(prf1_micar_lidar)
+  # ),
 
   tar_target(
     name = spatial_effects_plot,
