@@ -34,13 +34,14 @@ tar_source("src/plot-prf1.R")
 tar_source("src/generate-fitted-shapefile.R")
 tar_source("src/plot-spatial-effects.R")
 tar_source("src/generate-train-test-indices.R")
+tar_source("src/generate-fitted-impact.R")
 
 # Functions to generate grouped targets
 tar_source("src/target_functions/file_io_targets.R")
 tar_source("src/target_functions/data_wrangling_targets.R")
 tar_source("src/target_functions/exploratory_analysis_targets.R")
 tar_source("src/target_functions/modelling_targets.R")
-tar_source("src/target_functions/prediction_targets.R")
+tar_source("src/target_functions/model_assessment_targets.R")
 tar_source("src/target_functions/fitted_shapefile_targets.R")
 tar_source("src/target_functions/post_hoc_plotting_targets.R")
 
@@ -53,7 +54,7 @@ list(
   exploratory_analysis_targets,
  
   modelling_targets,
- # prediction_targets,
+  model_assessment_targets,
   
   fitted_shapefile_targets,
   

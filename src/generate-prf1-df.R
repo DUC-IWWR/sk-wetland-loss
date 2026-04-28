@@ -41,7 +41,7 @@ generate_prf1_df <- function(score_matrix, data, increment, thin = 1) {
     #' Should return a vector of the same length of the held out data
     pred_vector <- unlist(predictions_list[[as.character(df$threshold[i])]][df$draw[i],])
 
-    confusion_matrix <- generate_confusion_matrix(pred_vector, data$impact_cwi_te)
+    confusion_matrix <- generate_confusion_matrix(pred_vector, data$impact_cwi_tr)
 
     df$precision[i] <- calculate_precision(confusion_matrix)
 
