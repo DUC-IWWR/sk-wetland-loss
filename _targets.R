@@ -44,6 +44,7 @@ tar_source("src/target_functions/modelling_targets.R")
 tar_source("src/target_functions/model_assessment_targets.R")
 tar_source("src/target_functions/fitted_shapefile_targets.R")
 tar_source("src/target_functions/post_hoc_plotting_targets.R")
+tar_source("src/target_functions/projection_targets.R")
 
 list(
 
@@ -58,6 +59,7 @@ list(
   
   fitted_shapefile_targets,
   
-  post_hoc_plotting_targets
+  post_hoc_plotting_targets,
+  projection_targets
 
 )

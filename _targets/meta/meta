@@ -2,14 +2,10 @@ name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iterat
 hydro_basins_shapefile|stem|f952293644ff6de3|a5a9ba8a28d4ac7e|2c530c1562a7fbd1|936526418|data/raw/hydro_basins/hybas_na_lev12_v1c.shp|t16276.25s|s160813440b|160813440|file|local|vector|||0.016|package 'tibble' was built under R version 4.4.3|
 cwi_drainage_file|stem|14d046b027ae4830|71456218f30b37e8|2c530c1562a7fbd1|1080641842|data/raw/CWI_Drained_UnDrained.txt|t20419.8402304722s|s501940614b|501940614|file|local|vector|||0.016|package 'tibble' was built under R version 4.4.3|
 smith_creek_hybas_id|stem|9e8f38c901fb09a0|c030112fb486e7e7|2c530c1562a7fbd1|1355850679||t20570.9005324074s|s823b|823|rds|local|vector|||0.828||
-model_lidar_file_icar|stem|529c1d4a02a0a54a|3f8fe81b53382ccc|2c530c1562a7fbd1|-1951243670|models/icar.stan|t20570.8383681923s|s2341b|2341|file|local|vector|||0||
 ua_lidar_drainage_file|stem|90d8f9f619b2f334|f6ea7f9dfef6bc0d|2c530c1562a7fbd1|1840291059|data/raw/UA_Drainage2024/UA_Drainage2024.shp|t20292.6547569444s|s136513580b|136513580|file|local|vector|||0.516||
 cwi_points_file|stem|fdada7065b608a64|348ddaeed592adcc|2c530c1562a7fbd1|-974457108|data/raw/Points_CWI_Drained_UnDrained.txt|t20419.8404576757s|s963600b|963600|file|local|vector|||0||
 cwi_drainage_ditches_file|stem|7217bda1b4e46911|d9402a91c4955c7c|2c530c1562a7fbd1|182653777|data/raw/cwi_drainage/cwi_drainage.shp|t20556.6562024645s|s328864368b|328864368|file|local|vector|||0.563||
-model_cwi_file_micar|stem|aebf3fe49b678b14|a584d14895aa8e70|2c530c1562a7fbd1|-1080277972|models/micar.stan|t20570.8383921329s|s3985b|3985|file|local|vector|||0||
 dd_ua_2023_file|stem|3dd8cf39fbf6b48b|a266550b20e1634c|2c530c1562a7fbd1|-328256643|data/raw/UA_DD_2023.tif|t20474.009584041s|s112914672b|112914672|file|local|vector|||0||
-model_cwi_file_icar|stem|529c1d4a02a0a54a|3f8fe81b53382ccc|2c530c1562a7fbd1|-804724861|models/icar.stan|t20570.8383681923s|s2341b|2341|file|local|vector|||0||
-model_lidar_file_micar|stem|aebf3fe49b678b14|a584d14895aa8e70|2c530c1562a7fbd1|-833623788|models/micar.stan|t20570.8383921329s|s3985b|3985|file|local|vector|||0||
 cd_drainage_file|stem|55fea8fb46dc95b0|10332c41dc9d136a|2c530c1562a7fbd1|-318801056|data/raw/ImpactModels_Drained_UnDrained.txt|t20419.8404077985s|s5819149b|5819149|file|local|vector|||0.015|package 'tibble' was built under R version 4.4.3|
 hydro_basins|stem|8816dec7f01fa4b4|2e0a03475c3e6481|e7d6a1e2aa941475|1902658568||t20570.9002314815s|s221057024b|221057024|format_custom&read=ewogICAgaWYgKCJHUEtHIiA9PSAiRVNSSSBTaGFwZWZpbGUiKSB7CiAgICAgICAgdGVycmE6OnZlY3QocGFzdGUwKCIvdnNpemlwL3siLCBwYXRoLCAifSIpKQogICAgfQogICAgZWxzZSB7CiAgICAgICAgdGVycmE6OnZlY3QocGF0aCkKICAgIH0KfQ&write=ewogICAgZG8uY2FsbCh0ZXJyYTo6d3JpdGVWZWN0b3IsIGMobGlzdCh4ID0gb2JqZWN0LCBmaWxlbmFtZSA9IGlmZWxzZSgiR1BLRyIgPT0gCiAgICAgICAgIkVTUkkgU2hhcGVmaWxlIiwgeWVzID0gcGFzdGUwKHBhdGgsICIuc2h6IiksIG5vID0gcGF0aCksIAogICAgICAgIGZpbGV0eXBlID0gIkdQS0ciLCBvdmVyd3JpdGUgPSBUUlVFLCBvcHRpb25zID0gIkVOQ09ESU5HPVVURi04IiksIAogICAgICAgIGxpc3QoKSkpCiAgICBpZiAoIkdQS0ciID09ICJFU1JJIFNoYXBlZmlsZSIpIHsKICAgICAgICBmaWxlLnJlbmFtZShwYXN0ZTAocGF0aCwgIi5zaHoiKSwgcGF0aCkKICAgIH0KfQ&marshal=dGVycmE6OndyYXAob2JqZWN0KQ&unmarshal=dGVycmE6OnVud3JhcChvYmplY3Qp&convert=&copy=&repository=|local|list|||8.89||
 cwi_drainage|stem|13d9a4d951416543|3ba0f825869ea809|ef8e190801feb0ba|1756487132||t20570.9002083333s|s84282701b|84282701|rds|local|vector|||30.703||
@@ -64,26 +60,31 @@ lppd_icar_cwi|stem|e13eef1f12cd8511|ca6de1ec13e520fc|7ee8709a9dd78bb4|-6436107||
 lppd_micar_cwi|stem|90f15bfa21878ad3|5bc2d9b4e1b192f6|875bf3a0c29deba1|1406289842||t20571.8068671548s|s337789b|337789|rds|local|vector|||0||
 lppd_summary|stem|99bf8978230400ef|14d4575e26d03fa0|51bb87641b5960d6|-2146151652||t20571.806867922s|s137b|137|rds|local|vector|||0||
 prf1_icar_cwi|stem|ef9cb3a4854bf5c1|d5fb68d5c1c05a96|e93ca2bde06ed28b|970027110||t20571.8160275801s|s3592b|3592|rds|local|vector|||0.516||
-prf1_plot_icar_cwi|stem|dbce6ee2066cb1b7|42a45a0f4946935a|7eac58072928cfc7|-97254295||t20571.8160297495s|s183684b|183684|rds|local|vector|||0.032||
-calculate_f1|function|519583bc4f3339e2
-calculate_mcc|function|d922f383a5ada66f
-calculate_precision|function|ef488e573fb10bca
-calculate_recall|function|e2272badf421cc95
-generate_confusion_matrix|function|c2343c1e31652db0
-.Random.seed|object|93f617baed02cb88
-generate_train_test_indices|function|a1df0fe5af29245b
-inv_logit|function|496557eecdf2fe7f
-plot_prf1|function|dddba08247ca13d9
-mungeCARdata4stan|function|175bc7af67a484f8
-generate_fitted_shapefile|function|dee1095f73322ce4
-plot_spatial_effects|function|74f6832e38a5d1e2
-plot_drainage_on_map|function|1dacefef6c08da26
-prepare_stan_data|function|c203bf444e88ff90
-generate_prf1_df|function|b6f007127244ed8e
-generate_fitted_impact|function|e05994ee8dd80128
-generate_score_matrix|function|a1ad7f15ea95295f
-generate_icar_matrix|function|4588c763734aa584
 prf1_micar_cwi|stem|23b46328c68428d9|df6a883451feb8f7|d281de5c92e602f2|1719450083||t20571.8198459155s|s3608b|3608|rds|local|vector|||0.453||
 prf1_micar_lidar|stem|1796b44f07d5b027|820f4a21a83cac75|2b76f2aa328b0197|-1454909588||t20571.8198506655s|s3591b|3591|rds|local|vector|||0.297||
 prf1_icar_lidar|stem|2ee988604ffe958c|3bb3e8dcb5363d82|603162f158a3d7c7|-74492865||t20571.8198565253s|s3580b|3580|rds|local|vector|||0.391||
 prf1_plot|stem|8079cfc848f3f6c7|f8798bfb1fb53216|c82fc9d865fb6b60|-728427524||t20571.819871235s|s748199b|748199|rds|local|vector|||1|Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).|
+model_lidar_file_micar|stem|aebf3fe49b678b14|a584d14895aa8e70|2c530c1562a7fbd1|-833623788|models/micar.stan|t20571.841779932s|s3985b|3985|file|local|vector|||0||
+model_cwi_file_micar|stem|aebf3fe49b678b14|a584d14895aa8e70|2c530c1562a7fbd1|-1080277972|models/micar.stan|t20571.841779932s|s3985b|3985|file|local|vector|||0||
+model_cwi_file_icar|stem|529c1d4a02a0a54a|3f8fe81b53382ccc|2c530c1562a7fbd1|-804724861|models/icar.stan|t20571.8417798471s|s2341b|2341|file|local|vector|||0||
+chosen_threshold|stem|12b74096d3d8f14e|b11ad072d68afed1|2c530c1562a7fbd1|-518803680||t20571.87121981s|s51b|51|rds|local|vector|||0.859||
+model_lidar_file_icar|stem|529c1d4a02a0a54a|3f8fe81b53382ccc|2c530c1562a7fbd1|-1951243670|models/icar.stan|t20571.8417798471s|s2341b|2341|file|local|vector|||0||
+calculate_f1|function|519583bc4f3339e2|||||||||||||||
+calculate_mcc|function|d922f383a5ada66f|||||||||||||||
+calculate_precision|function|ef488e573fb10bca|||||||||||||||
+calculate_recall|function|e2272badf421cc95|||||||||||||||
+generate_confusion_matrix|function|c2343c1e31652db0|||||||||||||||
+.Random.seed|object|b25b21772a120733|||||||||||||||
+generate_train_test_indices|function|a1df0fe5af29245b|||||||||||||||
+inv_logit|function|496557eecdf2fe7f|||||||||||||||
+plot_prf1|function|dddba08247ca13d9|||||||||||||||
+mungeCARdata4stan|function|175bc7af67a484f8|||||||||||||||
+generate_fitted_shapefile|function|dee1095f73322ce4|||||||||||||||
+plot_spatial_effects|function|74f6832e38a5d1e2|||||||||||||||
+plot_drainage_on_map|function|1dacefef6c08da26|||||||||||||||
+prepare_stan_data|function|c203bf444e88ff90|||||||||||||||
+generate_prf1_df|function|b6f007127244ed8e|||||||||||||||
+generate_fitted_impact|function|e05994ee8dd80128|||||||||||||||
+generate_score_matrix|function|a1ad7f15ea95295f|||||||||||||||
+generate_icar_matrix|function|4588c763734aa584|||||||||||||||
+current_drainage|stem|a4c1aa179556a6d7|2eb7e6d8848a6aba|585501ce59d1a188|-145242520||t20571.8791632764s|s390037b|390037|rds|local|vector|||0.062||

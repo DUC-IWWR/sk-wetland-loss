@@ -153,5 +153,12 @@ model_assessment_targets <- list(
       data = stan_data_lidar,
       increment = 0.01
     )
+  ),
+
+  #' This target is based on results above. Eventually can look to make this dynamic
+
+  tar_target(
+    name = chosen_threshold,
+    command = 0.25
   )
 )
