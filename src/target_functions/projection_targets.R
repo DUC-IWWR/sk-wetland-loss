@@ -1,40 +1,46 @@
 projection_targets <- list(
   tar_target(
     name = current_drainage,
-    command = fitted_impact_micar_cwi |>
-      dplyr::mutate(
-        y_fitted = ifelse(y_fitted >= chosen_threshold, 1, 0),
-        y_q5 = ifelse(y_q5 >= chosen_threshold, 1, 0),
-        y_q95 = ifelse(y_q95 >= chosen_threshold, 1, 0)
-      ) |>
-        dplyr::bind_cols(
-            dplyr::bind_cols(
-              dplyr::select(
-                data.frame(point_data_subset),
-                Model
-              ),
-              dplyr::select(
-                covariate_df_cwi,
-                Area,
-                HYBAS_ID,
-                HYBAS_ID_Factor
-              )
-            ) |>
-              dplyr::filter(Model == "CWI")
-        ) %>%
-    c(
-      sum(
-        dplyr::filter(.,y_fitted == 1) |>
-          dplyr::select(Area)
-      ),
-      sum(
-        dplyr::filter(.,y_q5 == 1) |>
-          dplyr::select(Area)
-      ),
-      sum(
-        dplyr::filter(.,y_q95 == 1) |>
-          dplyr::select(Area)
-      )
+    command = calculate_drainage(
+      fitted_data = fitted_impact_micar_cwi,
+      thres = chosen_threshold,
+      raw_data = point_data_subset,
+      covariates = covariate_df_cwi
     )
-  ) 
+  ),
+
+  tar_target(
+    name = drainage_projection_high,
+    command = calculate_drainage(
+      fitted_data = fitted_impact_micar_cwi,
+      thres = chosen_threshold,
+      raw_data = point_data_subset,
+      covariates = covariate_df_cwi,
+      years = 20,
+      drainage_rate = 1.6/100,
+      stan_data = stan_data_cwi,
+      stan_fit = model_cwi_mcmc_micar
+    ) %>%
+      dplyr::mutate(Scenario = rep("High", nrow(.)))
+  ),
+
+  tar_target(
+    name = drainage_projection_low,
+    command = calculate_drainage(
+      fitted_data = fitted_impact_micar_cwi,
+      thres = chosen_threshold,
+      raw_data = point_data_subset,
+      covariates = covariate_df_cwi,
+      years = 20,
+      drainage_rate = 0.89/100,
+      stan_data = stan_data_cwi,
+      stan_fit = model_cwi_mcmc_micar
+    ) %>%
+      dplyr::mutate(Scenario = rep("Low", nrow(.)))
+  ),
+
+  tar_target(
+    name = drainage_scenarios,
+    command = rbind(drainage_projection_high, drainage_projection_low)
+  )
 )

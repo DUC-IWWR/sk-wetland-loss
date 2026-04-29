@@ -73,5 +73,29 @@ post_hoc_plotting_targets <- list(
       common.legend = TRUE,
       ncol = 2, nrow = 2
       )
+  ),
+
+  tar_target(
+    name = drainage_scenarios_plot,
+    command = drainage_scenarios |>
+      dplyr::group_by(Year, Scenario) |>
+      dplyr::summarise(
+        Drainage_mean = sum(Drainage_mean),
+        Drainage_q5 = sum(Drainage_q5),
+        Drainage_q95 = sum(Drainage_q95)
+      ) %>%
+      ggplot(
+      aes(
+        x = Year,
+        y = Drainage_mean/100,
+        group = Scenario,
+        colour = Scenario
+      )
+    ) +
+      geom_line(linewidth = 2) +
+     # geom_ribbon(aes(ymin = Drainage_q5/100, ymax = Drainage_q95/100), alpha = 0.1) +
+      ylab("Amount Drained (ha)") +
+      theme_set(theme_pubclean()) +
+      NULL
   )
 )

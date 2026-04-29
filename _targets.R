@@ -35,6 +35,7 @@ tar_source("src/generate-fitted-shapefile.R")
 tar_source("src/plot-spatial-effects.R")
 tar_source("src/generate-train-test-indices.R")
 tar_source("src/generate-fitted-impact.R")
+tar_source("src/calculate-drainage.R")
 
 # Functions to generate grouped targets
 tar_source("src/target_functions/file_io_targets.R")
