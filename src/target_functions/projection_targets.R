@@ -32,7 +32,7 @@ projection_targets <- list(
       raw_data = point_data_subset,
       covariates = covariate_df_cwi,
       years = 20,
-      drainage_rate = 0.89/100,
+      drainage_rate = 0.82/100,
       stan_data = stan_data_cwi,
       stan_fit = model_cwi_mcmc_micar
     ) %>%

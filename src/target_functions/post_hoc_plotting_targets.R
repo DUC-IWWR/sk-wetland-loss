@@ -93,8 +93,8 @@ post_hoc_plotting_targets <- list(
       )
     ) +
       geom_line(linewidth = 2) +
-     # geom_ribbon(aes(ymin = Drainage_q5/100, ymax = Drainage_q95/100), alpha = 0.1) +
-      ylab("Amount Drained (ha)") +
+      geom_ribbon(aes(ymin = Drainage_q5/100, ymax = Drainage_q95/100), alpha = 0.1) +
+      ylab("Amount of Wetland Drained (ha)") +
       theme_set(theme_pubclean()) +
       NULL
   )
