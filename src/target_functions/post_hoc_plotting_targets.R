@@ -97,5 +97,22 @@ post_hoc_plotting_targets <- list(
       ylab("Amount of Wetland Drained (ha)") +
       theme_set(theme_pubclean()) +
       NULL
+  ),
+
+  tar_target(
+    name = drainage_scenarios_prop_plot,
+    command = ggplot(drainage_scenarios_prop,
+      aes(
+        x = Year,
+        y = Proportion_Drained_Mean,
+        group = Scenario,
+        colour = Scenario
+      )
+    ) +
+      geom_line(linewidth = 2) +
+      geom_ribbon(aes(ymin = Proportion_Drained_q5, ymax = Proportion_Drained_q95), alpha = 0.1) +
+      ylab("Proportion of Wetlands Drained") +
+      theme_set(theme_pubclean()) +
+      NULL
   )
 )
