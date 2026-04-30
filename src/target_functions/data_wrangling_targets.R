@@ -205,6 +205,24 @@ data_wrangling_targets <- list(
       icar_matrix = icar_matrix,
       train_test_indices = NULL
     )
+  ),
+
+  tar_target(
+    name = wetland_area_cwi,
+    command = dplyr::bind_cols(
+      dplyr::select(
+        data.frame(point_data_subset),
+        Model
+      ),
+      dplyr::select(
+        covariate_df_cwi,
+        HYBAS_ID,
+        HYBAS_ID_Factor,
+        Area
+      )
+    ) |>
+      dplyr::filter(Model == "CWI") |>
+      dplyr::summarise(Area = sum(Area))
   )
 
 )

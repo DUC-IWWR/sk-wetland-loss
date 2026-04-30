@@ -80,22 +80,48 @@ post_hoc_plotting_targets <- list(
     command = drainage_scenarios |>
       dplyr::group_by(Year, Scenario) |>
       dplyr::summarise(
-        Drainage_mean = sum(Drainage_mean),
-        Drainage_q5 = sum(Drainage_q5),
-        Drainage_q95 = sum(Drainage_q95)
+        Drainage_mean = sum(Drainage_mean) / wetland_area_cwi$Area,
+        Drainage_q5 = sum(Drainage_q5) / wetland_area_cwi$Area,
+        Drainage_q95 = sum(Drainage_q95) / wetland_area_cwi$Area
       ) %>%
       ggplot(
       aes(
         x = Year,
-        y = Drainage_mean/100,
+        y = Drainage_mean,
         group = Scenario,
         colour = Scenario
       )
     ) +
       geom_line(linewidth = 2) +
-      geom_ribbon(aes(ymin = Drainage_q5/100, ymax = Drainage_q95/100), alpha = 0.1) +
-      ylab("Amount of Wetland Drained (ha)") +
+      geom_ribbon(aes(ymin = Drainage_q5, ymax = Drainage_q95), alpha = 0.1) +
+      ylab("Proportion Wetland Area Drained") +
       theme_set(theme_pubclean()) +
+      ylim(0,1) +
+      NULL
+  ),
+
+  tar_target(
+    name = drainage_scenarios_plot_hybas,
+    command = drainage_scenarios %>%
+      dplyr::filter(Scenario == "High") %>%
+      # dplyr::group_by(Year, Scenario) |>
+      # dplyr::summarise(
+      #   Drainage_mean = sum(Drainage_mean) / wetland_area_cwi$Area,
+      #   Drainage_q5 = sum(Drainage_q5) / wetland_area_cwi$Area,
+      #   Drainage_q95 = sum(Drainage_q95) / wetland_area_cwi$Area
+      # ) %>%
+      ggplot(
+      aes(
+        x = Year,
+        y = Drainage_mean,
+        group = HYBAS_ID_Factor
+      )
+    ) +
+      geom_line(linewidth = 1) +
+      #geom_ribbon(aes(ymin = Drainage_q5, ymax = Drainage_q95), alpha = 0.1) +
+      ylab("Proportion Wetland Area Drained") +
+      theme_set(theme_pubclean()) +
+      #ylim(0,1) +
       NULL
   ),
 

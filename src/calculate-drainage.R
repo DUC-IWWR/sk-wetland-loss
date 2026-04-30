@@ -4,13 +4,13 @@ calculate_drainage <- function(
   raw_data, 
   covariates, 
   by_basin = TRUE, 
-  calculate_proportion = FALSE,
+  calculate_proportion_wetlands = FALSE,
   years = 1, 
   drainage_rate = NULL, 
   stan_data = NULL,
   stan_fit = NULL) {
   
-  if (calculate_proportion) {
+  if (calculate_proportion_wetlands) {
     return(calculate_proportion_drained(
       fitted_data,
       thres,
