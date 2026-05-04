@@ -31,6 +31,15 @@ model_assessment_targets <- list(
       micar = TRUE
     )
   ),
+  tar_target(
+    name = fitted_impact_micar_cwi_cd,
+    command = generate_fitted_impact(
+      stan_fit = model_cwi_mcmc_micar,
+      data = stan_data_cwi,
+      micar = TRUE,
+      dataset = "cd"
+    )
+  ),
 
   tar_target(
     name = lppd_icar_cwi,

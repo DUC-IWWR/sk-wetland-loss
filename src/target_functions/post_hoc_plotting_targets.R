@@ -77,7 +77,7 @@ post_hoc_plotting_targets <- list(
 
   tar_target(
     name = drainage_scenarios_plot,
-    command = drainage_scenarios |>
+    command = drainage_scenarios_cwi |>
       dplyr::group_by(Year, Scenario) |>
       dplyr::summarise(
         Drainage_mean = sum(Drainage_mean) / wetland_area_cwi$Area,
@@ -101,8 +101,8 @@ post_hoc_plotting_targets <- list(
   ),
 
   tar_target(
-    name = drainage_scenarios_plot_hybas,
-    command = drainage_scenarios %>%
+    name = drainage_scenarios_plot_hybas_cwi,
+    command = drainage_scenarios_cwi %>%
       dplyr::filter(Scenario == "High") %>%
       # dplyr::group_by(Year, Scenario) |>
       # dplyr::summarise(
@@ -126,8 +126,8 @@ post_hoc_plotting_targets <- list(
   ),
 
   tar_target(
-    name = drainage_scenarios_prop_plot,
-    command = ggplot(drainage_scenarios_prop,
+    name = drainage_scenarios_prop_plot_cwi,
+    command = ggplot(drainage_scenarios_prop_cwi,
       aes(
         x = Year,
         y = Proportion_Drained_Mean,
@@ -140,5 +140,10 @@ post_hoc_plotting_targets <- list(
       ylab("Proportion of Wetlands Drained") +
       theme_set(theme_pubclean()) +
       NULL
+  ),
+
+  tar_target(
+    name = drainage_scenarios_sc_high_plot,
+    command = 
   )
 )

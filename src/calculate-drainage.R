@@ -3,6 +3,7 @@ calculate_drainage <- function(
   thres, 
   raw_data, 
   covariates, 
+  dataset = "CWI",
   by_basin = TRUE, 
   calculate_proportion_wetlands = FALSE,
   years = 1, 
@@ -16,6 +17,7 @@ calculate_drainage <- function(
       thres,
       raw_data,
       covariates,
+      dataset,
       by_basin,
       years,
       drainage_rate,
@@ -25,7 +27,7 @@ calculate_drainage <- function(
   }
   
   if (years == 1) {
-    combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates)
+    combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates, dataset)
     drainage_mean <- dplyr::filter(combined_data, y_fitted == 1) |>
       dplyr::group_by(HYBAS_ID_Factor) |>
       dplyr::summarise(Drainage_mean = sum(Area))
@@ -49,12 +51,19 @@ calculate_drainage <- function(
 
     for (y in 1:years) {
       if (y > 1) {
-        stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr * scale) + centre
-        stan_data$dd_cwi_tr <- stan_data$dd_cwi_tr * (1 + drainage_rate)
-        stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr - centre) / scale
-        fitted_data <- generate_fitted_impact(stan_fit, stan_data, micar = TRUE)
+        if (dataset == "CWI") {
+          stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr * scale) + centre
+          stan_data$dd_cwi_tr <- stan_data$dd_cwi_tr * (1 + drainage_rate)
+          stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr - centre) / scale
+        } else {
+          stan_data$dd_cd <- (stan_data$dd_cd * scale) + centre
+          stan_data$dd_cd <- stan_data$dd_cd * (1 + drainage_rate)
+          stan_data$dd_cd <- (stan_data$dd_cd - centre) / scale          
+        }
+
+        fitted_data <- generate_fitted_impact(stan_fit, stan_data, micar = TRUE, dataset = tolower(dataset))
       }
-      combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates)
+      combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates, dataset)
       drainage_mean <- dplyr::filter(combined_data, y_fitted == 1) |>
         dplyr::group_by(HYBAS_ID_Factor) |>
         dplyr::summarise(Drainage_mean = sum(Area))
@@ -85,6 +94,7 @@ calculate_proportion_drained <- function(
   thres, 
   raw_data, 
   covariates, 
+  dataset,
   by_basin = TRUE, 
   years = 1, 
   drainage_rate = NULL, 
@@ -92,7 +102,7 @@ calculate_proportion_drained <- function(
   stan_fit = NULL) {  
   
   if (years == 1) {
-    combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates)
+    combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates, dataset)
     if (by_basin) {
       drainage_mean <- dplyr::group_by(combined_data, HYBAS_ID_Factor) |>
         dplyr::summarise(Proportion_Drained_Mean = sum(y_fitted) / length(y_fitted))
@@ -123,12 +133,18 @@ calculate_proportion_drained <- function(
 
     for (y in 1:years) {
       if (y > 1) {
-        stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr * scale) + centre
-        stan_data$dd_cwi_tr <- stan_data$dd_cwi_tr * (1 + drainage_rate)
-        stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr - centre) / scale
-        fitted_data <- generate_fitted_impact(stan_fit, stan_data, micar = TRUE)
+        if (dataset == "CWI") {
+          stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr * scale) + centre
+          stan_data$dd_cwi_tr <- stan_data$dd_cwi_tr * (1 + drainage_rate)
+          stan_data$dd_cwi_tr <- (stan_data$dd_cwi_tr - centre) / scale
+        } else {
+          stan_data$dd_cd <- (stan_data$dd_cd * scale) + centre
+          stan_data$dd_cd <- stan_data$dd_cd * (1 + drainage_rate)
+          stan_data$dd_cd <- (stan_data$dd_cd - centre) / scale          
+        }
+        fitted_data <- generate_fitted_impact(stan_fit, stan_data, micar = TRUE, dataset = tolower(dataset))
       }
-      combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates)
+      combined_data <- combine_data_for_drainage(fitted_data, thres, raw_data, covariates, dataset)
       if (by_basin) {
         drainage_mean <- dplyr::group_by(combined_data, HYBAS_ID_Factor) |>
           dplyr::summarise(Proportion_Drained_Mean = sum(y_fitted) / length(y_fitted))
@@ -166,7 +182,7 @@ calculate_proportion_drained <- function(
   }  
 }
 
-combine_data_for_drainage <- function(fitted_data, thres, raw_data, covariates) {
+combine_data_for_drainage <- function(fitted_data, thres, raw_data, covariates, dataset) {
   return(fitted_data |>
       dplyr::mutate(
         y_fitted = ifelse(y_fitted >= thres, 1, 0),
@@ -186,6 +202,6 @@ combine_data_for_drainage <- function(fitted_data, thres, raw_data, covariates) 
                 Area
               )
             ) |>
-              dplyr::filter(Model == "CWI")
+              dplyr::filter(Model == dataset)
         ))
 }
