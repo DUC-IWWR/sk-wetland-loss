@@ -70,13 +70,8 @@ drainage_projection_high_low|stem|af3577913f311f2b|3b6bf07322b9fa8b|520115d5cc77
 drainage_scenarios_prop|stem|95432c014e29beda|cc84d4d75ae6e828|cc179173b9d1f32a|1900567420||t20573.8412683418s|s1174b|1174|rds|local|vector|||0||
 wetland_area_cwi|stem|ccfb6477fa2e5c08|054970eca78f7d1e|249d8f0388501ca7|-1462021345||t20573.8516030074s|s125b|125|rds|local|vector|||0.047||
 current_drainage_proportion|stem|de7db8b6cf31b706|4bbdd31a4c3eb690|07f0363728913cdb|-1718139003||t20573.8528686724s|s144b|144|rds|local|vector|||0.094||
-drainage_projection_low_prop|stem|af3577913f311f2b|3b6bf07322b9fa8b|1d652691b975b2a8|-1383300377||t20573.8530837234s|s738b|738|rds|local|vector|||18.172||
-drainage_projection_high|stem|41866136a880f902|02224ffe7a09921f|1d652691b975b2a8|1907306874||t20573.8532906296s|s8556b|8556|rds|local|vector|||17.562||
-drainage_projection_low|stem|dffa516b13663b25|84f302767e9ba1b3|1d652691b975b2a8|170969631||t20573.853481331s|s7517b|7517|rds|local|vector|||16.187||
-drainage_projection_high_prop|stem|64ba2faf1c0d5fde|cc6935d77d7a7653|1d652691b975b2a8|-46115058||t20573.8536719289s|s715b|715|rds|local|vector|||16.188||
 current_drainage|stem|76b2927402cee25d|3d008758e132fd76|07f0363728913cdb|-145242520||t20573.8536754589s|s790b|790|rds|local|vector|||0.078||
 drainage_scenarios_plot_hybas|stem|c688c95d55e4f21e|163a9872b471f90b|01060e2ff4f4c6d8|829033449||t20573.8622472043s|s272791b|272791|rds|local|vector|||0.047||
-drainage_scenarios_prop_plot|stem|8373da5c125323b5|7958e78b13a5509b|2c530c1562a7fbd1|2061900858||t20573.8412704252s||238533|rds|local|vector|||0.922||object 'drainage_scenarios_prop' not found
 fitted_impact_icar_lidar|stem|8324bc2124a7fa56|c5a047be1289208a|776a887a8409529e|915464361||t20577.8164343045s|s1046242b|1046242|rds|local|vector|||0.516||
 fitted_impact_micar_lidar|stem|bbc5e5d3171e5de8|2b9fd3e12b8ac2ab|1d665538a34ef8be|-1318937697||t20577.8164464431s|s1046168b|1046168|rds|local|vector|||0.906||
 fitted_impact_icar_cwi|stem|2ec1b51bb45f18d1|2b46c043763c3f1a|271a7b5ec7efcb46|-1242102566||t20577.8164552065s|s1039302b|1039302|rds|local|vector|||0.562||
@@ -97,16 +92,16 @@ drainage_scenarios_cd|stem|e858461c20b8a8d2|60c8b1b04d4cba2f|f12ee9da0c22aa16|-9
 drainage_scenarios_prop_cd|stem|f4868a8c1848f389|c68d0495666f7d56|98cee4f8f0808968|-1619003339||t20577.8247537356s|s940b|940|rds|local|vector|||0||
 drainage_scenarios_cwi|stem|0347fabd96be0089|eb2a479906d54206|558ab9667c75cc71|44332593||t20577.8247545351s|s13026b|13026|rds|local|vector|||0||
 drainage_scenarios_prop_cwi|stem|95432c014e29beda|cdcdb6ce9828a171|1d7df2f49ed2d8b2|433738397||t20577.8247553407s|s1174b|1174|rds|local|vector|||0||
-drainage_scenarios_plot|stem|2a95f2d4b78b811d|d4dc6f74dd4663ce|462831354ca49df9|56586435||t20577.8247602598s|s314897b|314897|rds|local|vector|||0.266||
 drainage_scenarios_plot_hybas_cwi|stem|ff866514059fd3a1|c0db00a0267d6b89|345600435d0afa33|-362534611||t20577.8247620648s|s272792b|272792|rds|local|vector|||0.016||
 drainage_scenarios_prop_plot_cwi|stem|72f571f656a339e2|fc1d729bc0ff8dae|e672ecaedcc4e61e|603572914||t20577.8247643823s|s238537b|238537|rds|local|vector|||0.046||
 drainage_projection_high_prop_cwi_basin|stem|61addef9539ec511|4a2a0a12510c928d|18953348123835bc|113834728||t20577.8841342712s|s7772b|7772|rds|local|vector|||17.672||
+current_drainage_proportion_cwi|stem|31a5a58e9f279db6|abde1cb25a71bfb6|3d94fdfaab399d38|-622355444||t20577.8886323643s|s796b|796|rds|local|vector|||0.125||
 calculate_f1|function|519583bc4f3339e2
 calculate_mcc|function|d922f383a5ada66f
 calculate_precision|function|ef488e573fb10bca
 calculate_recall|function|e2272badf421cc95
 generate_confusion_matrix|function|c2343c1e31652db0
-.Random.seed|object|f282d24cd1bb931b
+.Random.seed|object|589dc350bdacedaf
 combine_data_for_drainage|function|a8cca032baff9b38
 generate_train_test_indices|function|a1df0fe5af29245b
 inv_logit|function|496557eecdf2fe7f
@@ -122,4 +117,13 @@ generate_score_matrix|function|a1ad7f15ea95295f
 generate_icar_matrix|function|4588c763734aa584
 calculate_proportion_drained|function|5c0b51f19689d18f
 calculate_drainage|function|897c8fc9bcfa9d23
-current_drainage_proportion_cwi|stem|31a5a58e9f279db6|abde1cb25a71bfb6|3d94fdfaab399d38|-622355444||t20577.8886323643s|s796b|796|rds|local|vector|||0.125||
+drainage_projection_low_prop_basin|stem|9180e9e254d98899|9070c213b36b17b6|18953348123835bc|439493353||t20578.5913689586s|s7027b|7027|rds|local|vector|||17.203||
+drainage_projection_low_prop|stem|af3577913f311f2b|3b6bf07322b9fa8b|18953348123835bc|-1383300377||t20578.5915828038s|s738b|738|rds|local|vector|||18.141||
+drainage_projection_high_prop_basin|stem|61addef9539ec511|4a2a0a12510c928d|18953348123835bc|2138950925||t20578.5918209275s|s7772b|7772|rds|local|vector|||20.172||
+drainage_projection_high_prop|stem|64ba2faf1c0d5fde|cc6935d77d7a7653|18953348123835bc|-46115058||t20578.5920566531s|s715b|715|rds|local|vector|||19.985||
+drainage_projection_low|stem|dffa516b13663b25|84f302767e9ba1b3|18953348123835bc|170969631||t20578.592293908s|s7517b|7517|rds|local|vector|||20.187||
+drainage_projection_high|stem|41866136a880f902|02224ffe7a09921f|18953348123835bc|1907306874||t20578.5925355652s|s8556b|8556|rds|local|vector|||20.485||
+drainage_scenarios_prop_basin|stem|8239111209255508|4f4854b2d8d86a96|ecb86024cb81ce68|-1943072887||t20578.592536371s|s11539b|11539|rds|local|vector|||0||
+drainage_scenarios_prop_plot|stem|8373da5c125323b5|7958e78b13a5509b|e3bf8f2a4ca541d6|2061900858||t20578.5925383595s|s238533b|238533|rds|local|vector|||0.031||
+drainage_scenarios_plot|stem|7c0618d91b95429d|1a8b962385ba6e5f|2e47bd45a54a042f|56586435||t20578.5925420427s|s314891b|314891|rds|local|vector|||0.11||
+drainage_scenarios_plot_basin|stem|c688c95d55e4f21e|163a9872b471f90b|01060e2ff4f4c6d8|-1033289572||t20578.5925438492s|s272791b|272791|rds|local|vector|||0.031||
