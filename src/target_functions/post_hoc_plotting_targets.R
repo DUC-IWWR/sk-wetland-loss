@@ -73,5 +73,49 @@ post_hoc_plotting_targets <- list(
       common.legend = TRUE,
       ncol = 2, nrow = 2
       )
+  ),
+
+  tar_target(
+    name = drainage_scenarios_plot,
+    command = 
+      ggarrange(
+        ggplot(
+          data = dplyr::filter(drainage_scenarios, Scenario == "High"),
+          aes(x = Year, y = Drainage_mean_prop)
+        ) +
+          geom_line(aes(group = HYBAS_ID_Factor), alpha = 0.3) +
+          geom_line(
+            data = drainage_scenarios |>
+              dplyr::filter(Scenario == "High") |>
+              dplyr::group_by(Year) |>
+              dplyr::summarise(Drainage_mean_prop = sum(Drainage_mean) / sum(wetland_area_cwi$Area)) |>
+              dplyr::ungroup(),
+            color = "blue", linewidth = 2
+          ) + 
+          geom_hline(yintercept = 0.4, color = "red") + 
+          ylab("Proportion of Wetland Area Drained") +
+          #geom_hline(yintercept = 0.6, color = "red") +
+          ylim(0,1) +
+          NULL
+        ,
+        ggplot(
+          data = dplyr::filter(drainage_scenarios, Scenario == "Low"),
+          aes(x = Year, y = Drainage_mean_prop)
+        ) +
+          geom_line(aes(group = HYBAS_ID_Factor), alpha = 0.3) +
+          geom_line(
+            data = drainage_scenarios |>
+              dplyr::filter(Scenario == "Low") |>
+              dplyr::group_by(Year) |>
+              dplyr::summarise(Drainage_mean_prop = sum(Drainage_mean) / sum(wetland_area_cwi$Area)) |>
+              dplyr::ungroup(),
+            color = "blue", linewidth = 2
+          ) + 
+          geom_hline(yintercept = 0.4, color = "red") + 
+          ylab("Proportion of Wetland Area Drained") +
+          #geom_hline(yintercept = 0.6, color = "red") +
+          ylim(0,1) +
+          NULL
+      )
   )
 )
