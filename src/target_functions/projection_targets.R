@@ -8,8 +8,8 @@ projection_targets <- list(
       raw_data = point_data_subset,
       covariates = covariate_df_cwi,
       wetland_area = wetland_area_cwi,
-      years = 50,
-      drainage_rate = 1.6/100,
+      years = 20,
+      drainage_rate = 7.2/100,
       stan_data = stan_data_cwi,
       stan_fit = model_cwi_mcmc_micar
     ) %>%
@@ -24,8 +24,8 @@ projection_targets <- list(
       raw_data = point_data_subset,
       covariates = covariate_df_cwi,
       wetland_area = wetland_area_cwi,
-      years = 50,
-      drainage_rate = 0.82/100,
+      years = 20,
+      drainage_rate = 5/100,
       stan_data = stan_data_cwi,
       stan_fit = model_cwi_mcmc_micar
     ) %>%

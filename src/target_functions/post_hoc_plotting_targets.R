@@ -117,5 +117,29 @@ post_hoc_plotting_targets <- list(
           ylim(0,1) +
           NULL
       )
+  ),
+
+  tar_target(
+    name = drainage_scenarios_spatial_plot,
+    command = 
+      ggarrange(
+        ggplot() +
+          geom_spatvector(
+            data = drainage_scenarios |>
+              dplyr::filter(Scenario == "High" & Year == 1) |>
+              tidyterra::left_join(x = smith_creek, y = _, by = "HYBAS_ID_Factor"),
+            aes(fill = Drainage_mean_prop)
+          ) +
+          NULL
+        ,
+        ggplot() +
+          geom_spatvector(
+            data = drainage_scenarios |>
+              dplyr::filter(Scenario == "High" & Year == 50) |>
+              tidyterra::left_join(x = smith_creek, y = _, by = "HYBAS_ID_Factor"),
+            aes(fill = Drainage_mean_prop)
+          ) +
+          NULL
+      )
   )
 )

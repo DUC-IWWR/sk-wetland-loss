@@ -74,7 +74,7 @@ calculate_mcc|function|d922f383a5ada66f|||||||||||||||
 calculate_precision|function|ef488e573fb10bca|||||||||||||||
 calculate_recall|function|e2272badf421cc95|||||||||||||||
 generate_confusion_matrix|function|c2343c1e31652db0|||||||||||||||
-.Random.seed|object|f47413ca034f7c23|||||||||||||||
+.Random.seed|object|0717b370bbb3343e|||||||||||||||
 combine_data_for_drainage|function|a8cca032baff9b38|||||||||||||||
 generate_train_test_indices|function|a1df0fe5af29245b|||||||||||||||
 inv_logit|function|496557eecdf2fe7f|||||||||||||||
@@ -89,7 +89,8 @@ generate_fitted_impact|function|866350ced2cf931a|||||||||||||||
 generate_score_matrix|function|a1ad7f15ea95295f|||||||||||||||
 generate_icar_matrix|function|4588c763734aa584|||||||||||||||
 calculate_drainage|function|1cb0674bf52e6685|||||||||||||||
-drainage_projection_high|stem|e7c7aa302627eee3|6a4cae5a66cb7021|9782b8adf0bb4390|1907306874||t20578.671626541s|s41844b|41844|rds|local|vector|||49.422||
-drainage_projection_low|stem|44c84022126f856a|dfc4dbe0c4e5986b|9782b8adf0bb4390|170969631||t20578.6721327374s|s35854b|35854|rds|local|vector|||43.438||
-drainage_scenarios|stem|d890b5d5d70180dd|18a3d21b4e42ba9b|39ae7f17733e6b24|-1450466224||t20578.672133729s|s63588b|63588|rds|local|vector|||0||
-drainage_scenarios_plot|stem|104ceea518ce95d5|ab58f282dfbde669|4b56e7740349db46|56586435||t20578.6721417571s|s1295787b|1295787|rds|local|vector|||0.422||
+drainage_projection_high|stem|9d7f0704a86f6f62|3e332b1399b76b58|9782b8adf0bb4390|1907306874||t20578.8992252732s|s19986b|19986|rds|local|vector|||16.797||
+drainage_projection_low|stem|7b286198039b3e96|9f5145a24670ccf9|9782b8adf0bb4390|170969631||t20578.8994307911s|s19636b|19636|rds|local|vector|||17.437||
+drainage_scenarios|stem|2bc024e37ba4298e|18a3d21b4e42ba9b|c6e12e3dd8961b62|-1450466224||t20578.8994317215s|s34826b|34826|rds|local|vector|||0||
+drainage_scenarios_plot|stem|c00f2bdb0a1f6f2e|ab58f282dfbde669|0ebd5c6d7d02ad44|56586435||t20578.8994378144s|s899586b|899586|rds|local|vector|||0.312||
+drainage_scenarios_spatial_plot|stem|9e206c8b30ceb012|f50edf612ae891e7|ed32a5b01bf928df|-841355202||t20578.8994558693s|s2188834b|2188834|rds|local|vector|||0.75||
