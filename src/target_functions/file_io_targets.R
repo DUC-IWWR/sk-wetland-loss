@@ -42,16 +42,6 @@ file_io_targets <- list(
   ),
   
   tar_target(
-    name = dd_ua_2023_file,
-    command = "data/raw/UA_DD_2023.tif",
-    format = "file"
-  ),
-  tar_terra_rast(
-    name = dd_ua_2023,
-    command = terra::rast(dd_ua_2023_file)
-  ),
-
-  tar_target(
     name = cwi_drainage_ditches_file,
     command = "data/raw/cwi_drainage/cwi_drainage.shp",
     format = "file"

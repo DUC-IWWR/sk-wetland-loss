@@ -222,6 +222,7 @@ data_wrangling_targets <- list(
       )
     ) |>
       dplyr::filter(Model == "CWI") |>
+      dplyr::group_by(HYBAS_ID_Factor) |>
       dplyr::summarise(Area = sum(Area))
   )
 
