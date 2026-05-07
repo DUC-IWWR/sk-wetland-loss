@@ -2,7 +2,7 @@ projection_targets <- list(
 
   tar_target(
     name = projection_years,
-    command = 100
+    command = 50
   ),
 
   tar_target(

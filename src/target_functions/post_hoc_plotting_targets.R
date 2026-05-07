@@ -108,7 +108,7 @@ post_hoc_plotting_targets <- list(
           geom_hline(yintercept = 0.4, color = "red") + 
           geom_hline(yintercept = 0.6, color = "red") + 
           ylab("Proportion of Wetland Area Retained") +
-          ggtitle(paste0("High Scenario -- ", drainage_rate_high * 100,"% DD Increase/Year")) +
+          ggtitle(paste0("High Scenario -- ", round(drainage_rate_high * 100, 2),"% DD Increase/Year")) +
           ylim(0,1) +
           NULL
         ,
@@ -141,7 +141,7 @@ post_hoc_plotting_targets <- list(
           geom_hline(yintercept = 0.4, color = "red") + 
           geom_hline(yintercept = 0.6, color = "red") + 
           ylab("Proportion of Wetland Area Retained") +
-          ggtitle(paste0("Low Scenario -- ", drainage_rate_low * 100,"% DD Increase/Year")) +
+          ggtitle(paste0("Low Scenario -- ", round(drainage_rate_low * 100,2),"% DD Increase/Year")) +
           ylim(0,1) +
           NULL
       )
