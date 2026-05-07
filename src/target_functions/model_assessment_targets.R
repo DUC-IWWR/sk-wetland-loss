@@ -42,6 +42,16 @@ model_assessment_targets <- list(
   ),
 
   tar_target(
+    name = fitted_impact_micar_lidar_cd,
+    command = generate_fitted_impact(
+      stan_fit = model_lidar_mcmc_micar,
+      data = stan_data_lidar,
+      micar = TRUE,
+      dataset = "cd"
+    )
+  ),
+
+  tar_target(
     name = lppd_icar_cwi,
     command = 
       dbinom(
@@ -90,6 +100,29 @@ model_assessment_targets <- list(
       sum(lppd_micar_lidar, na.rm = TRUE)
     ) |>
       setNames(c("ICAR CWI", "MICAR CWI",  "ICAR LIDAR", "MICAR LIDAR"))
+  ),
+
+  tar_target(
+    name = lppd_micar_lidar_cd,
+    command = 
+      dbinom(
+        x = stan_data_lidar$impact_cd,
+        size = 1,
+        prob = fitted_impact_micar_lidar_cd$y_fitted,
+        log = FALSE        
+      )
+  ),
+
+
+  tar_target(
+    name = lppd_micar_cwi_cd,
+    command = 
+      dbinom(
+        x = stan_data_cwi$impact_cd,
+        size = 1,
+        prob = fitted_impact_micar_cwi_cd$y_fitted,
+        log = FALSE        
+      )
   ),
 
   # # Targets for generating score matrix
