@@ -169,5 +169,16 @@ post_hoc_plotting_targets <- list(
           ) +
           NULL
       )
+  ),
+
+  tar_target(
+    name = class_separation_plot,
+    command = 
+      ggarrange(
+        ggplot(data = fitted_impact_micar_cwi, aes(y = y_fitted, x = '', color = factor(stan_data_cwi$impact_cwi_tr, levels = c("1", "0")))) +
+          geom_jitter() +
+          scale_color_manual(values = c("0" = "#1A242F",
+                                          "1"="red"))
+      )
   )
 )

@@ -79,12 +79,13 @@ drainage_scenarios_plot|stem|dfcad1945ad8903b|65fb2582fbde608c|07de2f19531eb684|
 drainage_scenarios_spatial_plot|stem|260e23c51956d10f|f50edf612ae891e7|d5fd4e9f8745809e|-841355202||t20580.8177157793s|s2217132b|2217132|rds|local|vector|||2.656||
 fitted_impact_micar_lidar_cd|stem|c4e3e9c6b639137c|fef0979f4851057c|4525e066bcbf4b2b|1276962362||t20580.8259248928s|s428450b|428450|rds|local|vector|||0.843||
 lppd_micar_lidar_cd|stem|d724460b5e051d11|d4759c8aa2383917|eed7d0518c0ad194|2099043040||t20580.8259261196s|s142442b|142442|rds|local|vector|||0||
+lppd_micar_cwi_cd|stem|161584638a780aaa|f1ab99419948c3cd|24642ac0cba95f98|-193583107||t20580.8264504528s|s142380b|142380|rds|local|vector|||0||
 calculate_f1|function|519583bc4f3339e2
 calculate_mcc|function|d922f383a5ada66f
 calculate_precision|function|ef488e573fb10bca
 calculate_recall|function|e2272badf421cc95
 generate_confusion_matrix|function|c2343c1e31652db0
-.Random.seed|object|cf25cefe8e16150d
+.Random.seed|object|23580807c771b675
 combine_data_for_drainage|function|a8cca032baff9b38
 calculate_percent_change|function|54296c4bf0fa7063
 generate_train_test_indices|function|a1df0fe5af29245b
@@ -100,4 +101,4 @@ generate_fitted_impact|function|866350ced2cf931a
 generate_score_matrix|function|a1ad7f15ea95295f
 generate_icar_matrix|function|4588c763734aa584
 calculate_drainage|function|1cb0674bf52e6685
-lppd_micar_cwi_cd|stem|161584638a780aaa|f1ab99419948c3cd|24642ac0cba95f98|-193583107||t20580.8264504528s|s142380b|142380|rds|local|vector|||0||
+class_separation_plot|stem|5c79db33cb3700a6|4ca7f716fdaa3097|e9e820c2952ea842|-1561974132||t20581.8684298188s|s14905310b|14905310|rds|local|vector|||0.422||
