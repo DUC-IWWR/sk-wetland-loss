@@ -68,7 +68,6 @@ prf1_micar_cwi|stem|bd6bd5deb2f52b93|df6a883451feb8f7|bd3754c18c560aa4|171945008
 drainage_projection_low|stem|4c8636fedd29c128|73e0f385b955891a|5ace5535a69308fd|170969631||t20580.8171638548s|s38401b|38401|rds|local|vector|||42.969||
 drainage_projection_high|stem|2155e68fafcfb190|16cfd0e1f997dcc7|fa88f3f73f6799e2|1907306874||t20580.8176638593s|s39583b|39583|rds|local|vector|||42.922||
 lppd_micar_cwi|stem|3051590a8171c58d|5bc2d9b4e1b192f6|e9e820c2952ea842|1406289842||t20580.7990509259s|s337281b|337281|rds|local|vector|||0||
-spatial_effects_sd_plot|stem|e7a9969b7b218a1b|6fa8951ec62a7e28|b9fa442c961577ea|2083831167||t20580.7991203704s|s2854468b|2854468|rds|local|vector|||3.84||
 spatial_effects_plot|stem|7000e6064969822f|84dd64c212cdeb80|b9fa442c961577ea|-674566726||t20580.7991435185s|s2854131b|2854131|rds|local|vector|||1.17||
 prf1_icar_cwi|stem|34b665e15b9b6e35|d5fb68d5c1c05a96|7e0091a6f9146eba|970027110||t20580.7991666667s|s3599b|3599|rds|local|vector|||0.47||
 lppd_icar_cwi|stem|b47f630b24593e6c|ca6de1ec13e520fc|5dac9fa43a2839df|-6436107||t20580.7991666667s|s337517b|337517|rds|local|vector|||0||
@@ -76,16 +75,28 @@ drainage_scenarios|stem|fff8ac3fe78e551f|18a3d21b4e42ba9b|8c4f828b87f81913|-1450
 prf1_plot|stem|57e734f812e621d9|f8798bfb1fb53216|b03474bfdffd29fb|-728427524||t20580.7991666667s|s748891b|748891|rds|local|vector|||1.09|Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).. Removed 1 row containing missing values or values outside the scale range (`geom_line()`).|
 lppd_summary|stem|23a5c787a6296afe|14d4575e26d03fa0|96e2cb32fb46d565|-2146151652||t20580.7991666667s|s138b|138|rds|local|vector|||0||
 drainage_scenarios_plot|stem|dfcad1945ad8903b|65fb2582fbde608c|07de2f19531eb684|56586435||t20580.8176754318s|s1338046b|1338046|rds|local|vector|||0.704||
-drainage_scenarios_spatial_plot|stem|260e23c51956d10f|f50edf612ae891e7|d5fd4e9f8745809e|-841355202||t20580.8177157793s|s2217132b|2217132|rds|local|vector|||2.656||
 fitted_impact_micar_lidar_cd|stem|c4e3e9c6b639137c|fef0979f4851057c|4525e066bcbf4b2b|1276962362||t20580.8259248928s|s428450b|428450|rds|local|vector|||0.843||
 lppd_micar_lidar_cd|stem|d724460b5e051d11|d4759c8aa2383917|eed7d0518c0ad194|2099043040||t20580.8259261196s|s142442b|142442|rds|local|vector|||0||
 lppd_micar_cwi_cd|stem|161584638a780aaa|f1ab99419948c3cd|24642ac0cba95f98|-193583107||t20580.8264504528s|s142380b|142380|rds|local|vector|||0||
+class_separation_plot|stem|b7eb859e5fb88481|830169c319c64de6|e9e820c2952ea842|-1561974132||t20654.6273614882s|s4139043b|4139043|rds|local|vector|||0.032||
+cwi_vs_lidar_drainage_plot|stem|af4faba93776f607|76b19d8a3e8a6eeb|85ca9f1b6335cb14|1677626951||t20655.6177335947s|s5129274b|5129274|rds|local|vector|||0.016||
+class_separation_plot_lidar|stem|5b531ab9ae2656d2|fdc955a5dff64058|1c8ee6aa303823b6|865208939||t20655.663318492s|s4266776b|4266776|rds|local|vector|||0.078||
+class_separation_plot_cwi|stem|b7eb859e5fb88481|830169c319c64de6|e9e820c2952ea842|2064396041||t20655.6633241766s|s4139043b|4139043|rds|local|vector|||0.015||
+drainage_scenarios_spatial_plot|stem|260e23c51956d10f|f50edf612ae891e7|8ddd740981565be1|-841355202||t20580.8177157793s||2217132|rds|local|vector|||0.141||object 'drainage_scenarios' not found
+drainage_projection_low_lidar|stem|7b071c9a7026fafa|2f09d833ddc63e8b|b4e715317905ca0d|-921294123||t20655.6761551394s|s40979b|40979|rds|local|vector|||49.844||
+drainage_projection_high_lidar|stem|2518b85d08f5e73b|acd597cb53f785c7|f2a3b7171a261a61|1571294348||t20655.6767278859s|s41562b|41562|rds|local|vector|||49.079||
+drainage_projection_low_cwi|stem|4c8636fedd29c128|73e0f385b955891a|5ace5535a69308fd|-1023941430||t20655.6773062795s|s38401b|38401|rds|local|vector|||49.484||
+drainage_projection_high_cwi|stem|2155e68fafcfb190|16cfd0e1f997dcc7|fa88f3f73f6799e2|-1129922127||t20655.6778732371s|s39583b|39583|rds|local|vector|||48.672||
+drainage_scenarios_lidar|stem|c68aa7fd9d10cdab|89b3c31a6e16db1c|41847e8bbf2a6bcc|71624966||t20655.6778735984s|s66532b|66532|rds|local|vector|||0||
+drainage_scenarios_cwi|stem|fff8ac3fe78e551f|eb2a479906d54206|d5d50cf7ea60ff8f|44332593||t20655.6778739541s|s59104b|59104|rds|local|vector|||0||
+drainage_scenarios_plot_lidar|stem|b4744ffb03c71de2|3ba48428c0965555|1f65ba49c3175ac9|-1499267753||t20655.6778835787s|s1387267b|1387267|rds|local|vector|||0.562||
+drainage_scenarios_plot_cwi|stem|bca94a945ca00564|2b326227f7669473|9b42a29f33f74a46|-1630536824||t20655.6778895819s|s1338352b|1338352|rds|local|vector|||0.265||
 calculate_f1|function|519583bc4f3339e2
 calculate_mcc|function|d922f383a5ada66f
 calculate_precision|function|ef488e573fb10bca
 calculate_recall|function|e2272badf421cc95
 generate_confusion_matrix|function|c2343c1e31652db0
-.Random.seed|object|23580807c771b675
+.Random.seed|object|0ce3419ae44d44f7
 combine_data_for_drainage|function|a8cca032baff9b38
 calculate_percent_change|function|54296c4bf0fa7063
 generate_train_test_indices|function|a1df0fe5af29245b
@@ -101,4 +112,4 @@ generate_fitted_impact|function|866350ced2cf931a
 generate_score_matrix|function|a1ad7f15ea95295f
 generate_icar_matrix|function|4588c763734aa584
 calculate_drainage|function|1cb0674bf52e6685
-class_separation_plot|stem|5c79db33cb3700a6|4ca7f716fdaa3097|e9e820c2952ea842|-1561974132||t20581.8684298188s|s14905310b|14905310|rds|local|vector|||0.422||
+spatial_effects_sd_plot|stem|c7d95e2df4004ee1|93d47540f8d54fd5|08ec6c3e03b268cf|2083831167||t20657.7364363556s|s2111841b|2111841|rds|local|vector|||14.64||
