@@ -265,19 +265,6 @@ post_hoc_plotting_targets <- list(
         scale_color_manual(values = c("0" = "#1A242F",
                                         "1"="red")) +
         theme(legend.position = "top")
-  ),
-
-  tar_target(
-    name = cwi_vs_lidar_drainage_plot,
-    command = 
-      data.frame(
-        cwi = covariate_df_cwi$cwi_length_km,
-        lidar = covariate_df_lidar$ua_length_km,
-        basin = covariate_df_cwi$HYBAS_ID_Factor
-      ) |>
-        ggplot(aes(x = cwi, y = lidar)) +
-        geom_point() +
-        facet_wrap(~basin)
   )
 
 
