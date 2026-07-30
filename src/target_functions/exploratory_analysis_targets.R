@@ -63,7 +63,42 @@ exploratory_analysis_targets <- list(
                   dplyr::summarise(intensity = sum(LengthKM)),
           by = "HYBAS_ID_Factor"
         ) |>
-          ggplot(aes(x = intensity, y = omitted)) + geom_point()
+          ggplot(aes(x = intensity, y = omitted)) + geom_point() + geom_smooth(method = 'lm')
+  ),
+
+  tar_target(
+    name = omitted_vs_drainage_plot,
+    command = terra::extract(
+      smith_creek,
+      ua_dd |>
+      terra::project(smith_creek) |>
+      terra::crop(smith_creek) |>
+      tidyterra::filter(DClassPres %in% c("EnhancedAgricultural", "EnhancedSkeleton", "EnhancedChannelized")) |>
+      tidyterra::select(LengthKM)
+    ) |>
+      dplyr::select(HYBAS_ID_Factor) |>
+      dplyr::bind_cols(
+        ua_dd |>
+        terra::project(smith_creek) |>
+        terra::crop(smith_creek) |>
+        tidyterra::filter(DClassPres %in% c("EnhancedAgricultural", "EnhancedSkeleton", "EnhancedChannelized")) |>
+        tidyterra::select(LengthKM) |>
+        data.frame()
+      ) |>
+        dplyr::group_by(HYBAS_ID_Factor) |>
+        dplyr::summarise(omitted = sum(LengthKM)) |>
+        dplyr::left_join(
+          data.frame(
+            tidyterra::left_join(point_data_subset, data.frame(smith_creek), by = "HYBAS_ID")
+          ) |>
+            dplyr::filter(Impact == "Drained") |>
+            dplyr::group_by(HYBAS_ID_Factor) |>
+            dplyr::summarise(drained_area = sum(Area)) |>
+            dplyr::ungroup(),
+          by = "HYBAS_ID_Factor"
+        ) |>
+          ggplot(aes(x = drained_area, y = omitted)) + geom_point() + geom_smooth(method = 'lm')
+
   )
   
 )
