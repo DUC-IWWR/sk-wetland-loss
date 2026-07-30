@@ -67,6 +67,55 @@ exploratory_analysis_targets <- list(
   ),
 
   tar_target(
+    name = prop_omitted_vs_intensity_plot,
+    command = terra::extract(
+      smith_creek,
+      ua_dd |>
+      terra::project(smith_creek) |>
+      terra::crop(smith_creek) |>
+      tidyterra::filter(DClassPres %in% c("EnhancedAgricultural", "EnhancedSkeleton", "EnhancedChannelized")) |>
+      tidyterra::select(LengthKM)
+    ) |>
+      dplyr::select(HYBAS_ID_Factor) |>
+      dplyr::bind_cols(
+        ua_dd |>
+        terra::project(smith_creek) |>
+        terra::crop(smith_creek) |>
+        tidyterra::filter(DClassPres %in% c("EnhancedAgricultural", "EnhancedSkeleton", "EnhancedChannelized")) |>
+        tidyterra::select(LengthKM) |>
+        data.frame()
+      ) |>
+        dplyr::group_by(HYBAS_ID_Factor) |>
+        dplyr::summarise(omitted = sum(LengthKM)) |>
+        dplyr::left_join(
+          y = terra::extract(
+                smith_creek,
+                ua_dd |>
+                terra::project(smith_creek) |>
+                terra::crop(smith_creek) |>
+                tidyterra::filter(DClassPres %in% c("Agricultural", "Skeleton", "Channelized")) |>
+                tidyterra::select(LengthKM)
+              ) |>
+                dplyr::select(HYBAS_ID_Factor) |>
+                dplyr::bind_cols(
+                  ua_dd |>
+                  terra::project(smith_creek) |>
+                  terra::crop(smith_creek) |>
+                  tidyterra::filter(DClassPres %in% c("Agricultural", "Skeleton", "Channelized")) |>
+                  tidyterra::select(LengthKM) |>
+                  data.frame()
+                ) |>
+                  dplyr::group_by(HYBAS_ID_Factor) |>
+                  dplyr::summarise(intensity = sum(LengthKM)),
+          by = "HYBAS_ID_Factor"
+        ) |>
+          ggplot(aes(x = intensity, y = omitted / (omitted + intensity))) + 
+            geom_point() + 
+            geom_smooth(method = 'lm') +
+            ylim(0,1)
+  ),
+
+  tar_target(
     name = omitted_vs_drainage_plot,
     command = terra::extract(
       smith_creek,
