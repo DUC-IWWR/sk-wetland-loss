@@ -86,14 +86,15 @@ drainage_scenarios_cwi|stem|fff8ac3fe78e551f|eb2a479906d54206|d5d50cf7ea60ff8f|4
 drainage_scenarios_plot_lidar|stem|b4744ffb03c71de2|3ba48428c0965555|1f65ba49c3175ac9|-1499267753||t20655.6778835787s|s1387267b|1387267|rds|local|vector|||0.562||
 drainage_scenarios_plot_cwi|stem|bca94a945ca00564|2b326227f7669473|9b42a29f33f74a46|-1630536824||t20655.6778895819s|s1338352b|1338352|rds|local|vector|||0.265||
 spatial_effects_sd_plot|stem|c7d95e2df4004ee1|93d47540f8d54fd5|08ec6c3e03b268cf|2083831167||t20657.7364363556s|s2111841b|2111841|rds|local|vector|||14.64||
-omitted_vs_intensity_plot|stem|2e7633030c837f6f|1fdc3f050bb0fc09|ef1a07b8b6dae35b|-1906083640||t20664.7250033066s|s1102109b|1102109|rds|local|vector|||30.766||
 omitted_vs_drainage_plot|stem|1b347ab97a95d5b6|cf7c473d0f438dc8|5732b1fbb5c797e7|-769027831||t20664.7769327852s|s1102654b|1102654|rds|local|vector|||14.828||
+prop_omitted_vs_intensity_plot|stem|89ede293e4896d67|2cf0deaf49e82581|ef1a07b8b6dae35b|-16007570||t20664.9453019525s|s1163026b|1163026|rds|local|vector|||29.265||
+omitted_vs_intensity_plot|stem|6edd73c65d460074|361bdc5e51253a3e|ef1a07b8b6dae35b|-1906083640||t20665.8832355441s|s1130735b|1130735|rds|local|vector|||26.73||
 calculate_f1|function|519583bc4f3339e2
 calculate_mcc|function|d922f383a5ada66f
 calculate_precision|function|ef488e573fb10bca
 calculate_recall|function|e2272badf421cc95
 generate_confusion_matrix|function|c2343c1e31652db0
-.Random.seed|object|57aac628a0bbedba
+.Random.seed|object|acd903ba4b0246ab
 combine_data_for_drainage|function|a8cca032baff9b38
 calculate_percent_change|function|54296c4bf0fa7063
 generate_train_test_indices|function|a1df0fe5af29245b
@@ -109,4 +110,4 @@ generate_fitted_impact|function|866350ced2cf931a
 generate_score_matrix|function|a1ad7f15ea95295f
 generate_icar_matrix|function|4588c763734aa584
 calculate_drainage|function|1cb0674bf52e6685
-prop_omitted_vs_intensity_plot|stem|89ede293e4896d67|2cf0deaf49e82581|ef1a07b8b6dae35b|-16007570||t20664.9453019525s|s1163026b|1163026|rds|local|vector|||29.265||
+omitted_new_vs_intensity_plot|stem|2e112a527c6678c2|1452f0db2333e5b5|ef1a07b8b6dae35b|-1170191336||t20665.9199065918s|s1135402b|1135402|rds|local|vector|||13.54||

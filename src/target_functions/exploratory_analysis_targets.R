@@ -63,7 +63,38 @@ exploratory_analysis_targets <- list(
                   dplyr::summarise(intensity = sum(LengthKM)),
           by = "HYBAS_ID_Factor"
         ) |>
-          ggplot(aes(x = intensity, y = omitted)) + geom_point() + geom_smooth(method = 'lm')
+          ggplot(aes(x = (intensity + omitted), y = omitted)) + 
+            geom_point() + 
+            geom_smooth(method = 'lm') +
+            labs(x = "Total Drain Length (km)", y = "CWI-Omitted Total Drain Length (km)")
+  ),
+
+  tar_target(
+    name = omitted_new_vs_intensity_plot,
+    command = terra::project(ua_dd, smith_creek) |>
+      terra::crop(smith_creek) |>
+      terra::extract(x = smith_creek, y = _) |>
+      dplyr::select(HYBAS_ID_Factor) |>
+      dplyr::bind_cols(
+        terra::project(ua_dd, smith_creek) |>
+          terra::crop(smith_creek) |>
+          data.frame()
+      ) |>
+      reshape2::dcast(
+        formula = HYBAS_ID_Factor ~ DClassPres,
+        fun.aggregate = sum,
+        value.var = "LengthKM"
+      ) |>
+      dplyr::mutate(
+        CWI = rowSums(dplyr::across(c(Agricultural, Channelized, Skeleton))),
+        Omitted = rowSums(dplyr::across(c(EnhancedAgricultural, EnhancedChannelized, EnhancedSkeleton))),
+        New = rowSums(dplyr::across(c(NewAgricultural, NewChannelized, NewSkeleton)))
+      ) |>
+      dplyr::mutate(
+        Total = rowSums(dplyr::across(c(CWI, Omitted, New)))
+      ) |>
+      ggplot(aes(x = Total, y = Omitted + New)) + geom_point() + geom_smooth(method = 'lm')
+      
   ),
 
   tar_target(
