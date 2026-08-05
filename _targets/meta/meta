@@ -89,12 +89,13 @@ spatial_effects_sd_plot|stem|c7d95e2df4004ee1|93d47540f8d54fd5|08ec6c3e03b268cf|
 omitted_vs_drainage_plot|stem|1b347ab97a95d5b6|cf7c473d0f438dc8|5732b1fbb5c797e7|-769027831||t20664.7769327852s|s1102654b|1102654|rds|local|vector|||14.828||
 prop_omitted_vs_intensity_plot|stem|89ede293e4896d67|2cf0deaf49e82581|ef1a07b8b6dae35b|-16007570||t20664.9453019525s|s1163026b|1163026|rds|local|vector|||29.265||
 omitted_vs_intensity_plot|stem|6edd73c65d460074|361bdc5e51253a3e|ef1a07b8b6dae35b|-1906083640||t20665.8832355441s|s1130735b|1130735|rds|local|vector|||26.73||
+omitted_new_vs_intensity_plot|stem|2e112a527c6678c2|1452f0db2333e5b5|ef1a07b8b6dae35b|-1170191336||t20665.9199065918s|s1135402b|1135402|rds|local|vector|||13.54||
 calculate_f1|function|519583bc4f3339e2
 calculate_mcc|function|d922f383a5ada66f
 calculate_precision|function|ef488e573fb10bca
 calculate_recall|function|e2272badf421cc95
 generate_confusion_matrix|function|c2343c1e31652db0
-.Random.seed|object|acd903ba4b0246ab
+.Random.seed|object|70b798679dde2599
 combine_data_for_drainage|function|a8cca032baff9b38
 calculate_percent_change|function|54296c4bf0fa7063
 generate_train_test_indices|function|a1df0fe5af29245b
@@ -110,4 +111,4 @@ generate_fitted_impact|function|866350ced2cf931a
 generate_score_matrix|function|a1ad7f15ea95295f
 generate_icar_matrix|function|4588c763734aa584
 calculate_drainage|function|1cb0674bf52e6685
-omitted_new_vs_intensity_plot|stem|2e112a527c6678c2|1452f0db2333e5b5|ef1a07b8b6dae35b|-1170191336||t20665.9199065918s|s1135402b|1135402|rds|local|vector|||13.54||
+omitted_new_vs_cwi_plot|stem|1d3da0522cf657ac|5749c3f47a9ef309|ef1a07b8b6dae35b|-2003762470||t20670.6819613636s|s1135399b|1135399|rds|local|vector|||14.7||
