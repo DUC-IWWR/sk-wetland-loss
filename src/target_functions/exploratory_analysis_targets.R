@@ -97,7 +97,7 @@ exploratory_analysis_targets <- list(
   ),
 
   tar_target(
-    name = omitted_new_vs_cwi_plot,
+    name = total_vs_cwi_plot,
     command = terra::project(ua_dd, smith_creek) |>
       terra::crop(smith_creek) |>
       terra::extract(x = smith_creek, y = _) |>
@@ -120,7 +120,8 @@ exploratory_analysis_targets <- list(
       dplyr::mutate(
         Total = rowSums(dplyr::across(c(CWI, Omitted, New)))
       ) |>
-      ggplot(aes(x = CWI, y = Omitted + New)) + geom_point() + geom_smooth(method = 'lm')
+      ggplot(aes(x = CWI, y = Total)) + geom_point() + geom_smooth(method = 'lm') + 
+       labs(x = "CWI Detected Drains (km)", y = "Total Present Drains (km)")
   ),
 
   tar_target(
