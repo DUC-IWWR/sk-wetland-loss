@@ -140,7 +140,7 @@ data_wrangling_targets <- list(
     command = dplyr::bind_cols(
       terra::extract(
         cwi_drainage_rast,
-        terra::buffer(point_data_subset, 500),
+        terra::buffer(point_data_subset, 5000),
         fun = sum, na.rm = TRUE
       ) |>
         dplyr::mutate(cwi_length_km = ifelse(is.nan(cwi_length_km), 0, cwi_length_km)) |>
@@ -161,7 +161,7 @@ data_wrangling_targets <- list(
     command = dplyr::bind_cols(
       terra::extract(
         ua_drainage_rast,
-        terra::buffer(point_data_subset, 500),
+        terra::buffer(point_data_subset, 5000),
         fun = sum, na.rm = TRUE
       ) |>
         dplyr::mutate(ua_length_km = ifelse(is.nan(ua_length_km), 0, ua_length_km)) |>
