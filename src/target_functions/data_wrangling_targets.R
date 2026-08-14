@@ -119,6 +119,7 @@ data_wrangling_targets <- list(
   tar_terra_rast(
     name = ua_drainage_rast,
     command = ua_dd |>
+      tidyterra::filter(DTypePrese %in% c("Agricultural", "Channelized")) |>
       tidyterra::mutate(ua_length_km = SHAPE_Leng / 1000) |>
       terra::rasterize(
         y = terra::rast(
