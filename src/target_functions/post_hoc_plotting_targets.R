@@ -52,24 +52,24 @@ post_hoc_plotting_targets <- list(
         metric = "sd",
         title = "MICAR CWI"
       ),
-      # plot_spatial_effects(
-      #   shapefile = fitted_shapefile_icar_cwi,
-      #   parameter = "theta", 
-      #   metric = "sd",
-      #   title = "ICAR CWI"
-      # ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar_cwi,
+        parameter = "theta", 
+        metric = "sd",
+        title = "ICAR CWI"
+      ),
       plot_spatial_effects(
         shapefile = fitted_shapefile_micar_lidar,
         parameter = "theta", 
         metric = "sd",
         title = "MICAR LIDAR"
       ),
-      # plot_spatial_effects(
-      #   shapefile = fitted_shapefile_icar_lidar,
-      #   parameter = "theta", 
-      #   metric = "sd",
-      #   title = "ICAR LIDAR"
-      # ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar_lidar,
+        parameter = "theta", 
+        metric = "sd",
+        title = "ICAR LIDAR"
+      ),
       common.legend = TRUE,
       ncol = 2, nrow = 2
       )

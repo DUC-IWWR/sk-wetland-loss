@@ -20,7 +20,8 @@ plot_spatial_effects <- function(shapefile, parameter, metric = "median", title)
               " ", 
               parameter
             )) +
-    ggplot2::ggtitle(title)
+    ggplot2::ggtitle(title) +
+    ggplot2::scale_color_viridis_d()
   
   return(plot)
 }
