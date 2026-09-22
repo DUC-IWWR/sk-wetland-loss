@@ -18,24 +18,24 @@ post_hoc_plotting_targets <- list(
     command = 
       ggarrange(
       plot_spatial_effects(
-        shapefile = fitted_shapefile_micar_cwi,
-        parameter = "theta", 
-        title = "MICAR CWI"
-      ),
-      plot_spatial_effects(
         shapefile = fitted_shapefile_icar_cwi,
         parameter = "theta", 
         title = "ICAR CWI"
       ),
       plot_spatial_effects(
-        shapefile = fitted_shapefile_micar_lidar,
+        shapefile = fitted_shapefile_micar_cwi,
         parameter = "theta", 
-        title = "MICAR LIDAR"
+        title = "MICAR CWI"
       ),
       plot_spatial_effects(
         shapefile = fitted_shapefile_icar_lidar,
         parameter = "theta", 
         title = "ICAR LIDAR"
+      ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar_lidar,
+        parameter = "theta", 
+        title = "MICAR LIDAR"
       ),
       common.legend = TRUE,
       ncol = 2, nrow = 2
@@ -47,22 +47,16 @@ post_hoc_plotting_targets <- list(
     command = 
       ggarrange(
       plot_spatial_effects(
-        shapefile = fitted_shapefile_micar_cwi,
-        parameter = "theta", 
-        metric = "sd",
-        title = "MICAR CWI"
-      ),
-      plot_spatial_effects(
         shapefile = fitted_shapefile_icar_cwi,
         parameter = "theta", 
         metric = "sd",
         title = "ICAR CWI"
       ),
       plot_spatial_effects(
-        shapefile = fitted_shapefile_micar_lidar,
+        shapefile = fitted_shapefile_micar_cwi,
         parameter = "theta", 
         metric = "sd",
-        title = "MICAR LIDAR"
+        title = "MICAR CWI"
       ),
       plot_spatial_effects(
         shapefile = fitted_shapefile_icar_lidar,
@@ -70,9 +64,99 @@ post_hoc_plotting_targets <- list(
         metric = "sd",
         title = "ICAR LIDAR"
       ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar_lidar,
+        parameter = "theta", 
+        metric = "sd",
+        title = "MICAR LIDAR"
+      ),
       common.legend = TRUE,
       ncol = 2, nrow = 2
-      )
+    )
+  ),
+
+  tar_target(
+    name = icarcwi_vs_micarcwi_sd,
+    command = 
+      ggarrange(
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar_cwi,
+        parameter = "theta", 
+        metric = "sd",
+        title = "ICAR CWI"
+      ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar_cwi,
+        parameter = "theta", 
+        metric = "sd",
+        title = "MICAR CWI"
+      ) + tidyterra::geom_spatvector(
+        data = fitted_shapefile_micar_cwi |>
+          tidyterra::rename(sd_theta_micar = sd_theta) |>
+          tidyterra::bind_spat_cols(tidyterra::select(fitted_shapefile_icar_cwi, sd_theta)) |>
+          tidyterra::mutate(sd_diff = sd_theta_micar - sd_theta) |>
+          tidyterra::filter(sd_diff < 0),
+        color = "green", fill = NA, linewidth = 1
+      ),
+      common.legend = TRUE,
+      ncol = 2
+    )
+  ),
+
+  tar_target(
+    name = icarlidar_vs_micarlidar_sd,
+    command = 
+      ggarrange(
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_icar_lidar,
+        parameter = "theta", 
+        metric = "sd",
+        title = "ICAR LiDAR"
+      ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar_lidar,
+        parameter = "theta", 
+        metric = "sd",
+        title = "MICAR LiDAR"
+      ) + tidyterra::geom_spatvector(
+        data = fitted_shapefile_micar_lidar |>
+          tidyterra::rename(sd_theta_micar = sd_theta) |>
+          tidyterra::bind_spat_cols(tidyterra::select(fitted_shapefile_icar_lidar, sd_theta)) |>
+          tidyterra::mutate(sd_diff = sd_theta_micar - sd_theta) |>
+          tidyterra::filter(sd_diff < 0),
+        color = "green", fill = NA, linewidth = 1
+      ),
+      common.legend = TRUE,
+      ncol = 2
+    )
+  ),
+
+  tar_target(
+    name = micarcwi_vs_micarlidar_sd,
+    command = 
+      ggarrange(
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar_cwi,
+        parameter = "theta", 
+        metric = "sd",
+        title = "MICAR CWI"
+      ),
+      plot_spatial_effects(
+        shapefile = fitted_shapefile_micar_lidar,
+        parameter = "theta", 
+        metric = "sd",
+        title = "MICAR LiDAR"
+      ) + tidyterra::geom_spatvector(
+        data = fitted_shapefile_micar_lidar |>
+          tidyterra::rename(sd_theta_micar = sd_theta) |>
+          tidyterra::bind_spat_cols(tidyterra::select(fitted_shapefile_micar_cwi, sd_theta)) |>
+          tidyterra::mutate(sd_diff = sd_theta_micar - sd_theta) |>
+          tidyterra::filter(sd_diff < 0),
+        color = "green", fill = NA, linewidth = 1
+      ),
+      common.legend = TRUE,
+      ncol = 2
+    )
   ),
 
   tar_target(
