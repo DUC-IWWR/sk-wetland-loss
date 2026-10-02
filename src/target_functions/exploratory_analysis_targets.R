@@ -121,7 +121,8 @@ exploratory_analysis_targets <- list(
         Total = rowSums(dplyr::across(c(CWI, Omitted, New)))
       ) |>
       ggplot(aes(x = CWI, y = Total)) + geom_point() + geom_smooth(method = 'lm') + 
-       labs(x = "CWI Detected Drains (km)", y = "Total Present Drains (km)")
+       labs(x = "CWI Detected Drains (km)", y = "Total Present Drains (km)") +
+      NULL
   ),
 
   tar_target(
